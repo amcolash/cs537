@@ -21,6 +21,7 @@ int main() {
     /* Loop through input file */
     while ( fgets(buffer, 100, inFile) != NULL ) {
       printf("%s", buffer);
+      fputs(buffer, outFile);
     }
 
   }
