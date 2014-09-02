@@ -7,6 +7,8 @@
 CC = gcc
 args = -Wall -g
 
+all:: test
+
 bday: bday.c
 	$(CC) $(args) bday.c -o bday.o
 
@@ -17,4 +19,5 @@ test: bday
 # clean workspace
 ###
 clean::
-	rm -f bday.o
+	rm -f bday.o sampleOut.txt
+	touch sampleOut.txt
