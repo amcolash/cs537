@@ -27,6 +27,9 @@ int main() {
     /* Initialze random number generator */
     //srand(1);
 
+    srand(time(NULL));
+    rand();
+
     /* Loop through input file */
     while ( fgets(buffer, 100, inFile) != NULL ) {
       sampleSize = atoi(buffer);
@@ -37,13 +40,13 @@ int main() {
         int z;
         dupTrials = 0;
 
+
         /* Perform the requested number of trials */
         for (x=0; x < TRIALS; x++) {
           //printf("Trial [%i]: ", x);
 
           // /* Generate the random sample data and add to an array */
           int randNumber[sampleSize];
-          srand(time(NULL));
           for (y=0; y < sampleSize; y++) {
             randNumber[y] = rand() % 365 + 1;
             //printf("%i ", randNumber[y]);
@@ -59,13 +62,14 @@ int main() {
 
           /* Loop through the random array and find duplicates */
           int dupFound;
+          dupFound = 0;
           for (y=0; y < sampleSize; y++) {
             for (z=0; z < sampleSize; z++) {
               if (randNumber[y] == randNumber[z]) {
                 dupNumber[y]++;
                 if (dupNumber[y] > 1) {
                   dupFound = 1;
-                  //printf("Dup Found!\n");
+                  //printf("Dup Found! (%i)\n", randNumber[y]);
                 }
               }
             }
@@ -79,11 +83,11 @@ int main() {
           } else {
             // printf("---No duplicate found.\n");
           }
-          
+
         }
         float ratio;
         ratio = ((float)dupTrials / (float)TRIALS);
-        printf("Samples: %i, Trials: %i, Ratio: (%i / %i) = %f\n", sampleSize, TRIALS, dupTrials, TRIALS, ratio); 
+        printf("Samples: %i, Trials: %i, Ratio: (%i / %i) = %f\n", sampleSize, TRIALS, dupTrials, TRIALS, ratio);
         //fputs(buffer, outFile);
       }
     }
