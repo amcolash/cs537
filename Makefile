@@ -9,12 +9,12 @@ args = -Wall -g
 
 all:: test
 
-bday: bday.c
-	$(CC) $(args) bday.c -o bday.o
+paradox.o: paradox.c
+	$(CC) $(args) paradox.c -o paradox.o
 
-test: bday
+test: paradox.o
 	@echo "----------------------------------------------------------------------"
-	@./bday.o
+	@./paradox.o
 	@echo "----------------------------------------------------------------------"
 #@cat sampleOut.txt
 #@echo "----------------------------------------------------------------------"
@@ -23,5 +23,5 @@ test: bday
 # clean workspace
 ###
 clean::
-	rm -f bday.o sampleOut.txt
+	rm -f paradox.o sampleOut.txt
 	touch sampleOut.txt
