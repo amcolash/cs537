@@ -1,6 +1,7 @@
 
 # user programs
 USER_PROGS := \
+	andrew\
 	cat\
 	echo\
 	forktest\
