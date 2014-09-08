@@ -1,9 +1,0 @@
-<map id="kernel/sysproc.c" name="kernel/sysproc.c">
-<area shape="rect" id="node2" href="$types_8h.html" title="types.h" alt="" coords="5,80,69,107"/>
-<area shape="rect" id="node3" href="$x86_8h.html" title="x86.h" alt="" coords="94,80,148,107"/>
-<area shape="rect" id="node4" href="$defs_8h.html" title="defs.h" alt="" coords="173,80,231,107"/>
-<area shape="rect" id="node5" href="$param_8h.html" title="param.h" alt="" coords="256,80,325,107"/>
-<area shape="rect" id="node6" href="$mmu_8h.html" title="mmu.h" alt="" coords="350,80,412,107"/>
-<area shape="rect" id="node7" href="$proc_8h.html" title="proc.h" alt="" coords="437,80,495,107"/>
-<area shape="rect" id="node8" href="$sysfunc_8h.html" title="sysfunc.h" alt="" coords="521,80,599,107"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="kernel/lapic.c" name="kernel/lapic.c">
-<area shape="rect" id="node2" href="$types_8h.html" title="types.h" alt="" coords="5,80,69,107"/>
-<area shape="rect" id="node3" href="$defs_8h.html" title="defs.h" alt="" coords="95,80,152,107"/>
-<area shape="rect" id="node4" href="$traps_8h.html" title="traps.h" alt="" coords="178,80,240,107"/>
-<area shape="rect" id="node5" href="$mmu_8h.html" title="mmu.h" alt="" coords="265,80,327,107"/>
-<area shape="rect" id="node6" href="$x86_8h.html" title="x86.h" alt="" coords="351,80,405,107"/>
-</map>

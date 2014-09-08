@@ -1,5 +1,0 @@
-<map id="kernel/elf.h" name="kernel/elf.h">
-<area shape="rect" id="node2" href="$bootmain_8c.html" title="kernel/bootmain.c" alt="" coords="5,80,131,107"/>
-<area shape="rect" id="node3" href="$exec_8c.html" title="kernel/exec.c" alt="" coords="155,80,255,107"/>
-<area shape="rect" id="node4" href="$vm_8c.html" title="kernel/vm.c" alt="" coords="280,80,371,107"/>
-</map>
