@@ -9,7 +9,7 @@
 
 # Default make target
 .PHONY: all
-all: xv6.img fs.img
+all: xv6.img fs.img docs
 
 ################################################################################
 # Build options
@@ -57,8 +57,8 @@ OBJDUMP := objdump
 
 # Try to infer the correct QEMU if not specified
 ifndef QEMU
-QEMU := $(shell if which qemu 1> /dev/null 2> /dev/null; \
-	then echo qemu; exit; \
+QEMU := $(shell if which qemu-system-i386 1> /dev/null 2> /dev/null; \
+	then echo qemu-system-i386; exit; \
 	else \
 	qemu=/u/c/s/cs537-2/ta/tools/qemu; \
 	if test -x $$qemu; then echo $$qemu; exit; fi; fi; \
@@ -93,7 +93,7 @@ include user/makefile.mk
 include tools/makefile.mk
 DEPS := $(KERNEL_DEPS) $(USER_DEPS) $(TOOLS_DEPS)
 CLEAN := $(KERNEL_CLEAN) $(USER_CLEAN) $(TOOLS_CLEAN) \
-	fs fs.img .gdbinit .bochsrc dist
+	fs fs.img .gdbinit .bochsrc dist doc/*
 
 .PHONY: clean distclean run depend qemu qemu-nox qemu-gdb qemu-nox-gdb bochs
 
@@ -102,6 +102,9 @@ clean:
 	rm -rf $(CLEAN)
 
 run: qemu
+
+docs:
+	doxygen
 
 # run xv6 in qemu
 qemu: fs.img xv6.img

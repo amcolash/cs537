@@ -1,0 +1,805 @@
+\hypertarget{mmu_8h}{\section{kernel/mmu.h File Reference}
+\label{mmu_8h}\index{kernel/mmu.\-h@{kernel/mmu.\-h}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mmu_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structsegdesc}{segdesc}
+\item 
+struct \hyperlink{structtaskstate}{taskstate}
+\item 
+struct \hyperlink{structgatedesc}{gatedesc}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{mmu_8h_a1d4cd77f3325c9f7f53fb7c0f5e49009}{F\-L\-\_\-\-C\-F}~0x00000001
+\item 
+\#define \hyperlink{mmu_8h_a1f1a4ea59207cc41d72dada6a4b0691c}{F\-L\-\_\-\-P\-F}~0x00000004
+\item 
+\#define \hyperlink{mmu_8h_a4927c16122d3d544048432ad6f90b689}{F\-L\-\_\-\-A\-F}~0x00000010
+\item 
+\#define \hyperlink{mmu_8h_a66e0b71057f84fa675ccc3bc22c73be9}{F\-L\-\_\-\-Z\-F}~0x00000040
+\item 
+\#define \hyperlink{mmu_8h_a6619f7a7aff26d04b23afcbc6660a58e}{F\-L\-\_\-\-S\-F}~0x00000080
+\item 
+\#define \hyperlink{mmu_8h_abd949387acf746559a2287f6e404235c}{F\-L\-\_\-\-T\-F}~0x00000100
+\item 
+\#define \hyperlink{mmu_8h_ab481068357bb42797aafe91864a2d085}{F\-L\-\_\-\-I\-F}~0x00000200
+\item 
+\#define \hyperlink{mmu_8h_afa5551d2e2438dc958983396a1f580d3}{F\-L\-\_\-\-D\-F}~0x00000400
+\item 
+\#define \hyperlink{mmu_8h_a94b53adb28e5c5d73f529569d58da643}{F\-L\-\_\-\-O\-F}~0x00000800
+\item 
+\#define \hyperlink{mmu_8h_a36ddfe6c6974596cd642138eee7dbe98}{F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K}~0x00003000
+\item 
+\#define \hyperlink{mmu_8h_a3ed6d494edfe9cd89957726da3c20c2f}{F\-L\-\_\-\-I\-O\-P\-L\-\_\-0}~0x00000000
+\item 
+\#define \hyperlink{mmu_8h_acecae3043c790b6ed399d9a864c81595}{F\-L\-\_\-\-I\-O\-P\-L\-\_\-1}~0x00001000
+\item 
+\#define \hyperlink{mmu_8h_a4838447d144140d70f49776a3ca493de}{F\-L\-\_\-\-I\-O\-P\-L\-\_\-2}~0x00002000
+\item 
+\#define \hyperlink{mmu_8h_a65d57b1678c33e6c39cadb64457b36db}{F\-L\-\_\-\-I\-O\-P\-L\-\_\-3}~0x00003000
+\item 
+\#define \hyperlink{mmu_8h_ad5c3f2f9272df4c9d57a9487c4e1b50b}{F\-L\-\_\-\-N\-T}~0x00004000
+\item 
+\#define \hyperlink{mmu_8h_ade9786a06c1f327c37e1fe9ca3bc32b9}{F\-L\-\_\-\-R\-F}~0x00010000
+\item 
+\#define \hyperlink{mmu_8h_af7c82bf7715d78873a56ed04dfa9bd97}{F\-L\-\_\-\-V\-M}~0x00020000
+\item 
+\#define \hyperlink{mmu_8h_a9c71ec24fe8944c57bd3712b87644294}{F\-L\-\_\-\-A\-C}~0x00040000
+\item 
+\#define \hyperlink{mmu_8h_a5a8a6171bb4d6954ea080ebccf18fcf9}{F\-L\-\_\-\-V\-I\-F}~0x00080000
+\item 
+\#define \hyperlink{mmu_8h_ab5d8e8ca1f8cf4a7908f316435e25bb9}{F\-L\-\_\-\-V\-I\-P}~0x00100000
+\item 
+\#define \hyperlink{mmu_8h_a23f8f7b48086df377376e84d0bf65009}{F\-L\-\_\-\-I\-D}~0x00200000
+\item 
+\#define \hyperlink{mmu_8h_aa899fa0a2a7dd414343fb2fada767622}{C\-R0\-\_\-\-P\-E}~0x00000001
+\item 
+\#define \hyperlink{mmu_8h_a301019ca375756ccb75c7f207473e02d}{C\-R0\-\_\-\-M\-P}~0x00000002
+\item 
+\#define \hyperlink{mmu_8h_a39a8caf6348b3eae36171b43146025f6}{C\-R0\-\_\-\-E\-M}~0x00000004
+\item 
+\#define \hyperlink{mmu_8h_af9f6d1ac01fd24519da378e16b91b023}{C\-R0\-\_\-\-T\-S}~0x00000008
+\item 
+\#define \hyperlink{mmu_8h_ad13fdf98c38ada8515b3d490feba86e7}{C\-R0\-\_\-\-E\-T}~0x00000010
+\item 
+\#define \hyperlink{mmu_8h_a219c459acf834242afdd99cda9c6a42c}{C\-R0\-\_\-\-N\-E}~0x00000020
+\item 
+\#define \hyperlink{mmu_8h_a2897f244bf55b3cf87c13869db57f6c8}{C\-R0\-\_\-\-W\-P}~0x00010000
+\item 
+\#define \hyperlink{mmu_8h_a88b8c1f08a286fdaf7b58e10e4223771}{C\-R0\-\_\-\-A\-M}~0x00040000
+\item 
+\#define \hyperlink{mmu_8h_a0e3e94dacd9aafa4721822a934c10d9e}{C\-R0\-\_\-\-N\-W}~0x20000000
+\item 
+\#define \hyperlink{mmu_8h_ae2abb4033838584afd1413b3fcfe3e20}{C\-R0\-\_\-\-C\-D}~0x40000000
+\item 
+\#define \hyperlink{mmu_8h_a4f3b70ba40d96e55cae6026acc12cfed}{C\-R0\-\_\-\-P\-G}~0x80000000
+\item 
+\#define \hyperlink{mmu_8h_a1594ac4688d9f212e835fd38ff63e83f}{S\-E\-G}(type, base, lim, dpl)
+\item 
+\#define \hyperlink{mmu_8h_abe69a1dd6290e2be017d58309495adb7}{S\-E\-G16}(type, base, lim, dpl)
+\item 
+\#define \hyperlink{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}{D\-P\-L\-\_\-\-U\-S\-E\-R}~0x3
+\item 
+\#define \hyperlink{mmu_8h_af30c683a434e0712fd83781307239cb9}{S\-T\-A\-\_\-\-X}~0x8
+\item 
+\#define \hyperlink{mmu_8h_ad6f4adbc6fea020a7d9d18a5f709843e}{S\-T\-A\-\_\-\-E}~0x4
+\item 
+\#define \hyperlink{mmu_8h_ab4829c3150ed67ae0f00a103fb448a2f}{S\-T\-A\-\_\-\-C}~0x4
+\item 
+\#define \hyperlink{mmu_8h_a9321b5b232838b8b230c6b681be9a882}{S\-T\-A\-\_\-\-W}~0x2
+\item 
+\#define \hyperlink{mmu_8h_a6545a48f34a3fae1b04cf265f13bc8f3}{S\-T\-A\-\_\-\-R}~0x2
+\item 
+\#define \hyperlink{mmu_8h_a18eb795a2eb72794f4de5b8087731607}{S\-T\-A\-\_\-\-A}~0x1
+\item 
+\#define \hyperlink{mmu_8h_a92f6e9c3a88bc7b119e356214afb18d0}{S\-T\-S\-\_\-\-T16\-A}~0x1
+\item 
+\#define \hyperlink{mmu_8h_af82429cbe13d9fc970aa92082aa2b24f}{S\-T\-S\-\_\-\-L\-D\-T}~0x2
+\item 
+\#define \hyperlink{mmu_8h_a24f6ddb5ba92dab5a68f7f2cded0bb3a}{S\-T\-S\-\_\-\-T16\-B}~0x3
+\item 
+\#define \hyperlink{mmu_8h_a892428e720dfa978188d79cdd0380630}{S\-T\-S\-\_\-\-C\-G16}~0x4
+\item 
+\#define \hyperlink{mmu_8h_a52ec5ba90269a2040fc29d6a11e5c14c}{S\-T\-S\-\_\-\-T\-G}~0x5
+\item 
+\#define \hyperlink{mmu_8h_a8543847c09da13a951ab3009e49df956}{S\-T\-S\-\_\-\-I\-G16}~0x6
+\item 
+\#define \hyperlink{mmu_8h_a16d083797e265f35ef2a8edade986463}{S\-T\-S\-\_\-\-T\-G16}~0x7
+\item 
+\#define \hyperlink{mmu_8h_a1b27d53cef04c198f3b048345d28016c}{S\-T\-S\-\_\-\-T32\-A}~0x9
+\item 
+\#define \hyperlink{mmu_8h_af656e12a5bedfa79c0c3e02a3f01bab6}{S\-T\-S\-\_\-\-T32\-B}~0x\-B
+\item 
+\#define \hyperlink{mmu_8h_aa7e0b3f01699a15c5c49c54de3750107}{S\-T\-S\-\_\-\-C\-G32}~0x\-C
+\item 
+\#define \hyperlink{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}{S\-T\-S\-\_\-\-I\-G32}~0x\-E
+\item 
+\#define \hyperlink{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}{S\-T\-S\-\_\-\-T\-G32}~0x\-F
+\item 
+\#define \hyperlink{mmu_8h_a1b00ddfafd303030fd16bee16a42a2ce}{P\-D\-X}(la)~(((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(la) $>$$>$ \hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\-D\-X\-S\-H\-I\-F\-T}) \& 0x3\-F\-F)
+\item 
+\#define \hyperlink{mmu_8h_ac744451cc21b0b24f37dd8f0d51b43fc}{P\-T\-X}(la)~(((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(la) $>$$>$ \hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\-T\-X\-S\-H\-I\-F\-T}) \& 0x3\-F\-F)
+\item 
+\#define \hyperlink{mmu_8h_a2e162e8ad6bc81877dd299db9fc87664}{P\-G\-A\-D\-D\-R}(d, t, o)~((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})((d) $<$$<$ \hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\-D\-X\-S\-H\-I\-F\-T} $\vert$ (t) $<$$<$ \hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\-T\-X\-S\-H\-I\-F\-T} $\vert$ (o)))
+\item 
+\#define \hyperlink{mmu_8h_a3b7982928c5178b9244b2b6289ef3832}{P\-A\-D\-D\-R}(a)~((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(a))
+\item 
+\#define \hyperlink{mmu_8h_af60ee3ecbf249497d0378c97201edfe8}{N\-P\-D\-E\-N\-T\-R\-I\-E\-S}~1024
+\item 
+\#define \hyperlink{mmu_8h_a6318b16289e829d7f9719134ba08704f}{N\-P\-T\-E\-N\-T\-R\-I\-E\-S}~1024
+\item 
+\#define \hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\-G\-S\-I\-Z\-E}~4096
+\item 
+\#define \hyperlink{mmu_8h_a20d0b7c5f64f21a3fdc19cf44afe8ff2}{P\-G\-S\-H\-I\-F\-T}~12
+\item 
+\#define \hyperlink{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{P\-T\-X\-S\-H\-I\-F\-T}~12
+\item 
+\#define \hyperlink{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{P\-D\-X\-S\-H\-I\-F\-T}~22
+\item 
+\#define \hyperlink{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}{P\-G\-R\-O\-U\-N\-D\-U\-P}(sz)~(((sz)+\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\-G\-S\-I\-Z\-E}-\/1) \& $\sim$(\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\-G\-S\-I\-Z\-E}-\/1))
+\item 
+\#define \hyperlink{mmu_8h_a687e91750055553dd2788386c6a512fb}{P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N}(a)~((char$\ast$)((((unsigned int)(a)) \& $\sim$(\hyperlink{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{P\-G\-S\-I\-Z\-E}-\/1))))
+\item 
+\#define \hyperlink{mmu_8h_a89bd860de64c44cd8ebaca8dc311b5ac}{P\-T\-E\-\_\-\-P}~0x001
+\item 
+\#define \hyperlink{mmu_8h_a058fcbcc3e1eab2c09c68b3e5221c545}{P\-T\-E\-\_\-\-W}~0x002
+\item 
+\#define \hyperlink{mmu_8h_adced9836a1dc98d72849361e6ab03cda}{P\-T\-E\-\_\-\-U}~0x004
+\item 
+\#define \hyperlink{mmu_8h_a72dca8a3a88d5e77c35551286cc25f23}{P\-T\-E\-\_\-\-P\-W\-T}~0x008
+\item 
+\#define \hyperlink{mmu_8h_a120b9b6cd80216401185944eabc566c3}{P\-T\-E\-\_\-\-P\-C\-D}~0x010
+\item 
+\#define \hyperlink{mmu_8h_af2d908a8af1d94a6aaf803ab40fe0951}{P\-T\-E\-\_\-\-A}~0x020
+\item 
+\#define \hyperlink{mmu_8h_ae80b38f12787d02087c4575c48c36d88}{P\-T\-E\-\_\-\-D}~0x040
+\item 
+\#define \hyperlink{mmu_8h_ab499d5acd1363559590a7cfdcfadab46}{P\-T\-E\-\_\-\-P\-S}~0x080
+\item 
+\#define \hyperlink{mmu_8h_a2d7d0587af7c630f79199d1ecc048aef}{P\-T\-E\-\_\-\-M\-B\-Z}~0x180
+\item 
+\#define \hyperlink{mmu_8h_a74b24f9b091875a5313370892e3f37a5}{P\-T\-E\-\_\-\-A\-D\-D\-R}(pte)~((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(pte) \& $\sim$0x\-F\-F\-F)
+\item 
+\#define \hyperlink{mmu_8h_a23e7ddf0a414b66cf9badd182edf1eca}{S\-E\-T\-G\-A\-T\-E}(gate, istrap, sel, off, d)
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}{pte\-\_\-t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{mmu_8h_a88b8c1f08a286fdaf7b58e10e4223771}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-A\-M@{C\-R0\-\_\-\-A\-M}}
+\index{C\-R0\-\_\-\-A\-M@{C\-R0\-\_\-\-A\-M}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-A\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-A\-M~0x00040000}}\label{mmu_8h_a88b8c1f08a286fdaf7b58e10e4223771}
+
+
+Definition at line 37 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ae2abb4033838584afd1413b3fcfe3e20}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-C\-D@{C\-R0\-\_\-\-C\-D}}
+\index{C\-R0\-\_\-\-C\-D@{C\-R0\-\_\-\-C\-D}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-C\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-C\-D~0x40000000}}\label{mmu_8h_ae2abb4033838584afd1413b3fcfe3e20}
+
+
+Definition at line 39 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a39a8caf6348b3eae36171b43146025f6}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-E\-M@{C\-R0\-\_\-\-E\-M}}
+\index{C\-R0\-\_\-\-E\-M@{C\-R0\-\_\-\-E\-M}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-E\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-E\-M~0x00000004}}\label{mmu_8h_a39a8caf6348b3eae36171b43146025f6}
+
+
+Definition at line 32 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ad13fdf98c38ada8515b3d490feba86e7}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-E\-T@{C\-R0\-\_\-\-E\-T}}
+\index{C\-R0\-\_\-\-E\-T@{C\-R0\-\_\-\-E\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-E\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-E\-T~0x00000010}}\label{mmu_8h_ad13fdf98c38ada8515b3d490feba86e7}
+
+
+Definition at line 34 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a301019ca375756ccb75c7f207473e02d}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-M\-P@{C\-R0\-\_\-\-M\-P}}
+\index{C\-R0\-\_\-\-M\-P@{C\-R0\-\_\-\-M\-P}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-M\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-M\-P~0x00000002}}\label{mmu_8h_a301019ca375756ccb75c7f207473e02d}
+
+
+Definition at line 31 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a219c459acf834242afdd99cda9c6a42c}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-N\-E@{C\-R0\-\_\-\-N\-E}}
+\index{C\-R0\-\_\-\-N\-E@{C\-R0\-\_\-\-N\-E}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-N\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-N\-E~0x00000020}}\label{mmu_8h_a219c459acf834242afdd99cda9c6a42c}
+
+
+Definition at line 35 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a0e3e94dacd9aafa4721822a934c10d9e}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-N\-W@{C\-R0\-\_\-\-N\-W}}
+\index{C\-R0\-\_\-\-N\-W@{C\-R0\-\_\-\-N\-W}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-N\-W}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-N\-W~0x20000000}}\label{mmu_8h_a0e3e94dacd9aafa4721822a934c10d9e}
+
+
+Definition at line 38 of file mmu.\-h.
+
+\hypertarget{mmu_8h_aa899fa0a2a7dd414343fb2fada767622}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-P\-E@{C\-R0\-\_\-\-P\-E}}
+\index{C\-R0\-\_\-\-P\-E@{C\-R0\-\_\-\-P\-E}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-P\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-P\-E~0x00000001}}\label{mmu_8h_aa899fa0a2a7dd414343fb2fada767622}
+
+
+Definition at line 30 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a4f3b70ba40d96e55cae6026acc12cfed}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-P\-G@{C\-R0\-\_\-\-P\-G}}
+\index{C\-R0\-\_\-\-P\-G@{C\-R0\-\_\-\-P\-G}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-P\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-P\-G~0x80000000}}\label{mmu_8h_a4f3b70ba40d96e55cae6026acc12cfed}
+
+
+Definition at line 40 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af9f6d1ac01fd24519da378e16b91b023}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-T\-S@{C\-R0\-\_\-\-T\-S}}
+\index{C\-R0\-\_\-\-T\-S@{C\-R0\-\_\-\-T\-S}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-T\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-T\-S~0x00000008}}\label{mmu_8h_af9f6d1ac01fd24519da378e16b91b023}
+
+
+Definition at line 33 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a2897f244bf55b3cf87c13869db57f6c8}{\index{mmu.\-h@{mmu.\-h}!C\-R0\-\_\-\-W\-P@{C\-R0\-\_\-\-W\-P}}
+\index{C\-R0\-\_\-\-W\-P@{C\-R0\-\_\-\-W\-P}!mmu.h@{mmu.\-h}}
+\subsubsection[{C\-R0\-\_\-\-W\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R0\-\_\-\-W\-P~0x00010000}}\label{mmu_8h_a2897f244bf55b3cf87c13869db57f6c8}
+
+
+Definition at line 36 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}{\index{mmu.\-h@{mmu.\-h}!D\-P\-L\-\_\-\-U\-S\-E\-R@{D\-P\-L\-\_\-\-U\-S\-E\-R}}
+\index{D\-P\-L\-\_\-\-U\-S\-E\-R@{D\-P\-L\-\_\-\-U\-S\-E\-R}!mmu.h@{mmu.\-h}}
+\subsubsection[{D\-P\-L\-\_\-\-U\-S\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\-P\-L\-\_\-\-U\-S\-E\-R~0x3}}\label{mmu_8h_a060d4d4e32af81cab881fe77e58d7b78}
+
+
+Definition at line 69 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a9c71ec24fe8944c57bd3712b87644294}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-A\-C@{F\-L\-\_\-\-A\-C}}
+\index{F\-L\-\_\-\-A\-C@{F\-L\-\_\-\-A\-C}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-A\-C}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-A\-C~0x00040000}}\label{mmu_8h_a9c71ec24fe8944c57bd3712b87644294}
+
+
+Definition at line 24 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a4927c16122d3d544048432ad6f90b689}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-A\-F@{F\-L\-\_\-\-A\-F}}
+\index{F\-L\-\_\-\-A\-F@{F\-L\-\_\-\-A\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-A\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-A\-F~0x00000010}}\label{mmu_8h_a4927c16122d3d544048432ad6f90b689}
+
+
+Definition at line 9 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a1d4cd77f3325c9f7f53fb7c0f5e49009}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-C\-F@{F\-L\-\_\-\-C\-F}}
+\index{F\-L\-\_\-\-C\-F@{F\-L\-\_\-\-C\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-C\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-C\-F~0x00000001}}\label{mmu_8h_a1d4cd77f3325c9f7f53fb7c0f5e49009}
+
+
+Definition at line 7 of file mmu.\-h.
+
+\hypertarget{mmu_8h_afa5551d2e2438dc958983396a1f580d3}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-D\-F@{F\-L\-\_\-\-D\-F}}
+\index{F\-L\-\_\-\-D\-F@{F\-L\-\_\-\-D\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-D\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-D\-F~0x00000400}}\label{mmu_8h_afa5551d2e2438dc958983396a1f580d3}
+
+
+Definition at line 14 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a23f8f7b48086df377376e84d0bf65009}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-D@{F\-L\-\_\-\-I\-D}}
+\index{F\-L\-\_\-\-I\-D@{F\-L\-\_\-\-I\-D}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-D~0x00200000}}\label{mmu_8h_a23f8f7b48086df377376e84d0bf65009}
+
+
+Definition at line 27 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ab481068357bb42797aafe91864a2d085}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-F@{F\-L\-\_\-\-I\-F}}
+\index{F\-L\-\_\-\-I\-F@{F\-L\-\_\-\-I\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-F~0x00000200}}\label{mmu_8h_ab481068357bb42797aafe91864a2d085}
+
+
+Definition at line 13 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a3ed6d494edfe9cd89957726da3c20c2f}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-O\-P\-L\-\_\-0@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-0}}
+\index{F\-L\-\_\-\-I\-O\-P\-L\-\_\-0@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-0}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-O\-P\-L\-\_\-0}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-O\-P\-L\-\_\-0~0x00000000}}\label{mmu_8h_a3ed6d494edfe9cd89957726da3c20c2f}
+
+
+Definition at line 17 of file mmu.\-h.
+
+\hypertarget{mmu_8h_acecae3043c790b6ed399d9a864c81595}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-O\-P\-L\-\_\-1@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-1}}
+\index{F\-L\-\_\-\-I\-O\-P\-L\-\_\-1@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-1}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-O\-P\-L\-\_\-1}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-O\-P\-L\-\_\-1~0x00001000}}\label{mmu_8h_acecae3043c790b6ed399d9a864c81595}
+
+
+Definition at line 18 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a4838447d144140d70f49776a3ca493de}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-O\-P\-L\-\_\-2@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-2}}
+\index{F\-L\-\_\-\-I\-O\-P\-L\-\_\-2@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-2}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-O\-P\-L\-\_\-2}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-O\-P\-L\-\_\-2~0x00002000}}\label{mmu_8h_a4838447d144140d70f49776a3ca493de}
+
+
+Definition at line 19 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a65d57b1678c33e6c39cadb64457b36db}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-O\-P\-L\-\_\-3@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-3}}
+\index{F\-L\-\_\-\-I\-O\-P\-L\-\_\-3@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-3}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-O\-P\-L\-\_\-3}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-O\-P\-L\-\_\-3~0x00003000}}\label{mmu_8h_a65d57b1678c33e6c39cadb64457b36db}
+
+
+Definition at line 20 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a36ddfe6c6974596cd642138eee7dbe98}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K}}
+\index{F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K@{F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-I\-O\-P\-L\-\_\-\-M\-A\-S\-K~0x00003000}}\label{mmu_8h_a36ddfe6c6974596cd642138eee7dbe98}
+
+
+Definition at line 16 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ad5c3f2f9272df4c9d57a9487c4e1b50b}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-N\-T@{F\-L\-\_\-\-N\-T}}
+\index{F\-L\-\_\-\-N\-T@{F\-L\-\_\-\-N\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-N\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-N\-T~0x00004000}}\label{mmu_8h_ad5c3f2f9272df4c9d57a9487c4e1b50b}
+
+
+Definition at line 21 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a94b53adb28e5c5d73f529569d58da643}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-O\-F@{F\-L\-\_\-\-O\-F}}
+\index{F\-L\-\_\-\-O\-F@{F\-L\-\_\-\-O\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-O\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-O\-F~0x00000800}}\label{mmu_8h_a94b53adb28e5c5d73f529569d58da643}
+
+
+Definition at line 15 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a1f1a4ea59207cc41d72dada6a4b0691c}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-P\-F@{F\-L\-\_\-\-P\-F}}
+\index{F\-L\-\_\-\-P\-F@{F\-L\-\_\-\-P\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-P\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-P\-F~0x00000004}}\label{mmu_8h_a1f1a4ea59207cc41d72dada6a4b0691c}
+
+
+Definition at line 8 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ade9786a06c1f327c37e1fe9ca3bc32b9}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-R\-F@{F\-L\-\_\-\-R\-F}}
+\index{F\-L\-\_\-\-R\-F@{F\-L\-\_\-\-R\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-R\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-R\-F~0x00010000}}\label{mmu_8h_ade9786a06c1f327c37e1fe9ca3bc32b9}
+
+
+Definition at line 22 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a6619f7a7aff26d04b23afcbc6660a58e}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-S\-F@{F\-L\-\_\-\-S\-F}}
+\index{F\-L\-\_\-\-S\-F@{F\-L\-\_\-\-S\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-S\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-S\-F~0x00000080}}\label{mmu_8h_a6619f7a7aff26d04b23afcbc6660a58e}
+
+
+Definition at line 11 of file mmu.\-h.
+
+\hypertarget{mmu_8h_abd949387acf746559a2287f6e404235c}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-T\-F@{F\-L\-\_\-\-T\-F}}
+\index{F\-L\-\_\-\-T\-F@{F\-L\-\_\-\-T\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-T\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-T\-F~0x00000100}}\label{mmu_8h_abd949387acf746559a2287f6e404235c}
+
+
+Definition at line 12 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a5a8a6171bb4d6954ea080ebccf18fcf9}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-V\-I\-F@{F\-L\-\_\-\-V\-I\-F}}
+\index{F\-L\-\_\-\-V\-I\-F@{F\-L\-\_\-\-V\-I\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-V\-I\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-V\-I\-F~0x00080000}}\label{mmu_8h_a5a8a6171bb4d6954ea080ebccf18fcf9}
+
+
+Definition at line 25 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ab5d8e8ca1f8cf4a7908f316435e25bb9}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-V\-I\-P@{F\-L\-\_\-\-V\-I\-P}}
+\index{F\-L\-\_\-\-V\-I\-P@{F\-L\-\_\-\-V\-I\-P}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-V\-I\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-V\-I\-P~0x00100000}}\label{mmu_8h_ab5d8e8ca1f8cf4a7908f316435e25bb9}
+
+
+Definition at line 26 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af7c82bf7715d78873a56ed04dfa9bd97}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-V\-M@{F\-L\-\_\-\-V\-M}}
+\index{F\-L\-\_\-\-V\-M@{F\-L\-\_\-\-V\-M}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-V\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-V\-M~0x00020000}}\label{mmu_8h_af7c82bf7715d78873a56ed04dfa9bd97}
+
+
+Definition at line 23 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a66e0b71057f84fa675ccc3bc22c73be9}{\index{mmu.\-h@{mmu.\-h}!F\-L\-\_\-\-Z\-F@{F\-L\-\_\-\-Z\-F}}
+\index{F\-L\-\_\-\-Z\-F@{F\-L\-\_\-\-Z\-F}!mmu.h@{mmu.\-h}}
+\subsubsection[{F\-L\-\_\-\-Z\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-L\-\_\-\-Z\-F~0x00000040}}\label{mmu_8h_a66e0b71057f84fa675ccc3bc22c73be9}
+
+
+Definition at line 10 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af60ee3ecbf249497d0378c97201edfe8}{\index{mmu.\-h@{mmu.\-h}!N\-P\-D\-E\-N\-T\-R\-I\-E\-S@{N\-P\-D\-E\-N\-T\-R\-I\-E\-S}}
+\index{N\-P\-D\-E\-N\-T\-R\-I\-E\-S@{N\-P\-D\-E\-N\-T\-R\-I\-E\-S}!mmu.h@{mmu.\-h}}
+\subsubsection[{N\-P\-D\-E\-N\-T\-R\-I\-E\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-P\-D\-E\-N\-T\-R\-I\-E\-S~1024}}\label{mmu_8h_af60ee3ecbf249497d0378c97201edfe8}
+
+
+Definition at line 116 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a6318b16289e829d7f9719134ba08704f}{\index{mmu.\-h@{mmu.\-h}!N\-P\-T\-E\-N\-T\-R\-I\-E\-S@{N\-P\-T\-E\-N\-T\-R\-I\-E\-S}}
+\index{N\-P\-T\-E\-N\-T\-R\-I\-E\-S@{N\-P\-T\-E\-N\-T\-R\-I\-E\-S}!mmu.h@{mmu.\-h}}
+\subsubsection[{N\-P\-T\-E\-N\-T\-R\-I\-E\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-P\-T\-E\-N\-T\-R\-I\-E\-S~1024}}\label{mmu_8h_a6318b16289e829d7f9719134ba08704f}
+
+
+Definition at line 117 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a3b7982928c5178b9244b2b6289ef3832}{\index{mmu.\-h@{mmu.\-h}!P\-A\-D\-D\-R@{P\-A\-D\-D\-R}}
+\index{P\-A\-D\-D\-R@{P\-A\-D\-D\-R}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-A\-D\-D\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-A\-D\-D\-R(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~(({\bf uint})(a))}}\label{mmu_8h_a3b7982928c5178b9244b2b6289ef3832}
+
+
+Definition at line 113 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a1b00ddfafd303030fd16bee16a42a2ce}{\index{mmu.\-h@{mmu.\-h}!P\-D\-X@{P\-D\-X}}
+\index{P\-D\-X@{P\-D\-X}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-D\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-D\-X(
+\begin{DoxyParamCaption}
+\item[{}]{la}
+\end{DoxyParamCaption}
+)~((({\bf uint})(la) $>$$>$ {\bf P\-D\-X\-S\-H\-I\-F\-T}) \& 0x3\-F\-F)}}\label{mmu_8h_a1b00ddfafd303030fd16bee16a42a2ce}
+
+
+Definition at line 102 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}{\index{mmu.\-h@{mmu.\-h}!P\-D\-X\-S\-H\-I\-F\-T@{P\-D\-X\-S\-H\-I\-F\-T}}
+\index{P\-D\-X\-S\-H\-I\-F\-T@{P\-D\-X\-S\-H\-I\-F\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-D\-X\-S\-H\-I\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-D\-X\-S\-H\-I\-F\-T~22}}\label{mmu_8h_a6d2227e0acbc6e206494b5e50f0c5297}
+
+
+Definition at line 123 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a2e162e8ad6bc81877dd299db9fc87664}{\index{mmu.\-h@{mmu.\-h}!P\-G\-A\-D\-D\-R@{P\-G\-A\-D\-D\-R}}
+\index{P\-G\-A\-D\-D\-R@{P\-G\-A\-D\-D\-R}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-G\-A\-D\-D\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-G\-A\-D\-D\-R(
+\begin{DoxyParamCaption}
+\item[{}]{d, }
+\item[{}]{t, }
+\item[{}]{o}
+\end{DoxyParamCaption}
+)~(({\bf uint})((d) $<$$<$ {\bf P\-D\-X\-S\-H\-I\-F\-T} $\vert$ (t) $<$$<$ {\bf P\-T\-X\-S\-H\-I\-F\-T} $\vert$ (o)))}}\label{mmu_8h_a2e162e8ad6bc81877dd299db9fc87664}
+
+
+Definition at line 108 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a687e91750055553dd2788386c6a512fb}{\index{mmu.\-h@{mmu.\-h}!P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N@{P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N}}
+\index{P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N@{P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-G\-R\-O\-U\-N\-D\-D\-O\-W\-N(
+\begin{DoxyParamCaption}
+\item[{}]{a}
+\end{DoxyParamCaption}
+)~((char$\ast$)((((unsigned int)(a)) \& $\sim$({\bf P\-G\-S\-I\-Z\-E}-\/1))))}}\label{mmu_8h_a687e91750055553dd2788386c6a512fb}
+
+
+Definition at line 126 of file mmu.\-h.
+
+\hypertarget{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}{\index{mmu.\-h@{mmu.\-h}!P\-G\-R\-O\-U\-N\-D\-U\-P@{P\-G\-R\-O\-U\-N\-D\-U\-P}}
+\index{P\-G\-R\-O\-U\-N\-D\-U\-P@{P\-G\-R\-O\-U\-N\-D\-U\-P}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-G\-R\-O\-U\-N\-D\-U\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-G\-R\-O\-U\-N\-D\-U\-P(
+\begin{DoxyParamCaption}
+\item[{}]{sz}
+\end{DoxyParamCaption}
+)~(((sz)+{\bf P\-G\-S\-I\-Z\-E}-\/1) \& $\sim$({\bf P\-G\-S\-I\-Z\-E}-\/1))}}\label{mmu_8h_affa8cdfbd1c15dafc9f3af3a7b641f80}
+
+
+Definition at line 125 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a20d0b7c5f64f21a3fdc19cf44afe8ff2}{\index{mmu.\-h@{mmu.\-h}!P\-G\-S\-H\-I\-F\-T@{P\-G\-S\-H\-I\-F\-T}}
+\index{P\-G\-S\-H\-I\-F\-T@{P\-G\-S\-H\-I\-F\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-G\-S\-H\-I\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-G\-S\-H\-I\-F\-T~12}}\label{mmu_8h_a20d0b7c5f64f21a3fdc19cf44afe8ff2}
+
+
+Definition at line 120 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}{\index{mmu.\-h@{mmu.\-h}!P\-G\-S\-I\-Z\-E@{P\-G\-S\-I\-Z\-E}}
+\index{P\-G\-S\-I\-Z\-E@{P\-G\-S\-I\-Z\-E}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-G\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-G\-S\-I\-Z\-E~4096}}\label{mmu_8h_a5f96cb6ae6670e023c407cc2f77e1704}
+
+
+Definition at line 119 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af2d908a8af1d94a6aaf803ab40fe0951}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-A@{P\-T\-E\-\_\-\-A}}
+\index{P\-T\-E\-\_\-\-A@{P\-T\-E\-\_\-\-A}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-A~0x020}}\label{mmu_8h_af2d908a8af1d94a6aaf803ab40fe0951}
+
+
+Definition at line 134 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a74b24f9b091875a5313370892e3f37a5}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-A\-D\-D\-R@{P\-T\-E\-\_\-\-A\-D\-D\-R}}
+\index{P\-T\-E\-\_\-\-A\-D\-D\-R@{P\-T\-E\-\_\-\-A\-D\-D\-R}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-A\-D\-D\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-A\-D\-D\-R(
+\begin{DoxyParamCaption}
+\item[{}]{pte}
+\end{DoxyParamCaption}
+)~(({\bf uint})(pte) \& $\sim$0x\-F\-F\-F)}}\label{mmu_8h_a74b24f9b091875a5313370892e3f37a5}
+
+
+Definition at line 140 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ae80b38f12787d02087c4575c48c36d88}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-D@{P\-T\-E\-\_\-\-D}}
+\index{P\-T\-E\-\_\-\-D@{P\-T\-E\-\_\-\-D}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-D~0x040}}\label{mmu_8h_ae80b38f12787d02087c4575c48c36d88}
+
+
+Definition at line 135 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a2d7d0587af7c630f79199d1ecc048aef}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-M\-B\-Z@{P\-T\-E\-\_\-\-M\-B\-Z}}
+\index{P\-T\-E\-\_\-\-M\-B\-Z@{P\-T\-E\-\_\-\-M\-B\-Z}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-M\-B\-Z}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-M\-B\-Z~0x180}}\label{mmu_8h_a2d7d0587af7c630f79199d1ecc048aef}
+
+
+Definition at line 137 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a89bd860de64c44cd8ebaca8dc311b5ac}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-P@{P\-T\-E\-\_\-\-P}}
+\index{P\-T\-E\-\_\-\-P@{P\-T\-E\-\_\-\-P}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-P~0x001}}\label{mmu_8h_a89bd860de64c44cd8ebaca8dc311b5ac}
+
+
+Definition at line 129 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a120b9b6cd80216401185944eabc566c3}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-P\-C\-D@{P\-T\-E\-\_\-\-P\-C\-D}}
+\index{P\-T\-E\-\_\-\-P\-C\-D@{P\-T\-E\-\_\-\-P\-C\-D}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-P\-C\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-P\-C\-D~0x010}}\label{mmu_8h_a120b9b6cd80216401185944eabc566c3}
+
+
+Definition at line 133 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ab499d5acd1363559590a7cfdcfadab46}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-P\-S@{P\-T\-E\-\_\-\-P\-S}}
+\index{P\-T\-E\-\_\-\-P\-S@{P\-T\-E\-\_\-\-P\-S}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-P\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-P\-S~0x080}}\label{mmu_8h_ab499d5acd1363559590a7cfdcfadab46}
+
+
+Definition at line 136 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a72dca8a3a88d5e77c35551286cc25f23}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-P\-W\-T@{P\-T\-E\-\_\-\-P\-W\-T}}
+\index{P\-T\-E\-\_\-\-P\-W\-T@{P\-T\-E\-\_\-\-P\-W\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-P\-W\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-P\-W\-T~0x008}}\label{mmu_8h_a72dca8a3a88d5e77c35551286cc25f23}
+
+
+Definition at line 132 of file mmu.\-h.
+
+\hypertarget{mmu_8h_adced9836a1dc98d72849361e6ab03cda}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-U@{P\-T\-E\-\_\-\-U}}
+\index{P\-T\-E\-\_\-\-U@{P\-T\-E\-\_\-\-U}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-U}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-U~0x004}}\label{mmu_8h_adced9836a1dc98d72849361e6ab03cda}
+
+
+Definition at line 131 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a058fcbcc3e1eab2c09c68b3e5221c545}{\index{mmu.\-h@{mmu.\-h}!P\-T\-E\-\_\-\-W@{P\-T\-E\-\_\-\-W}}
+\index{P\-T\-E\-\_\-\-W@{P\-T\-E\-\_\-\-W}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-E\-\_\-\-W}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-E\-\_\-\-W~0x002}}\label{mmu_8h_a058fcbcc3e1eab2c09c68b3e5221c545}
+
+
+Definition at line 130 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ac744451cc21b0b24f37dd8f0d51b43fc}{\index{mmu.\-h@{mmu.\-h}!P\-T\-X@{P\-T\-X}}
+\index{P\-T\-X@{P\-T\-X}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-X(
+\begin{DoxyParamCaption}
+\item[{}]{la}
+\end{DoxyParamCaption}
+)~((({\bf uint})(la) $>$$>$ {\bf P\-T\-X\-S\-H\-I\-F\-T}) \& 0x3\-F\-F)}}\label{mmu_8h_ac744451cc21b0b24f37dd8f0d51b43fc}
+
+
+Definition at line 105 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a4424facfb4be6b056c05ec638d6347de}{\index{mmu.\-h@{mmu.\-h}!P\-T\-X\-S\-H\-I\-F\-T@{P\-T\-X\-S\-H\-I\-F\-T}}
+\index{P\-T\-X\-S\-H\-I\-F\-T@{P\-T\-X\-S\-H\-I\-F\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{P\-T\-X\-S\-H\-I\-F\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-T\-X\-S\-H\-I\-F\-T~12}}\label{mmu_8h_a4424facfb4be6b056c05ec638d6347de}
+
+
+Definition at line 122 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a1594ac4688d9f212e835fd38ff63e83f}{\index{mmu.\-h@{mmu.\-h}!S\-E\-G@{S\-E\-G}}
+\index{S\-E\-G@{S\-E\-G}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-E\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-E\-G(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{base, }
+\item[{}]{lim, }
+\item[{}]{dpl}
+\end{DoxyParamCaption}
+)}}\label{mmu_8h_a1594ac4688d9f212e835fd38ff63e83f}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+(\textcolor{keyword}{struct }\hyperlink{structsegdesc}{segdesc})    \(\backslash\)
+\{ ((lim) >> 12) & 0xffff, (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(base) & 0xffff,      \(\backslash\)
+  ((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(base) >> 16) & 0xff, \hyperlink{structsegdesc_a4e4020c6e82bee6562d5bc3c1657cafe}{type}, 1, \hyperlink{structsegdesc_af007c16108fee6bd537fac7128283b6e}{dpl}, 1,       \(\backslash\)
+  (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(lim) >> 28, 0, 0, 1, 1, (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(base) >> 24 \}
+\end{DoxyCode}
+
+
+Definition at line 60 of file mmu.\-h.
+
+\hypertarget{mmu_8h_abe69a1dd6290e2be017d58309495adb7}{\index{mmu.\-h@{mmu.\-h}!S\-E\-G16@{S\-E\-G16}}
+\index{S\-E\-G16@{S\-E\-G16}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-E\-G16}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-E\-G16(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{base, }
+\item[{}]{lim, }
+\item[{}]{dpl}
+\end{DoxyParamCaption}
+)}}\label{mmu_8h_abe69a1dd6290e2be017d58309495adb7}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+(\textcolor{keyword}{struct }\hyperlink{structsegdesc}{segdesc})  \(\backslash\)
+\{ (lim) & 0xffff, (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(base) & 0xffff,              \(\backslash\)
+  ((\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(base) >> 16) & 0xff, \hyperlink{structsegdesc_a4e4020c6e82bee6562d5bc3c1657cafe}{type}, 1, \hyperlink{structsegdesc_af007c16108fee6bd537fac7128283b6e}{dpl}, 1,       \(\backslash\)
+  (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(lim) >> 16, 0, 0, 1, 0, (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(base) >> 24 \}
+\end{DoxyCode}
+
+
+Definition at line 64 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a23e7ddf0a414b66cf9badd182edf1eca}{\index{mmu.\-h@{mmu.\-h}!S\-E\-T\-G\-A\-T\-E@{S\-E\-T\-G\-A\-T\-E}}
+\index{S\-E\-T\-G\-A\-T\-E@{S\-E\-T\-G\-A\-T\-E}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-E\-T\-G\-A\-T\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-E\-T\-G\-A\-T\-E(
+\begin{DoxyParamCaption}
+\item[{}]{gate, }
+\item[{}]{istrap, }
+\item[{}]{sel, }
+\item[{}]{off, }
+\item[{}]{d}
+\end{DoxyParamCaption}
+)}}\label{mmu_8h_a23e7ddf0a414b66cf9badd182edf1eca}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\{                                                         \(\backslash\)
+  (gate).off\_15\_0 = (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(off) & 0xffff;                \(\backslash\)
+  (gate).cs = (sel);                                      \(\backslash\)
+  (gate).args = 0;                                        \(\backslash\)
+  (gate).rsv1 = 0;                                        \(\backslash\)
+  (gate).type = (istrap) ? \hyperlink{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}{STS\_TG32} : \hyperlink{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}{STS\_IG32};           \(\backslash\)
+  (gate).s = 0;                                           \(\backslash\)
+  (gate).dpl = (d);                                       \(\backslash\)
+  (gate).p = 1;                                           \(\backslash\)
+  (gate).off\_31\_16 = (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})(off) >> 16;                  \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Definition at line 206 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a18eb795a2eb72794f4de5b8087731607}{\index{mmu.\-h@{mmu.\-h}!S\-T\-A\-\_\-\-A@{S\-T\-A\-\_\-\-A}}
+\index{S\-T\-A\-\_\-\-A@{S\-T\-A\-\_\-\-A}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-A~0x1}}\label{mmu_8h_a18eb795a2eb72794f4de5b8087731607}
+
+
+Definition at line 77 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ab4829c3150ed67ae0f00a103fb448a2f}{\index{mmu.\-h@{mmu.\-h}!S\-T\-A\-\_\-\-C@{S\-T\-A\-\_\-\-C}}
+\index{S\-T\-A\-\_\-\-C@{S\-T\-A\-\_\-\-C}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-C}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-C~0x4}}\label{mmu_8h_ab4829c3150ed67ae0f00a103fb448a2f}
+
+
+Definition at line 74 of file mmu.\-h.
+
+\hypertarget{mmu_8h_ad6f4adbc6fea020a7d9d18a5f709843e}{\index{mmu.\-h@{mmu.\-h}!S\-T\-A\-\_\-\-E@{S\-T\-A\-\_\-\-E}}
+\index{S\-T\-A\-\_\-\-E@{S\-T\-A\-\_\-\-E}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-E~0x4}}\label{mmu_8h_ad6f4adbc6fea020a7d9d18a5f709843e}
+
+
+Definition at line 73 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a6545a48f34a3fae1b04cf265f13bc8f3}{\index{mmu.\-h@{mmu.\-h}!S\-T\-A\-\_\-\-R@{S\-T\-A\-\_\-\-R}}
+\index{S\-T\-A\-\_\-\-R@{S\-T\-A\-\_\-\-R}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-R~0x2}}\label{mmu_8h_a6545a48f34a3fae1b04cf265f13bc8f3}
+
+
+Definition at line 76 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a9321b5b232838b8b230c6b681be9a882}{\index{mmu.\-h@{mmu.\-h}!S\-T\-A\-\_\-\-W@{S\-T\-A\-\_\-\-W}}
+\index{S\-T\-A\-\_\-\-W@{S\-T\-A\-\_\-\-W}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-W}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-W~0x2}}\label{mmu_8h_a9321b5b232838b8b230c6b681be9a882}
+
+
+Definition at line 75 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af30c683a434e0712fd83781307239cb9}{\index{mmu.\-h@{mmu.\-h}!S\-T\-A\-\_\-\-X@{S\-T\-A\-\_\-\-X}}
+\index{S\-T\-A\-\_\-\-X@{S\-T\-A\-\_\-\-X}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-X~0x8}}\label{mmu_8h_af30c683a434e0712fd83781307239cb9}
+
+
+Definition at line 72 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a892428e720dfa978188d79cdd0380630}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-C\-G16@{S\-T\-S\-\_\-\-C\-G16}}
+\index{S\-T\-S\-\_\-\-C\-G16@{S\-T\-S\-\_\-\-C\-G16}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-C\-G16}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-C\-G16~0x4}}\label{mmu_8h_a892428e720dfa978188d79cdd0380630}
+
+
+Definition at line 83 of file mmu.\-h.
+
+\hypertarget{mmu_8h_aa7e0b3f01699a15c5c49c54de3750107}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-C\-G32@{S\-T\-S\-\_\-\-C\-G32}}
+\index{S\-T\-S\-\_\-\-C\-G32@{S\-T\-S\-\_\-\-C\-G32}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-C\-G32}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-C\-G32~0x\-C}}\label{mmu_8h_aa7e0b3f01699a15c5c49c54de3750107}
+
+
+Definition at line 89 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a8543847c09da13a951ab3009e49df956}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-I\-G16@{S\-T\-S\-\_\-\-I\-G16}}
+\index{S\-T\-S\-\_\-\-I\-G16@{S\-T\-S\-\_\-\-I\-G16}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-I\-G16}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-I\-G16~0x6}}\label{mmu_8h_a8543847c09da13a951ab3009e49df956}
+
+
+Definition at line 85 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-I\-G32@{S\-T\-S\-\_\-\-I\-G32}}
+\index{S\-T\-S\-\_\-\-I\-G32@{S\-T\-S\-\_\-\-I\-G32}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-I\-G32}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-I\-G32~0x\-E}}\label{mmu_8h_a14b54d1a503921b0c10993cdc6ff197b}
+
+
+Definition at line 90 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af82429cbe13d9fc970aa92082aa2b24f}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-L\-D\-T@{S\-T\-S\-\_\-\-L\-D\-T}}
+\index{S\-T\-S\-\_\-\-L\-D\-T@{S\-T\-S\-\_\-\-L\-D\-T}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-L\-D\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-L\-D\-T~0x2}}\label{mmu_8h_af82429cbe13d9fc970aa92082aa2b24f}
+
+
+Definition at line 81 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a92f6e9c3a88bc7b119e356214afb18d0}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T16\-A@{S\-T\-S\-\_\-\-T16\-A}}
+\index{S\-T\-S\-\_\-\-T16\-A@{S\-T\-S\-\_\-\-T16\-A}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T16\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T16\-A~0x1}}\label{mmu_8h_a92f6e9c3a88bc7b119e356214afb18d0}
+
+
+Definition at line 80 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a24f6ddb5ba92dab5a68f7f2cded0bb3a}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T16\-B@{S\-T\-S\-\_\-\-T16\-B}}
+\index{S\-T\-S\-\_\-\-T16\-B@{S\-T\-S\-\_\-\-T16\-B}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T16\-B}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T16\-B~0x3}}\label{mmu_8h_a24f6ddb5ba92dab5a68f7f2cded0bb3a}
+
+
+Definition at line 82 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a1b27d53cef04c198f3b048345d28016c}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T32\-A@{S\-T\-S\-\_\-\-T32\-A}}
+\index{S\-T\-S\-\_\-\-T32\-A@{S\-T\-S\-\_\-\-T32\-A}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T32\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T32\-A~0x9}}\label{mmu_8h_a1b27d53cef04c198f3b048345d28016c}
+
+
+Definition at line 87 of file mmu.\-h.
+
+\hypertarget{mmu_8h_af656e12a5bedfa79c0c3e02a3f01bab6}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T32\-B@{S\-T\-S\-\_\-\-T32\-B}}
+\index{S\-T\-S\-\_\-\-T32\-B@{S\-T\-S\-\_\-\-T32\-B}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T32\-B}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T32\-B~0x\-B}}\label{mmu_8h_af656e12a5bedfa79c0c3e02a3f01bab6}
+
+
+Definition at line 88 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a52ec5ba90269a2040fc29d6a11e5c14c}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T\-G@{S\-T\-S\-\_\-\-T\-G}}
+\index{S\-T\-S\-\_\-\-T\-G@{S\-T\-S\-\_\-\-T\-G}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T\-G}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T\-G~0x5}}\label{mmu_8h_a52ec5ba90269a2040fc29d6a11e5c14c}
+
+
+Definition at line 84 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a16d083797e265f35ef2a8edade986463}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T\-G16@{S\-T\-S\-\_\-\-T\-G16}}
+\index{S\-T\-S\-\_\-\-T\-G16@{S\-T\-S\-\_\-\-T\-G16}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T\-G16}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T\-G16~0x7}}\label{mmu_8h_a16d083797e265f35ef2a8edade986463}
+
+
+Definition at line 86 of file mmu.\-h.
+
+\hypertarget{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}{\index{mmu.\-h@{mmu.\-h}!S\-T\-S\-\_\-\-T\-G32@{S\-T\-S\-\_\-\-T\-G32}}
+\index{S\-T\-S\-\_\-\-T\-G32@{S\-T\-S\-\_\-\-T\-G32}!mmu.h@{mmu.\-h}}
+\subsubsection[{S\-T\-S\-\_\-\-T\-G32}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-S\-\_\-\-T\-G32~0x\-F}}\label{mmu_8h_a734d7f1a24c70d7b410cf3a7cbe00093}
+
+
+Definition at line 91 of file mmu.\-h.
+
+
+
+\subsection{Typedef Documentation}
+\hypertarget{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}{\index{mmu.\-h@{mmu.\-h}!pte\-\_\-t@{pte\-\_\-t}}
+\index{pte\-\_\-t@{pte\-\_\-t}!mmu.h@{mmu.\-h}}
+\subsubsection[{pte\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}typedef {\bf uint} {\bf pte\-\_\-t}}}\label{mmu_8h_ab23e75f764f8314a83eaff23508c2ae5}
+
+
+Definition at line 142 of file mmu.\-h.
+

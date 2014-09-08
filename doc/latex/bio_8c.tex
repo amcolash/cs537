@@ -1,0 +1,114 @@
+\hypertarget{bio_8c}{\section{kernel/bio.c File Reference}
+\label{bio_8c}\index{kernel/bio.\-c@{kernel/bio.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spinlock.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}buf.\-h\char`\"{}}\\*
+Include dependency graph for bio.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{bio_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{bio_8c_a53cca0ddc98c5f1de37124eca2575a59}{binit} (void)
+\item 
+struct \hyperlink{structbuf}{buf} $\ast$ \hyperlink{bio_8c_ac09898fdd6868e88ff35f498fa6ef52f}{bread} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} dev, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} sector)
+\item 
+void \hyperlink{bio_8c_a63c899c13b176ddf80064d32225e1298}{bwrite} (struct \hyperlink{structbuf}{buf} $\ast$b)
+\item 
+void \hyperlink{bio_8c_ab5335aeb503731104314321a78a6d727}{brelse} (struct \hyperlink{structbuf}{buf} $\ast$b)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \hyperlink{structspinlock}{spinlock} \hyperlink{bio_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}\\
+\>struct \hyperlink{structbuf}{buf} \hyperlink{bio_8c_a72ee90c61d41547b10a533c219e081c6}{buf} \mbox{[}\hyperlink{param_8h_ad51e2f8dffd163c263ec676a268d0f0a}{NBUF}\mbox{]}\\
+\>struct \hyperlink{structbuf}{buf} \hyperlink{bio_8c_aa6e692c16f1b909f5cb2a1832cf43430}{head}\\
+\} \hyperlink{bio_8c_a8c840c340a1233a78bdb2af607bbbcfc}{bcache}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{bio_8c_a53cca0ddc98c5f1de37124eca2575a59}{\index{bio.\-c@{bio.\-c}!binit@{binit}}
+\index{binit@{binit}!bio.c@{bio.\-c}}
+\subsubsection[{binit}]{\setlength{\rightskip}{0pt plus 5cm}void binit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{bio_8c_a53cca0ddc98c5f1de37124eca2575a59}
+
+
+Definition at line 40 of file bio.\-c.
+
+\hypertarget{bio_8c_ac09898fdd6868e88ff35f498fa6ef52f}{\index{bio.\-c@{bio.\-c}!bread@{bread}}
+\index{bread@{bread}!bio.c@{bio.\-c}}
+\subsubsection[{bread}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf buf}$\ast$ bread (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{dev, }
+\item[{{\bf uint}}]{sector}
+\end{DoxyParamCaption}
+)}}\label{bio_8c_ac09898fdd6868e88ff35f498fa6ef52f}
+
+
+Definition at line 97 of file bio.\-c.
+
+\hypertarget{bio_8c_ab5335aeb503731104314321a78a6d727}{\index{bio.\-c@{bio.\-c}!brelse@{brelse}}
+\index{brelse@{brelse}!bio.c@{bio.\-c}}
+\subsubsection[{brelse}]{\setlength{\rightskip}{0pt plus 5cm}void brelse (
+\begin{DoxyParamCaption}
+\item[{struct {\bf buf} $\ast$}]{b}
+\end{DoxyParamCaption}
+)}}\label{bio_8c_ab5335aeb503731104314321a78a6d727}
+
+
+Definition at line 119 of file bio.\-c.
+
+\hypertarget{bio_8c_a63c899c13b176ddf80064d32225e1298}{\index{bio.\-c@{bio.\-c}!bwrite@{bwrite}}
+\index{bwrite@{bwrite}!bio.c@{bio.\-c}}
+\subsubsection[{bwrite}]{\setlength{\rightskip}{0pt plus 5cm}void bwrite (
+\begin{DoxyParamCaption}
+\item[{struct {\bf buf} $\ast$}]{b}
+\end{DoxyParamCaption}
+)}}\label{bio_8c_a63c899c13b176ddf80064d32225e1298}
+
+
+Definition at line 109 of file bio.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{bio_8c_a8c840c340a1233a78bdb2af607bbbcfc}{\index{bio.\-c@{bio.\-c}!bcache@{bcache}}
+\index{bcache@{bcache}!bio.c@{bio.\-c}}
+\subsubsection[{bcache}]{\setlength{\rightskip}{0pt plus 5cm}struct \{ ... \}   bcache}}\label{bio_8c_a8c840c340a1233a78bdb2af607bbbcfc}
+\hypertarget{bio_8c_a72ee90c61d41547b10a533c219e081c6}{\index{bio.\-c@{bio.\-c}!buf@{buf}}
+\index{buf@{buf}!bio.c@{bio.\-c}}
+\subsubsection[{buf}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf buf} {\bf buf}\mbox{[}{\bf N\-B\-U\-F}\mbox{]}}}\label{bio_8c_a72ee90c61d41547b10a533c219e081c6}
+
+
+Definition at line 32 of file bio.\-c.
+
+\hypertarget{bio_8c_aa6e692c16f1b909f5cb2a1832cf43430}{\index{bio.\-c@{bio.\-c}!head@{head}}
+\index{head@{head}!bio.c@{bio.\-c}}
+\subsubsection[{head}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf buf} head}}\label{bio_8c_aa6e692c16f1b909f5cb2a1832cf43430}
+
+
+Definition at line 36 of file bio.\-c.
+
+\hypertarget{bio_8c_ab28e82cd5dda7d960095706a3ea20572}{\index{bio.\-c@{bio.\-c}!lock@{lock}}
+\index{lock@{lock}!bio.c@{bio.\-c}}
+\subsubsection[{lock}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf spinlock} lock}}\label{bio_8c_ab28e82cd5dda7d960095706a3ea20572}
+
+
+Definition at line 31 of file bio.\-c.
+

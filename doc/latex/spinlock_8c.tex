@@ -1,0 +1,117 @@
+\hypertarget{spinlock_8c}{\section{kernel/spinlock.c File Reference}
+\label{spinlock_8c}\index{kernel/spinlock.\-c@{kernel/spinlock.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}proc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spinlock.\-h\char`\"{}}\\*
+Include dependency graph for spinlock.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{spinlock_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{spinlock_8c_abda07b4a007b2e888d9d783920460b89}{initlock} (struct \hyperlink{structspinlock}{spinlock} $\ast$lk, char $\ast$\hyperlink{usertests_8c_aee754febd402311e2a552cb0d6ab6629}{name})
+\item 
+void \hyperlink{spinlock_8c_aed377f16a085b00de3a4b32392adbdfb}{acquire} (struct \hyperlink{structspinlock}{spinlock} $\ast$lk)
+\item 
+void \hyperlink{spinlock_8c_a1cee376aa9a00e754bf5481cd5f3d97b}{release} (struct \hyperlink{structspinlock}{spinlock} $\ast$lk)
+\item 
+void \hyperlink{spinlock_8c_a6ac35304ea80f01086b47edcc2328010}{getcallerpcs} (void $\ast$v, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} pcs\mbox{[}$\,$\mbox{]})
+\item 
+int \hyperlink{spinlock_8c_aea48df3e5cfb903179ad3dc78ab502d9}{holding} (struct \hyperlink{structspinlock}{spinlock} $\ast$\hyperlink{proc_8c_ab28e82cd5dda7d960095706a3ea20572}{lock})
+\item 
+void \hyperlink{spinlock_8c_a206b749d1b7768dadce61cbcde7e0f1c}{pushcli} (void)
+\item 
+void \hyperlink{spinlock_8c_ae3424f669269fef400ce29c3aeb43fdb}{popcli} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{spinlock_8c_aed377f16a085b00de3a4b32392adbdfb}{\index{spinlock.\-c@{spinlock.\-c}!acquire@{acquire}}
+\index{acquire@{acquire}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{acquire}]{\setlength{\rightskip}{0pt plus 5cm}void acquire (
+\begin{DoxyParamCaption}
+\item[{struct {\bf spinlock} $\ast$}]{lk}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_aed377f16a085b00de3a4b32392adbdfb}
+
+
+Definition at line 24 of file spinlock.\-c.
+
+\hypertarget{spinlock_8c_a6ac35304ea80f01086b47edcc2328010}{\index{spinlock.\-c@{spinlock.\-c}!getcallerpcs@{getcallerpcs}}
+\index{getcallerpcs@{getcallerpcs}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{getcallerpcs}]{\setlength{\rightskip}{0pt plus 5cm}void getcallerpcs (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{v, }
+\item[{{\bf uint}}]{pcs\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_a6ac35304ea80f01086b47edcc2328010}
+
+
+Definition at line 67 of file spinlock.\-c.
+
+\hypertarget{spinlock_8c_aea48df3e5cfb903179ad3dc78ab502d9}{\index{spinlock.\-c@{spinlock.\-c}!holding@{holding}}
+\index{holding@{holding}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{holding}]{\setlength{\rightskip}{0pt plus 5cm}int holding (
+\begin{DoxyParamCaption}
+\item[{struct {\bf spinlock} $\ast$}]{lock}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_aea48df3e5cfb903179ad3dc78ab502d9}
+
+
+Definition at line 85 of file spinlock.\-c.
+
+\hypertarget{spinlock_8c_abda07b4a007b2e888d9d783920460b89}{\index{spinlock.\-c@{spinlock.\-c}!initlock@{initlock}}
+\index{initlock@{initlock}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{initlock}]{\setlength{\rightskip}{0pt plus 5cm}void initlock (
+\begin{DoxyParamCaption}
+\item[{struct {\bf spinlock} $\ast$}]{lk, }
+\item[{char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_abda07b4a007b2e888d9d783920460b89}
+
+
+Definition at line 12 of file spinlock.\-c.
+
+\hypertarget{spinlock_8c_ae3424f669269fef400ce29c3aeb43fdb}{\index{spinlock.\-c@{spinlock.\-c}!popcli@{popcli}}
+\index{popcli@{popcli}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{popcli}]{\setlength{\rightskip}{0pt plus 5cm}void popcli (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_ae3424f669269fef400ce29c3aeb43fdb}
+
+
+Definition at line 107 of file spinlock.\-c.
+
+\hypertarget{spinlock_8c_a206b749d1b7768dadce61cbcde7e0f1c}{\index{spinlock.\-c@{spinlock.\-c}!pushcli@{pushcli}}
+\index{pushcli@{pushcli}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{pushcli}]{\setlength{\rightskip}{0pt plus 5cm}void pushcli (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_a206b749d1b7768dadce61cbcde7e0f1c}
+
+
+Definition at line 96 of file spinlock.\-c.
+
+\hypertarget{spinlock_8c_a1cee376aa9a00e754bf5481cd5f3d97b}{\index{spinlock.\-c@{spinlock.\-c}!release@{release}}
+\index{release@{release}!spinlock.c@{spinlock.\-c}}
+\subsubsection[{release}]{\setlength{\rightskip}{0pt plus 5cm}void release (
+\begin{DoxyParamCaption}
+\item[{struct {\bf spinlock} $\ast$}]{lk}
+\end{DoxyParamCaption}
+)}}\label{spinlock_8c_a1cee376aa9a00e754bf5481cd5f3d97b}
+
+
+Definition at line 43 of file spinlock.\-c.
+

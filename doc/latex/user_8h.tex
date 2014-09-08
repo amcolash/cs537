@@ -1,0 +1,403 @@
+\hypertarget{user_8h}{\section{user/user.h File Reference}
+\label{user_8h}\index{user/user.\-h@{user/user.\-h}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{user_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{user_8h_acd2e1ded4bb6fce4500438bf928330f4}{fork} (void)
+\item 
+int \hyperlink{user_8h_ab3db880e623854a39a18d618e360323d}{exit} (void) \-\_\-\-\_\-attribute\-\_\-\-\_\-((noreturn))
+\item 
+int \hyperlink{user_8h_af6f31822f7e737b4e414bdac1ccb59a4}{wait} (void)
+\item 
+int \hyperlink{user_8h_a3e511a43ff12776599312723e69df219}{pipe} (int $\ast$)
+\item 
+int \hyperlink{user_8h_a894862d36b7a203a88a0c1ab835b8230}{write} (int, void $\ast$, int)
+\item 
+int \hyperlink{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{read} (int, void $\ast$, int)
+\item 
+int \hyperlink{user_8h_ae152484c890a24e4d9b4980e7b965be0}{close} (int)
+\item 
+int \hyperlink{user_8h_ab893e9671d6bfe2b2604002a50639f21}{kill} (int)
+\item 
+int \hyperlink{user_8h_aa7b4aae4a12acd187e23396214aeca47}{exec} (char $\ast$, char $\ast$$\ast$)
+\item 
+int \hyperlink{user_8h_a2955ebac5bec99d94ed565e5404240da}{open} (char $\ast$, int)
+\item 
+int \hyperlink{user_8h_aeefc0cd49669f3c28005ca31db429829}{mknod} (char $\ast$, short, short)
+\item 
+int \hyperlink{user_8h_a65a95f51eb9a357f7bef0ebc501b1983}{unlink} (char $\ast$)
+\item 
+int \hyperlink{user_8h_a649aa32ddc94f9b64c3fa27dc9724459}{fstat} (int fd, struct \hyperlink{structstat}{stat} $\ast$)
+\item 
+int \hyperlink{user_8h_a61214ce61efc8c5c9171007c47c0f16b}{link} (char $\ast$, char $\ast$)
+\item 
+int \hyperlink{user_8h_a37cb3261a58deb6c34ceef90c2874157}{mkdir} (char $\ast$)
+\item 
+int \hyperlink{user_8h_abd9c122e4b77f6b137e3ced8b9d9b931}{chdir} (char $\ast$)
+\item 
+int \hyperlink{user_8h_a530ea95b243a1bf148adaf399e2a6292}{dup} (int)
+\item 
+int \hyperlink{user_8h_a939cb25a305fe68aad9b365077f1a8c7}{getpid} (void)
+\item 
+char $\ast$ \hyperlink{user_8h_ab93887b632d2111cb006eaa3018ccef7}{sbrk} (int)
+\item 
+int \hyperlink{user_8h_a4c9ea5126314b1eedbe1f6c94996878a}{sleep} (int)
+\item 
+int \hyperlink{user_8h_ab637d1dd2fecad1cb0c91a42597a8dbc}{uptime} (void)
+\item 
+int \hyperlink{user_8h_af64024a7b15af7af750aedf03b915367}{stat} (char $\ast$, struct \hyperlink{structstat}{stat} $\ast$)
+\item 
+char $\ast$ \hyperlink{user_8h_a142a2e8da2023db4c382bfb2d5c0318e}{strcpy} (char $\ast$, char $\ast$)
+\item 
+void $\ast$ \hyperlink{user_8h_a2d3fe6ea21c6be9686e54e697dd3e8c8}{memmove} (void $\ast$, void $\ast$, int)
+\item 
+char $\ast$ \hyperlink{user_8h_a590d52011eabccabedfa9e8e88e4f39f}{strchr} (const char $\ast$, char c)
+\item 
+int \hyperlink{user_8h_a21e4788b4a0ae39b11aa32e9a1079f98}{strcmp} (const char $\ast$, const char $\ast$)
+\item 
+void \hyperlink{user_8h_a91d1c331b690ee949e0b36a476b1e101}{printf} (int, char $\ast$,...)
+\item 
+char $\ast$ \hyperlink{user_8h_abab901a6ac270dc88187de0ea891a202}{gets} (char $\ast$, int max)
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{user_8h_a99ac12f46a74690bab859ea047b949b5}{strlen} (char $\ast$)
+\item 
+void $\ast$ \hyperlink{user_8h_a9d55c9f035076ed1a90b6452770d0b62}{memset} (void $\ast$, int, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})
+\item 
+void $\ast$ \hyperlink{user_8h_a695dd0e01092a07da0d1d9f7a96d1f8b}{malloc} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint})
+\item 
+void \hyperlink{user_8h_af07d89f5ceaea0c7c8252cc41fd75f37}{free} (void $\ast$)
+\item 
+int \hyperlink{user_8h_a4e157d18591ba54c92e4da99a3d1ccae}{atoi} (const char $\ast$)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{user_8h_a4e157d18591ba54c92e4da99a3d1ccae}{\index{user.\-h@{user.\-h}!atoi@{atoi}}
+\index{atoi@{atoi}!user.h@{user.\-h}}
+\subsubsection[{atoi}]{\setlength{\rightskip}{0pt plus 5cm}int atoi (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a4e157d18591ba54c92e4da99a3d1ccae}
+
+
+Definition at line 85 of file ulib.\-c.
+
+\hypertarget{user_8h_abd9c122e4b77f6b137e3ced8b9d9b931}{\index{user.\-h@{user.\-h}!chdir@{chdir}}
+\index{chdir@{chdir}!user.h@{user.\-h}}
+\subsubsection[{chdir}]{\setlength{\rightskip}{0pt plus 5cm}int chdir (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_abd9c122e4b77f6b137e3ced8b9d9b931}
+\hypertarget{user_8h_ae152484c890a24e4d9b4980e7b965be0}{\index{user.\-h@{user.\-h}!close@{close}}
+\index{close@{close}!user.h@{user.\-h}}
+\subsubsection[{close}]{\setlength{\rightskip}{0pt plus 5cm}int close (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_ae152484c890a24e4d9b4980e7b965be0}
+\hypertarget{user_8h_a530ea95b243a1bf148adaf399e2a6292}{\index{user.\-h@{user.\-h}!dup@{dup}}
+\index{dup@{dup}!user.h@{user.\-h}}
+\subsubsection[{dup}]{\setlength{\rightskip}{0pt plus 5cm}int dup (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a530ea95b243a1bf148adaf399e2a6292}
+\hypertarget{user_8h_aa7b4aae4a12acd187e23396214aeca47}{\index{user.\-h@{user.\-h}!exec@{exec}}
+\index{exec@{exec}!user.h@{user.\-h}}
+\subsubsection[{exec}]{\setlength{\rightskip}{0pt plus 5cm}int exec (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{char $\ast$$\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_aa7b4aae4a12acd187e23396214aeca47}
+
+
+Definition at line 10 of file exec.\-c.
+
+\hypertarget{user_8h_ab3db880e623854a39a18d618e360323d}{\index{user.\-h@{user.\-h}!exit@{exit}}
+\index{exit@{exit}!user.h@{user.\-h}}
+\subsubsection[{exit}]{\setlength{\rightskip}{0pt plus 5cm}int exit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_ab3db880e623854a39a18d618e360323d}
+
+
+Definition at line 166 of file proc.\-c.
+
+\hypertarget{user_8h_acd2e1ded4bb6fce4500438bf928330f4}{\index{user.\-h@{user.\-h}!fork@{fork}}
+\index{fork@{fork}!user.h@{user.\-h}}
+\subsubsection[{fork}]{\setlength{\rightskip}{0pt plus 5cm}int fork (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_acd2e1ded4bb6fce4500438bf928330f4}
+
+
+Definition at line 128 of file proc.\-c.
+
+\hypertarget{user_8h_af07d89f5ceaea0c7c8252cc41fd75f37}{\index{user.\-h@{user.\-h}!free@{free}}
+\index{free@{free}!user.h@{user.\-h}}
+\subsubsection[{free}]{\setlength{\rightskip}{0pt plus 5cm}void free (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_af07d89f5ceaea0c7c8252cc41fd75f37}
+
+
+Definition at line 25 of file umalloc.\-c.
+
+\hypertarget{user_8h_a649aa32ddc94f9b64c3fa27dc9724459}{\index{user.\-h@{user.\-h}!fstat@{fstat}}
+\index{fstat@{fstat}!user.h@{user.\-h}}
+\subsubsection[{fstat}]{\setlength{\rightskip}{0pt plus 5cm}int fstat (
+\begin{DoxyParamCaption}
+\item[{int}]{fd, }
+\item[{struct {\bf stat} $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a649aa32ddc94f9b64c3fa27dc9724459}
+\hypertarget{user_8h_a939cb25a305fe68aad9b365077f1a8c7}{\index{user.\-h@{user.\-h}!getpid@{getpid}}
+\index{getpid@{getpid}!user.h@{user.\-h}}
+\subsubsection[{getpid}]{\setlength{\rightskip}{0pt plus 5cm}int getpid (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a939cb25a305fe68aad9b365077f1a8c7}
+\hypertarget{user_8h_abab901a6ac270dc88187de0ea891a202}{\index{user.\-h@{user.\-h}!gets@{gets}}
+\index{gets@{gets}!user.h@{user.\-h}}
+\subsubsection[{gets}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ gets (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{int}]{max}
+\end{DoxyParamCaption}
+)}}\label{user_8h_abab901a6ac270dc88187de0ea891a202}
+
+
+Definition at line 53 of file ulib.\-c.
+
+\hypertarget{user_8h_ab893e9671d6bfe2b2604002a50639f21}{\index{user.\-h@{user.\-h}!kill@{kill}}
+\index{kill@{kill}!user.h@{user.\-h}}
+\subsubsection[{kill}]{\setlength{\rightskip}{0pt plus 5cm}int kill (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_ab893e9671d6bfe2b2604002a50639f21}
+
+
+Definition at line 391 of file proc.\-c.
+
+\hypertarget{user_8h_a61214ce61efc8c5c9171007c47c0f16b}{\index{user.\-h@{user.\-h}!link@{link}}
+\index{link@{link}!user.h@{user.\-h}}
+\subsubsection[{link}]{\setlength{\rightskip}{0pt plus 5cm}int link (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a61214ce61efc8c5c9171007c47c0f16b}
+\hypertarget{user_8h_a695dd0e01092a07da0d1d9f7a96d1f8b}{\index{user.\-h@{user.\-h}!malloc@{malloc}}
+\index{malloc@{malloc}!user.h@{user.\-h}}
+\subsubsection[{malloc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ malloc (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a695dd0e01092a07da0d1d9f7a96d1f8b}
+
+
+Definition at line 64 of file umalloc.\-c.
+
+\hypertarget{user_8h_a2d3fe6ea21c6be9686e54e697dd3e8c8}{\index{user.\-h@{user.\-h}!memmove@{memmove}}
+\index{memmove@{memmove}!user.h@{user.\-h}}
+\subsubsection[{memmove}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ memmove (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{, }
+\item[{void $\ast$}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a2d3fe6ea21c6be9686e54e697dd3e8c8}
+
+
+Definition at line 96 of file ulib.\-c.
+
+\hypertarget{user_8h_a9d55c9f035076ed1a90b6452770d0b62}{\index{user.\-h@{user.\-h}!memset@{memset}}
+\index{memset@{memset}!user.h@{user.\-h}}
+\subsubsection[{memset}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ memset (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{, }
+\item[{int}]{, }
+\item[{{\bf uint}}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a9d55c9f035076ed1a90b6452770d0b62}
+
+
+Definition at line 5 of file string.\-c.
+
+\hypertarget{user_8h_a37cb3261a58deb6c34ceef90c2874157}{\index{user.\-h@{user.\-h}!mkdir@{mkdir}}
+\index{mkdir@{mkdir}!user.h@{user.\-h}}
+\subsubsection[{mkdir}]{\setlength{\rightskip}{0pt plus 5cm}int mkdir (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a37cb3261a58deb6c34ceef90c2874157}
+\hypertarget{user_8h_aeefc0cd49669f3c28005ca31db429829}{\index{user.\-h@{user.\-h}!mknod@{mknod}}
+\index{mknod@{mknod}!user.h@{user.\-h}}
+\subsubsection[{mknod}]{\setlength{\rightskip}{0pt plus 5cm}int mknod (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{short}]{, }
+\item[{short}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_aeefc0cd49669f3c28005ca31db429829}
+\hypertarget{user_8h_a2955ebac5bec99d94ed565e5404240da}{\index{user.\-h@{user.\-h}!open@{open}}
+\index{open@{open}!user.h@{user.\-h}}
+\subsubsection[{open}]{\setlength{\rightskip}{0pt plus 5cm}int open (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a2955ebac5bec99d94ed565e5404240da}
+\hypertarget{user_8h_a3e511a43ff12776599312723e69df219}{\index{user.\-h@{user.\-h}!pipe@{pipe}}
+\index{pipe@{pipe}!user.h@{user.\-h}}
+\subsubsection[{pipe}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf pipe} (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a3e511a43ff12776599312723e69df219}
+\hypertarget{user_8h_a91d1c331b690ee949e0b36a476b1e101}{\index{user.\-h@{user.\-h}!printf@{printf}}
+\index{printf@{printf}!user.h@{user.\-h}}
+\subsubsection[{printf}]{\setlength{\rightskip}{0pt plus 5cm}void printf (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{char $\ast$}]{, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a91d1c331b690ee949e0b36a476b1e101}
+
+
+Definition at line 11 of file forktest.\-c.
+
+\hypertarget{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}{\index{user.\-h@{user.\-h}!read@{read}}
+\index{read@{read}!user.h@{user.\-h}}
+\subsubsection[{read}]{\setlength{\rightskip}{0pt plus 5cm}int read (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{void $\ast$}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a2d73522d6354b8a141ecfaa9585a0c77}
+\hypertarget{user_8h_ab93887b632d2111cb006eaa3018ccef7}{\index{user.\-h@{user.\-h}!sbrk@{sbrk}}
+\index{sbrk@{sbrk}!user.h@{user.\-h}}
+\subsubsection[{sbrk}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ sbrk (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_ab93887b632d2111cb006eaa3018ccef7}
+\hypertarget{user_8h_a4c9ea5126314b1eedbe1f6c94996878a}{\index{user.\-h@{user.\-h}!sleep@{sleep}}
+\index{sleep@{sleep}!user.h@{user.\-h}}
+\subsubsection[{sleep}]{\setlength{\rightskip}{0pt plus 5cm}int sleep (
+\begin{DoxyParamCaption}
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a4c9ea5126314b1eedbe1f6c94996878a}
+\hypertarget{user_8h_af64024a7b15af7af750aedf03b915367}{\index{user.\-h@{user.\-h}!stat@{stat}}
+\index{stat@{stat}!user.h@{user.\-h}}
+\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf stat} (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{struct {\bf stat} $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_af64024a7b15af7af750aedf03b915367}
+
+
+Definition at line 71 of file ulib.\-c.
+
+\hypertarget{user_8h_a590d52011eabccabedfa9e8e88e4f39f}{\index{user.\-h@{user.\-h}!strchr@{strchr}}
+\index{strchr@{strchr}!user.h@{user.\-h}}
+\subsubsection[{strchr}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ strchr (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a590d52011eabccabedfa9e8e88e4f39f}
+
+
+Definition at line 44 of file ulib.\-c.
+
+\hypertarget{user_8h_a21e4788b4a0ae39b11aa32e9a1079f98}{\index{user.\-h@{user.\-h}!strcmp@{strcmp}}
+\index{strcmp@{strcmp}!user.h@{user.\-h}}
+\subsubsection[{strcmp}]{\setlength{\rightskip}{0pt plus 5cm}int strcmp (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a21e4788b4a0ae39b11aa32e9a1079f98}
+
+
+Definition at line 19 of file ulib.\-c.
+
+\hypertarget{user_8h_a142a2e8da2023db4c382bfb2d5c0318e}{\index{user.\-h@{user.\-h}!strcpy@{strcpy}}
+\index{strcpy@{strcpy}!user.h@{user.\-h}}
+\subsubsection[{strcpy}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ strcpy (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{, }
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a142a2e8da2023db4c382bfb2d5c0318e}
+
+
+Definition at line 8 of file ulib.\-c.
+
+\hypertarget{user_8h_a99ac12f46a74690bab859ea047b949b5}{\index{user.\-h@{user.\-h}!strlen@{strlen}}
+\index{strlen@{strlen}!user.h@{user.\-h}}
+\subsubsection[{strlen}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} strlen (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a99ac12f46a74690bab859ea047b949b5}
+
+
+Definition at line 27 of file ulib.\-c.
+
+\hypertarget{user_8h_a65a95f51eb9a357f7bef0ebc501b1983}{\index{user.\-h@{user.\-h}!unlink@{unlink}}
+\index{unlink@{unlink}!user.h@{user.\-h}}
+\subsubsection[{unlink}]{\setlength{\rightskip}{0pt plus 5cm}int unlink (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a65a95f51eb9a357f7bef0ebc501b1983}
+\hypertarget{user_8h_ab637d1dd2fecad1cb0c91a42597a8dbc}{\index{user.\-h@{user.\-h}!uptime@{uptime}}
+\index{uptime@{uptime}!user.h@{user.\-h}}
+\subsubsection[{uptime}]{\setlength{\rightskip}{0pt plus 5cm}int uptime (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_ab637d1dd2fecad1cb0c91a42597a8dbc}
+\hypertarget{user_8h_af6f31822f7e737b4e414bdac1ccb59a4}{\index{user.\-h@{user.\-h}!wait@{wait}}
+\index{wait@{wait}!user.h@{user.\-h}}
+\subsubsection[{wait}]{\setlength{\rightskip}{0pt plus 5cm}int wait (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_af6f31822f7e737b4e414bdac1ccb59a4}
+
+
+Definition at line 208 of file proc.\-c.
+
+\hypertarget{user_8h_a894862d36b7a203a88a0c1ab835b8230}{\index{user.\-h@{user.\-h}!write@{write}}
+\index{write@{write}!user.h@{user.\-h}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}int write (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{void $\ast$}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}}\label{user_8h_a894862d36b7a203a88a0c1ab835b8230}

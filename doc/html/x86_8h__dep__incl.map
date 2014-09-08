@@ -1,0 +1,21 @@
+<map id="include/x86.h" name="include/x86.h">
+<area shape="rect" id="node2" href="$bootmain_8c.html" title="kernel/bootmain.c" alt="" coords="5,80,131,107"/>
+<area shape="rect" id="node3" href="$console_8c.html" title="kernel/console.c" alt="" coords="155,80,271,107"/>
+<area shape="rect" id="node4" href="$exec_8c.html" title="kernel/exec.c" alt="" coords="295,80,395,107"/>
+<area shape="rect" id="node5" href="$ide_8c.html" title="kernel/ide.c" alt="" coords="419,80,508,107"/>
+<area shape="rect" id="node6" href="$kbd_8c.html" title="kernel/kbd.c" alt="" coords="533,80,627,107"/>
+<area shape="rect" id="node7" href="$lapic_8c.html" title="kernel/lapic.c" alt="" coords="651,80,749,107"/>
+<area shape="rect" id="node8" href="$main_8c.html" title="kernel/main.c" alt="" coords="774,80,873,107"/>
+<area shape="rect" id="node9" href="$mp_8c.html" title="kernel/mp.c" alt="" coords="899,80,989,107"/>
+<area shape="rect" id="node10" href="$picirq_8c.html" title="kernel/picirq.c" alt="" coords="1014,80,1116,107"/>
+<area shape="rect" id="node11" href="$proc_8c.html" title="kernel/proc.c" alt="" coords="1141,80,1237,107"/>
+<area shape="rect" id="node12" href="$spinlock_8c.html" title="kernel/spinlock.c" alt="" coords="1263,80,1383,107"/>
+<area shape="rect" id="node13" href="$string_8c.html" title="kernel/string.c" alt="" coords="1407,80,1511,107"/>
+<area shape="rect" id="node14" href="$syscall_8c.html" title="kernel/syscall.c" alt="" coords="1535,80,1648,107"/>
+<area shape="rect" id="node15" href="$sysproc_8c.html" title="kernel/sysproc.c" alt="" coords="1673,80,1791,107"/>
+<area shape="rect" id="node16" href="$timer_8c.html" title="kernel/timer.c" alt="" coords="1816,80,1917,107"/>
+<area shape="rect" id="node17" href="$trap_8c.html" title="kernel/trap.c" alt="" coords="1942,80,2036,107"/>
+<area shape="rect" id="node18" href="$uart_8c.html" title="kernel/uart.c" alt="" coords="2061,80,2155,107"/>
+<area shape="rect" id="node19" href="$vm_8c.html" title="kernel/vm.c" alt="" coords="2180,80,2271,107"/>
+<area shape="rect" id="node20" href="$ulib_8c.html" title="user/ulib.c" alt="" coords="2295,80,2376,107"/>
+</map>

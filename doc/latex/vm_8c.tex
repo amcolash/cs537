@@ -1,0 +1,237 @@
+\hypertarget{vm_8c}{\section{kernel/vm.c File Reference}
+\label{vm_8c}\index{kernel/vm.\-c@{kernel/vm.\-c}}
+}
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}proc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}elf.\-h\char`\"{}}\\*
+Include dependency graph for vm.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{vm_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bfseries kmap}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{vm_8c_a893bf6891e427f310b43981bf8e737ea}{kvmalloc} (void)
+\item 
+void \hyperlink{vm_8c_aaf5b2814a1dbf3ef0803dff58e0a76dc}{seginit} (void)
+\item 
+\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$ \hyperlink{vm_8c_aa7dbd3b5c70eb93e0e7fb8331202821d}{setupkvm} (void)
+\item 
+void \hyperlink{vm_8c_a29a329af50004b3156504840ac815c7c}{vmenable} (void)
+\item 
+void \hyperlink{vm_8c_a02ca0670bc1fe12e38453082631ff360}{switchkvm} (void)
+\item 
+void \hyperlink{vm_8c_a87c90f0ab2a1b11c2b55f4e483bb8493}{switchuvm} (struct \hyperlink{structproc}{proc} $\ast$p)
+\item 
+void \hyperlink{vm_8c_ac96c231d4053eaf4322c27d1f2cd9d49}{inituvm} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, char $\ast$init, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} sz)
+\item 
+int \hyperlink{vm_8c_a201acc8337a2893268b61ea5a1ee0d53}{loaduvm} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, char $\ast$addr, struct \hyperlink{structinode}{inode} $\ast$ip, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} offset, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} sz)
+\item 
+int \hyperlink{vm_8c_afea0f0a82a9f9c7aae26f90b5e0836c6}{allocuvm} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} oldsz, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} newsz)
+\item 
+int \hyperlink{vm_8c_a6d3019ea15a9bfdc5131ae97f3623c49}{deallocuvm} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} oldsz, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} newsz)
+\item 
+void \hyperlink{vm_8c_aa883924e2f068c520b695cdc168e1603}{freevm} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir)
+\item 
+\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$ \hyperlink{vm_8c_ad158860fa206e19f2370eeab852bca7c}{copyuvm} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} sz)
+\item 
+char $\ast$ \hyperlink{vm_8c_adefebae1abb3b54fd04d6d4858e7735b}{uva2ka} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, char $\ast$uva)
+\item 
+int \hyperlink{vm_8c_a532bc3f3e39942c20a471a11cff1a582}{copyout} (\hyperlink{types_8h_ac131849542282b2c95dfeaf1f26dc010}{pde\-\_\-t} $\ast$pgdir, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} va, void $\ast$p, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} len)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{vm_8c_a923b2158227405b9f7a6eceb6c7104c8}{data} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{vm_8c_afea0f0a82a9f9c7aae26f90b5e0836c6}{\index{vm.\-c@{vm.\-c}!allocuvm@{allocuvm}}
+\index{allocuvm@{allocuvm}!vm.c@{vm.\-c}}
+\subsubsection[{allocuvm}]{\setlength{\rightskip}{0pt plus 5cm}int allocuvm (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{{\bf uint}}]{oldsz, }
+\item[{{\bf uint}}]{newsz}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_afea0f0a82a9f9c7aae26f90b5e0836c6}
+
+
+Definition at line 229 of file vm.\-c.
+
+\hypertarget{vm_8c_a532bc3f3e39942c20a471a11cff1a582}{\index{vm.\-c@{vm.\-c}!copyout@{copyout}}
+\index{copyout@{copyout}!vm.c@{vm.\-c}}
+\subsubsection[{copyout}]{\setlength{\rightskip}{0pt plus 5cm}int copyout (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{{\bf uint}}]{va, }
+\item[{void $\ast$}]{p, }
+\item[{{\bf uint}}]{len}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a532bc3f3e39942c20a471a11cff1a582}
+
+
+Definition at line 346 of file vm.\-c.
+
+\hypertarget{vm_8c_ad158860fa206e19f2370eeab852bca7c}{\index{vm.\-c@{vm.\-c}!copyuvm@{copyuvm}}
+\index{copyuvm@{copyuvm}!vm.c@{vm.\-c}}
+\subsubsection[{copyuvm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pde\-\_\-t}$\ast$ copyuvm (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{{\bf uint}}]{sz}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_ad158860fa206e19f2370eeab852bca7c}
+
+
+Definition at line 300 of file vm.\-c.
+
+\hypertarget{vm_8c_a6d3019ea15a9bfdc5131ae97f3623c49}{\index{vm.\-c@{vm.\-c}!deallocuvm@{deallocuvm}}
+\index{deallocuvm@{deallocuvm}!vm.c@{vm.\-c}}
+\subsubsection[{deallocuvm}]{\setlength{\rightskip}{0pt plus 5cm}int deallocuvm (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{{\bf uint}}]{oldsz, }
+\item[{{\bf uint}}]{newsz}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a6d3019ea15a9bfdc5131ae97f3623c49}
+
+
+Definition at line 258 of file vm.\-c.
+
+\hypertarget{vm_8c_aa883924e2f068c520b695cdc168e1603}{\index{vm.\-c@{vm.\-c}!freevm@{freevm}}
+\index{freevm@{freevm}!vm.c@{vm.\-c}}
+\subsubsection[{freevm}]{\setlength{\rightskip}{0pt plus 5cm}void freevm (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_aa883924e2f068c520b695cdc168e1603}
+
+
+Definition at line 283 of file vm.\-c.
+
+\hypertarget{vm_8c_ac96c231d4053eaf4322c27d1f2cd9d49}{\index{vm.\-c@{vm.\-c}!inituvm@{inituvm}}
+\index{inituvm@{inituvm}!vm.c@{vm.\-c}}
+\subsubsection[{inituvm}]{\setlength{\rightskip}{0pt plus 5cm}void inituvm (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{char $\ast$}]{init, }
+\item[{{\bf uint}}]{sz}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_ac96c231d4053eaf4322c27d1f2cd9d49}
+
+
+Definition at line 190 of file vm.\-c.
+
+\hypertarget{vm_8c_a893bf6891e427f310b43981bf8e737ea}{\index{vm.\-c@{vm.\-c}!kvmalloc@{kvmalloc}}
+\index{kvmalloc@{kvmalloc}!vm.c@{vm.\-c}}
+\subsubsection[{kvmalloc}]{\setlength{\rightskip}{0pt plus 5cm}void kvmalloc (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a893bf6891e427f310b43981bf8e737ea}
+
+
+Definition at line 16 of file vm.\-c.
+
+\hypertarget{vm_8c_a201acc8337a2893268b61ea5a1ee0d53}{\index{vm.\-c@{vm.\-c}!loaduvm@{loaduvm}}
+\index{loaduvm@{loaduvm}!vm.c@{vm.\-c}}
+\subsubsection[{loaduvm}]{\setlength{\rightskip}{0pt plus 5cm}int loaduvm (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{char $\ast$}]{addr, }
+\item[{struct {\bf inode} $\ast$}]{ip, }
+\item[{{\bf uint}}]{offset, }
+\item[{{\bf uint}}]{sz}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a201acc8337a2893268b61ea5a1ee0d53}
+
+
+Definition at line 205 of file vm.\-c.
+
+\hypertarget{vm_8c_aaf5b2814a1dbf3ef0803dff58e0a76dc}{\index{vm.\-c@{vm.\-c}!seginit@{seginit}}
+\index{seginit@{seginit}!vm.c@{vm.\-c}}
+\subsubsection[{seginit}]{\setlength{\rightskip}{0pt plus 5cm}void seginit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_aaf5b2814a1dbf3ef0803dff58e0a76dc}
+
+
+Definition at line 24 of file vm.\-c.
+
+\hypertarget{vm_8c_aa7dbd3b5c70eb93e0e7fb8331202821d}{\index{vm.\-c@{vm.\-c}!setupkvm@{setupkvm}}
+\index{setupkvm@{setupkvm}!vm.c@{vm.\-c}}
+\subsubsection[{setupkvm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pde\-\_\-t}$\ast$ setupkvm (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_aa7dbd3b5c70eb93e0e7fb8331202821d}
+
+
+Definition at line 135 of file vm.\-c.
+
+\hypertarget{vm_8c_a02ca0670bc1fe12e38453082631ff360}{\index{vm.\-c@{vm.\-c}!switchkvm@{switchkvm}}
+\index{switchkvm@{switchkvm}!vm.c@{vm.\-c}}
+\subsubsection[{switchkvm}]{\setlength{\rightskip}{0pt plus 5cm}void switchkvm (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a02ca0670bc1fe12e38453082631ff360}
+
+
+Definition at line 166 of file vm.\-c.
+
+\hypertarget{vm_8c_a87c90f0ab2a1b11c2b55f4e483bb8493}{\index{vm.\-c@{vm.\-c}!switchuvm@{switchuvm}}
+\index{switchuvm@{switchuvm}!vm.c@{vm.\-c}}
+\subsubsection[{switchuvm}]{\setlength{\rightskip}{0pt plus 5cm}void switchuvm (
+\begin{DoxyParamCaption}
+\item[{struct {\bf proc} $\ast$}]{p}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a87c90f0ab2a1b11c2b55f4e483bb8493}
+
+
+Definition at line 173 of file vm.\-c.
+
+\hypertarget{vm_8c_adefebae1abb3b54fd04d6d4858e7735b}{\index{vm.\-c@{vm.\-c}!uva2ka@{uva2ka}}
+\index{uva2ka@{uva2ka}!vm.c@{vm.\-c}}
+\subsubsection[{uva2ka}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ uva2ka (
+\begin{DoxyParamCaption}
+\item[{{\bf pde\-\_\-t} $\ast$}]{pgdir, }
+\item[{char $\ast$}]{uva}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_adefebae1abb3b54fd04d6d4858e7735b}
+
+
+Definition at line 330 of file vm.\-c.
+
+\hypertarget{vm_8c_a29a329af50004b3156504840ac815c7c}{\index{vm.\-c@{vm.\-c}!vmenable@{vmenable}}
+\index{vmenable@{vmenable}!vm.c@{vm.\-c}}
+\subsubsection[{vmenable}]{\setlength{\rightskip}{0pt plus 5cm}void vmenable (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{vm_8c_a29a329af50004b3156504840ac815c7c}
+
+
+Definition at line 153 of file vm.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{vm_8c_a923b2158227405b9f7a6eceb6c7104c8}{\index{vm.\-c@{vm.\-c}!data@{data}}
+\index{data@{data}!vm.c@{vm.\-c}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}char data\mbox{[}$\,$\mbox{]}}}\label{vm_8c_a923b2158227405b9f7a6eceb6c7104c8}

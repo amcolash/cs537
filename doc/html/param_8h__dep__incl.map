@@ -1,0 +1,21 @@
+<map id="include/param.h" name="include/param.h">
+<area shape="rect" id="node2" href="$bio_8c.html" title="kernel/bio.c" alt="" coords="5,80,93,107"/>
+<area shape="rect" id="node3" href="$console_8c.html" title="kernel/console.c" alt="" coords="119,80,235,107"/>
+<area shape="rect" id="node4" href="$exec_8c.html" title="kernel/exec.c" alt="" coords="259,80,359,107"/>
+<area shape="rect" id="node5" href="$file_8c.html" title="kernel/file.c" alt="" coords="383,80,472,107"/>
+<area shape="rect" id="node6" href="$fs_8c.html" title="kernel/fs.c" alt="" coords="497,80,579,107"/>
+<area shape="rect" id="node7" href="$ide_8c.html" title="kernel/ide.c" alt="" coords="605,80,693,107"/>
+<area shape="rect" id="node8" href="$kalloc_8c.html" title="kernel/kalloc.c" alt="" coords="719,80,825,107"/>
+<area shape="rect" id="node9" href="$main_8c.html" title="kernel/main.c" alt="" coords="850,80,949,107"/>
+<area shape="rect" id="node10" href="$mp_8c.html" title="kernel/mp.c" alt="" coords="975,80,1065,107"/>
+<area shape="rect" id="node11" href="$pipe_8c.html" title="kernel/pipe.c" alt="" coords="1089,80,1185,107"/>
+<area shape="rect" id="node12" href="$proc_8c.html" title="kernel/proc.c" alt="" coords="1210,80,1307,107"/>
+<area shape="rect" id="node13" href="$spinlock_8c.html" title="kernel/spinlock.c" alt="" coords="1332,80,1452,107"/>
+<area shape="rect" id="node14" href="$syscall_8c.html" title="kernel/syscall.c" alt="" coords="1477,80,1589,107"/>
+<area shape="rect" id="node15" href="$sysfile_8c.html" title="kernel/sysfile.c" alt="" coords="1614,80,1724,107"/>
+<area shape="rect" id="node16" href="$sysproc_8c.html" title="kernel/sysproc.c" alt="" coords="1749,80,1867,107"/>
+<area shape="rect" id="node17" href="$trap_8c.html" title="kernel/trap.c" alt="" coords="1891,80,1985,107"/>
+<area shape="rect" id="node18" href="$uart_8c.html" title="kernel/uart.c" alt="" coords="2010,80,2104,107"/>
+<area shape="rect" id="node19" href="$vm_8c.html" title="kernel/vm.c" alt="" coords="2129,80,2220,107"/>
+<area shape="rect" id="node20" href="$umalloc_8c.html" title="user/umalloc.c" alt="" coords="2244,80,2351,107"/>
+</map>

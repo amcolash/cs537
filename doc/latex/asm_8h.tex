@@ -1,0 +1,98 @@
+\hypertarget{asm_8h}{\section{kernel/asm.h File Reference}
+\label{asm_8h}\index{kernel/asm.\-h@{kernel/asm.\-h}}
+}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{asm_8h_a0281b83dd2d5c19c39be963761f26e4f}{S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M}
+\item 
+\#define \hyperlink{asm_8h_a56761ae3b4f4c70da4f433b9867e4e87}{S\-E\-G\-\_\-\-A\-S\-M}(type, base, lim)
+\item 
+\#define \hyperlink{asm_8h_af30c683a434e0712fd83781307239cb9}{S\-T\-A\-\_\-\-X}~0x8
+\item 
+\#define \hyperlink{asm_8h_ad6f4adbc6fea020a7d9d18a5f709843e}{S\-T\-A\-\_\-\-E}~0x4
+\item 
+\#define \hyperlink{asm_8h_ab4829c3150ed67ae0f00a103fb448a2f}{S\-T\-A\-\_\-\-C}~0x4
+\item 
+\#define \hyperlink{asm_8h_a9321b5b232838b8b230c6b681be9a882}{S\-T\-A\-\_\-\-W}~0x2
+\item 
+\#define \hyperlink{asm_8h_a6545a48f34a3fae1b04cf265f13bc8f3}{S\-T\-A\-\_\-\-R}~0x2
+\item 
+\#define \hyperlink{asm_8h_a18eb795a2eb72794f4de5b8087731607}{S\-T\-A\-\_\-\-A}~0x1
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{asm_8h_a56761ae3b4f4c70da4f433b9867e4e87}{\index{asm.\-h@{asm.\-h}!S\-E\-G\-\_\-\-A\-S\-M@{S\-E\-G\-\_\-\-A\-S\-M}}
+\index{S\-E\-G\-\_\-\-A\-S\-M@{S\-E\-G\-\_\-\-A\-S\-M}!asm.h@{asm.\-h}}
+\subsubsection[{S\-E\-G\-\_\-\-A\-S\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-E\-G\-\_\-\-A\-S\-M(
+\begin{DoxyParamCaption}
+\item[{}]{type, }
+\item[{}]{base, }
+\item[{}]{lim}
+\end{DoxyParamCaption}
+)}}\label{asm_8h_a56761ae3b4f4c70da4f433b9867e4e87}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+.word (((lim) >> 12) & 0xffff), ((base) & 0xffff);      \(\backslash\)
+        .byte (((base) >> 16) & 0xff), (0x90 | (type)),         \(\backslash\)
+                (0xC0 | (((lim) >> 28) & 0xf)), (((base) >> 24) & 0xff)
+\end{DoxyCode}
+
+
+Definition at line 11 of file asm.\-h.
+
+\hypertarget{asm_8h_a0281b83dd2d5c19c39be963761f26e4f}{\index{asm.\-h@{asm.\-h}!S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M@{S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M}}
+\index{S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M@{S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M}!asm.h@{asm.\-h}}
+\subsubsection[{S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-E\-G\-\_\-\-N\-U\-L\-L\-A\-S\-M}}\label{asm_8h_a0281b83dd2d5c19c39be963761f26e4f}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+.word 0, 0;                                             \(\backslash\)
+        .byte 0, 0, 0, 0
+\end{DoxyCode}
+
+
+Definition at line 5 of file asm.\-h.
+
+\hypertarget{asm_8h_a18eb795a2eb72794f4de5b8087731607}{\index{asm.\-h@{asm.\-h}!S\-T\-A\-\_\-\-A@{S\-T\-A\-\_\-\-A}}
+\index{S\-T\-A\-\_\-\-A@{S\-T\-A\-\_\-\-A}!asm.h@{asm.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-A}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-A~0x1}}\label{asm_8h_a18eb795a2eb72794f4de5b8087731607}
+
+
+Definition at line 21 of file asm.\-h.
+
+\hypertarget{asm_8h_ab4829c3150ed67ae0f00a103fb448a2f}{\index{asm.\-h@{asm.\-h}!S\-T\-A\-\_\-\-C@{S\-T\-A\-\_\-\-C}}
+\index{S\-T\-A\-\_\-\-C@{S\-T\-A\-\_\-\-C}!asm.h@{asm.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-C}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-C~0x4}}\label{asm_8h_ab4829c3150ed67ae0f00a103fb448a2f}
+
+
+Definition at line 18 of file asm.\-h.
+
+\hypertarget{asm_8h_ad6f4adbc6fea020a7d9d18a5f709843e}{\index{asm.\-h@{asm.\-h}!S\-T\-A\-\_\-\-E@{S\-T\-A\-\_\-\-E}}
+\index{S\-T\-A\-\_\-\-E@{S\-T\-A\-\_\-\-E}!asm.h@{asm.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-E~0x4}}\label{asm_8h_ad6f4adbc6fea020a7d9d18a5f709843e}
+
+
+Definition at line 17 of file asm.\-h.
+
+\hypertarget{asm_8h_a6545a48f34a3fae1b04cf265f13bc8f3}{\index{asm.\-h@{asm.\-h}!S\-T\-A\-\_\-\-R@{S\-T\-A\-\_\-\-R}}
+\index{S\-T\-A\-\_\-\-R@{S\-T\-A\-\_\-\-R}!asm.h@{asm.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-R~0x2}}\label{asm_8h_a6545a48f34a3fae1b04cf265f13bc8f3}
+
+
+Definition at line 20 of file asm.\-h.
+
+\hypertarget{asm_8h_a9321b5b232838b8b230c6b681be9a882}{\index{asm.\-h@{asm.\-h}!S\-T\-A\-\_\-\-W@{S\-T\-A\-\_\-\-W}}
+\index{S\-T\-A\-\_\-\-W@{S\-T\-A\-\_\-\-W}!asm.h@{asm.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-W}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-W~0x2}}\label{asm_8h_a9321b5b232838b8b230c6b681be9a882}
+
+
+Definition at line 19 of file asm.\-h.
+
+\hypertarget{asm_8h_af30c683a434e0712fd83781307239cb9}{\index{asm.\-h@{asm.\-h}!S\-T\-A\-\_\-\-X@{S\-T\-A\-\_\-\-X}}
+\index{S\-T\-A\-\_\-\-X@{S\-T\-A\-\_\-\-X}!asm.h@{asm.\-h}}
+\subsubsection[{S\-T\-A\-\_\-\-X}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-\_\-\-X~0x8}}\label{asm_8h_af30c683a434e0712fd83781307239cb9}
+
+
+Definition at line 16 of file asm.\-h.
+

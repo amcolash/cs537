@@ -1,0 +1,379 @@
+\hypertarget{lapic_8c}{\section{kernel/lapic.c File Reference}
+\label{lapic_8c}\index{kernel/lapic.\-c@{kernel/lapic.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traps.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+Include dependency graph for lapic.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lapic_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{lapic_8c_a77ceac8d6af195fe72f95f6afd87c45e}{I\-D}~(0x0020/4)
+\item 
+\#define \hyperlink{lapic_8c_a98ed931f97fef7e06e3ea441d0326c67}{V\-E\-R}~(0x0030/4)
+\item 
+\#define \hyperlink{lapic_8c_a0d378efcaaff1100c96bff8856bfc036}{T\-P\-R}~(0x0080/4)
+\item 
+\#define \hyperlink{lapic_8c_a04c9015da7e7ea45f3b80793809e2d7b}{E\-O\-I}~(0x00\-B0/4)
+\item 
+\#define \hyperlink{lapic_8c_a062fc16f4eacb723c76e2c87c8495412}{S\-V\-R}~(0x00\-F0/4)
+\item 
+\#define \hyperlink{lapic_8c_a514ad415fb6125ba296793df7d1a468a}{E\-N\-A\-B\-L\-E}~0x00000100
+\item 
+\#define \hyperlink{lapic_8c_ae4ad5e3805ffa2cbe03b65421edd8f99}{E\-S\-R}~(0x0280/4)
+\item 
+\#define \hyperlink{lapic_8c_ae6db3be23c343c0823604670010635f7}{I\-C\-R\-L\-O}~(0x0300/4)
+\item 
+\#define \hyperlink{lapic_8c_ab5889105dcd019008c9448dff61323f6}{I\-N\-I\-T}~0x00000500
+\item 
+\#define \hyperlink{lapic_8c_ad0dd8aa1d9d769cf15609ca108af4af9}{S\-T\-A\-R\-T\-U\-P}~0x00000600
+\item 
+\#define \hyperlink{lapic_8c_a5f0b856b460d14d6fac161e35cfdb9d1}{D\-E\-L\-I\-V\-S}~0x00001000
+\item 
+\#define \hyperlink{lapic_8c_af343b20373ba49a92fce523e948f2ab3}{A\-S\-S\-E\-R\-T}~0x00004000
+\item 
+\#define \hyperlink{lapic_8c_a8b48e10f84b81902cf66c89ac52649b7}{D\-E\-A\-S\-S\-E\-R\-T}~0x00000000
+\item 
+\#define \hyperlink{lapic_8c_a73f717b7aae31163c2a85f67883bf0ed}{L\-E\-V\-E\-L}~0x00008000
+\item 
+\#define \hyperlink{lapic_8c_adc4a14c073a7427003796cbd9d435758}{B\-C\-A\-S\-T}~0x00080000
+\item 
+\#define \hyperlink{lapic_8c_ab5be0aaddb58ffb9cb20c12530d66316}{B\-U\-S\-Y}~0x00001000
+\item 
+\#define \hyperlink{lapic_8c_a20207ffc8e6f0bdcefb5c42a5b5c3fb8}{F\-I\-X\-E\-D}~0x00000000
+\item 
+\#define \hyperlink{lapic_8c_a9382474befd66e12c502eb221e4f9a0d}{I\-C\-R\-H\-I}~(0x0310/4)
+\item 
+\#define \hyperlink{lapic_8c_a599217205dc3092c26567a2bd868ef3a}{T\-I\-M\-E\-R}~(0x0320/4)
+\item 
+\#define \hyperlink{lapic_8c_a1964818ccd90a6173ea48cecb652feeb}{X1}~0x0000000\-B
+\item 
+\#define \hyperlink{lapic_8c_af36821ad7b93ab31dcfaaa25e134fdf0}{P\-E\-R\-I\-O\-D\-I\-C}~0x00020000
+\item 
+\#define \hyperlink{lapic_8c_a5c989e3931132d4a4aca9cacfcb8b075}{P\-C\-I\-N\-T}~(0x0340/4)
+\item 
+\#define \hyperlink{lapic_8c_acec8cff36b5e5b2b4bda262480db2af2}{L\-I\-N\-T0}~(0x0350/4)
+\item 
+\#define \hyperlink{lapic_8c_a19035d504c49cf257ef4dc27cd3eb668}{L\-I\-N\-T1}~(0x0360/4)
+\item 
+\#define \hyperlink{lapic_8c_a8fe83ac76edc595f6b98cd4a4127aed5}{E\-R\-R\-O\-R}~(0x0370/4)
+\item 
+\#define \hyperlink{lapic_8c_a8fe9c058dcb81f528134d37e741182a3}{M\-A\-S\-K\-E\-D}~0x00010000
+\item 
+\#define \hyperlink{lapic_8c_af1d7a14061b402e4718eff6d9ef7ada4}{T\-I\-C\-R}~(0x0380/4)
+\item 
+\#define \hyperlink{lapic_8c_a1a73e99a3dd2d2d7dc6bbf084638e044}{T\-C\-C\-R}~(0x0390/4)
+\item 
+\#define \hyperlink{lapic_8c_a11b0b699f28c2043fcd6da289fff7375}{T\-D\-C\-R}~(0x03\-E0/4)
+\item 
+\#define \hyperlink{lapic_8c_a76c0053c859f3f56cf5cb1e2c5df5dd9}{I\-O\-\_\-\-R\-T\-C}~0x70
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{lapic_8c_abd5f53c2ab772d7cd392bf54122b3b9a}{lapicinit} (int c)
+\item 
+int \hyperlink{lapic_8c_ad07bc98847d46ba9772ab5ad4f52e6ec}{cpunum} (void)
+\item 
+void \hyperlink{lapic_8c_a42fdd0783bbeb7cdc646d360191cdcac}{lapiceoi} (void)
+\item 
+void \hyperlink{lapic_8c_ae0ac6441d1d76d8ef821cdbbc6b6fc2f}{microdelay} (int us)
+\item 
+void \hyperlink{lapic_8c_a54df00c792282426648d2876835958fa}{lapicstartap} (\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar} apicid, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} addr)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+volatile \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} $\ast$ \hyperlink{lapic_8c_a4029f3e2439d5912f93543b8addd10ec}{lapic}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{lapic_8c_af343b20373ba49a92fce523e948f2ab3}{\index{lapic.\-c@{lapic.\-c}!A\-S\-S\-E\-R\-T@{A\-S\-S\-E\-R\-T}}
+\index{A\-S\-S\-E\-R\-T@{A\-S\-S\-E\-R\-T}!lapic.c@{lapic.\-c}}
+\subsubsection[{A\-S\-S\-E\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define A\-S\-S\-E\-R\-T~0x00004000}}\label{lapic_8c_af343b20373ba49a92fce523e948f2ab3}
+
+
+Definition at line 22 of file lapic.\-c.
+
+\hypertarget{lapic_8c_adc4a14c073a7427003796cbd9d435758}{\index{lapic.\-c@{lapic.\-c}!B\-C\-A\-S\-T@{B\-C\-A\-S\-T}}
+\index{B\-C\-A\-S\-T@{B\-C\-A\-S\-T}!lapic.c@{lapic.\-c}}
+\subsubsection[{B\-C\-A\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-C\-A\-S\-T~0x00080000}}\label{lapic_8c_adc4a14c073a7427003796cbd9d435758}
+
+
+Definition at line 25 of file lapic.\-c.
+
+\hypertarget{lapic_8c_ab5be0aaddb58ffb9cb20c12530d66316}{\index{lapic.\-c@{lapic.\-c}!B\-U\-S\-Y@{B\-U\-S\-Y}}
+\index{B\-U\-S\-Y@{B\-U\-S\-Y}!lapic.c@{lapic.\-c}}
+\subsubsection[{B\-U\-S\-Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-U\-S\-Y~0x00001000}}\label{lapic_8c_ab5be0aaddb58ffb9cb20c12530d66316}
+
+
+Definition at line 26 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a8b48e10f84b81902cf66c89ac52649b7}{\index{lapic.\-c@{lapic.\-c}!D\-E\-A\-S\-S\-E\-R\-T@{D\-E\-A\-S\-S\-E\-R\-T}}
+\index{D\-E\-A\-S\-S\-E\-R\-T@{D\-E\-A\-S\-S\-E\-R\-T}!lapic.c@{lapic.\-c}}
+\subsubsection[{D\-E\-A\-S\-S\-E\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\-E\-A\-S\-S\-E\-R\-T~0x00000000}}\label{lapic_8c_a8b48e10f84b81902cf66c89ac52649b7}
+
+
+Definition at line 23 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a5f0b856b460d14d6fac161e35cfdb9d1}{\index{lapic.\-c@{lapic.\-c}!D\-E\-L\-I\-V\-S@{D\-E\-L\-I\-V\-S}}
+\index{D\-E\-L\-I\-V\-S@{D\-E\-L\-I\-V\-S}!lapic.c@{lapic.\-c}}
+\subsubsection[{D\-E\-L\-I\-V\-S}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\-E\-L\-I\-V\-S~0x00001000}}\label{lapic_8c_a5f0b856b460d14d6fac161e35cfdb9d1}
+
+
+Definition at line 21 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a514ad415fb6125ba296793df7d1a468a}{\index{lapic.\-c@{lapic.\-c}!E\-N\-A\-B\-L\-E@{E\-N\-A\-B\-L\-E}}
+\index{E\-N\-A\-B\-L\-E@{E\-N\-A\-B\-L\-E}!lapic.c@{lapic.\-c}}
+\subsubsection[{E\-N\-A\-B\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-N\-A\-B\-L\-E~0x00000100}}\label{lapic_8c_a514ad415fb6125ba296793df7d1a468a}
+
+
+Definition at line 16 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a04c9015da7e7ea45f3b80793809e2d7b}{\index{lapic.\-c@{lapic.\-c}!E\-O\-I@{E\-O\-I}}
+\index{E\-O\-I@{E\-O\-I}!lapic.c@{lapic.\-c}}
+\subsubsection[{E\-O\-I}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-O\-I~(0x00\-B0/4)}}\label{lapic_8c_a04c9015da7e7ea45f3b80793809e2d7b}
+
+
+Definition at line 14 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a8fe83ac76edc595f6b98cd4a4127aed5}{\index{lapic.\-c@{lapic.\-c}!E\-R\-R\-O\-R@{E\-R\-R\-O\-R}}
+\index{E\-R\-R\-O\-R@{E\-R\-R\-O\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{E\-R\-R\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-R\-R\-O\-R~(0x0370/4)}}\label{lapic_8c_a8fe83ac76edc595f6b98cd4a4127aed5}
+
+
+Definition at line 35 of file lapic.\-c.
+
+\hypertarget{lapic_8c_ae4ad5e3805ffa2cbe03b65421edd8f99}{\index{lapic.\-c@{lapic.\-c}!E\-S\-R@{E\-S\-R}}
+\index{E\-S\-R@{E\-S\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{E\-S\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-S\-R~(0x0280/4)}}\label{lapic_8c_ae4ad5e3805ffa2cbe03b65421edd8f99}
+
+
+Definition at line 17 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a20207ffc8e6f0bdcefb5c42a5b5c3fb8}{\index{lapic.\-c@{lapic.\-c}!F\-I\-X\-E\-D@{F\-I\-X\-E\-D}}
+\index{F\-I\-X\-E\-D@{F\-I\-X\-E\-D}!lapic.c@{lapic.\-c}}
+\subsubsection[{F\-I\-X\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\-I\-X\-E\-D~0x00000000}}\label{lapic_8c_a20207ffc8e6f0bdcefb5c42a5b5c3fb8}
+
+
+Definition at line 27 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a9382474befd66e12c502eb221e4f9a0d}{\index{lapic.\-c@{lapic.\-c}!I\-C\-R\-H\-I@{I\-C\-R\-H\-I}}
+\index{I\-C\-R\-H\-I@{I\-C\-R\-H\-I}!lapic.c@{lapic.\-c}}
+\subsubsection[{I\-C\-R\-H\-I}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-C\-R\-H\-I~(0x0310/4)}}\label{lapic_8c_a9382474befd66e12c502eb221e4f9a0d}
+
+
+Definition at line 28 of file lapic.\-c.
+
+\hypertarget{lapic_8c_ae6db3be23c343c0823604670010635f7}{\index{lapic.\-c@{lapic.\-c}!I\-C\-R\-L\-O@{I\-C\-R\-L\-O}}
+\index{I\-C\-R\-L\-O@{I\-C\-R\-L\-O}!lapic.c@{lapic.\-c}}
+\subsubsection[{I\-C\-R\-L\-O}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-C\-R\-L\-O~(0x0300/4)}}\label{lapic_8c_ae6db3be23c343c0823604670010635f7}
+
+
+Definition at line 18 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a77ceac8d6af195fe72f95f6afd87c45e}{\index{lapic.\-c@{lapic.\-c}!I\-D@{I\-D}}
+\index{I\-D@{I\-D}!lapic.c@{lapic.\-c}}
+\subsubsection[{I\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-D~(0x0020/4)}}\label{lapic_8c_a77ceac8d6af195fe72f95f6afd87c45e}
+
+
+Definition at line 11 of file lapic.\-c.
+
+\hypertarget{lapic_8c_ab5889105dcd019008c9448dff61323f6}{\index{lapic.\-c@{lapic.\-c}!I\-N\-I\-T@{I\-N\-I\-T}}
+\index{I\-N\-I\-T@{I\-N\-I\-T}!lapic.c@{lapic.\-c}}
+\subsubsection[{I\-N\-I\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-N\-I\-T~0x00000500}}\label{lapic_8c_ab5889105dcd019008c9448dff61323f6}
+
+
+Definition at line 19 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a76c0053c859f3f56cf5cb1e2c5df5dd9}{\index{lapic.\-c@{lapic.\-c}!I\-O\-\_\-\-R\-T\-C@{I\-O\-\_\-\-R\-T\-C}}
+\index{I\-O\-\_\-\-R\-T\-C@{I\-O\-\_\-\-R\-T\-C}!lapic.c@{lapic.\-c}}
+\subsubsection[{I\-O\-\_\-\-R\-T\-C}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-O\-\_\-\-R\-T\-C~0x70}}\label{lapic_8c_a76c0053c859f3f56cf5cb1e2c5df5dd9}
+
+
+Definition at line 132 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a73f717b7aae31163c2a85f67883bf0ed}{\index{lapic.\-c@{lapic.\-c}!L\-E\-V\-E\-L@{L\-E\-V\-E\-L}}
+\index{L\-E\-V\-E\-L@{L\-E\-V\-E\-L}!lapic.c@{lapic.\-c}}
+\subsubsection[{L\-E\-V\-E\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-E\-V\-E\-L~0x00008000}}\label{lapic_8c_a73f717b7aae31163c2a85f67883bf0ed}
+
+
+Definition at line 24 of file lapic.\-c.
+
+\hypertarget{lapic_8c_acec8cff36b5e5b2b4bda262480db2af2}{\index{lapic.\-c@{lapic.\-c}!L\-I\-N\-T0@{L\-I\-N\-T0}}
+\index{L\-I\-N\-T0@{L\-I\-N\-T0}!lapic.c@{lapic.\-c}}
+\subsubsection[{L\-I\-N\-T0}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-I\-N\-T0~(0x0350/4)}}\label{lapic_8c_acec8cff36b5e5b2b4bda262480db2af2}
+
+
+Definition at line 33 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a19035d504c49cf257ef4dc27cd3eb668}{\index{lapic.\-c@{lapic.\-c}!L\-I\-N\-T1@{L\-I\-N\-T1}}
+\index{L\-I\-N\-T1@{L\-I\-N\-T1}!lapic.c@{lapic.\-c}}
+\subsubsection[{L\-I\-N\-T1}]{\setlength{\rightskip}{0pt plus 5cm}\#define L\-I\-N\-T1~(0x0360/4)}}\label{lapic_8c_a19035d504c49cf257ef4dc27cd3eb668}
+
+
+Definition at line 34 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a8fe9c058dcb81f528134d37e741182a3}{\index{lapic.\-c@{lapic.\-c}!M\-A\-S\-K\-E\-D@{M\-A\-S\-K\-E\-D}}
+\index{M\-A\-S\-K\-E\-D@{M\-A\-S\-K\-E\-D}!lapic.c@{lapic.\-c}}
+\subsubsection[{M\-A\-S\-K\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-S\-K\-E\-D~0x00010000}}\label{lapic_8c_a8fe9c058dcb81f528134d37e741182a3}
+
+
+Definition at line 36 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a5c989e3931132d4a4aca9cacfcb8b075}{\index{lapic.\-c@{lapic.\-c}!P\-C\-I\-N\-T@{P\-C\-I\-N\-T}}
+\index{P\-C\-I\-N\-T@{P\-C\-I\-N\-T}!lapic.c@{lapic.\-c}}
+\subsubsection[{P\-C\-I\-N\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-C\-I\-N\-T~(0x0340/4)}}\label{lapic_8c_a5c989e3931132d4a4aca9cacfcb8b075}
+
+
+Definition at line 32 of file lapic.\-c.
+
+\hypertarget{lapic_8c_af36821ad7b93ab31dcfaaa25e134fdf0}{\index{lapic.\-c@{lapic.\-c}!P\-E\-R\-I\-O\-D\-I\-C@{P\-E\-R\-I\-O\-D\-I\-C}}
+\index{P\-E\-R\-I\-O\-D\-I\-C@{P\-E\-R\-I\-O\-D\-I\-C}!lapic.c@{lapic.\-c}}
+\subsubsection[{P\-E\-R\-I\-O\-D\-I\-C}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-E\-R\-I\-O\-D\-I\-C~0x00020000}}\label{lapic_8c_af36821ad7b93ab31dcfaaa25e134fdf0}
+
+
+Definition at line 31 of file lapic.\-c.
+
+\hypertarget{lapic_8c_ad0dd8aa1d9d769cf15609ca108af4af9}{\index{lapic.\-c@{lapic.\-c}!S\-T\-A\-R\-T\-U\-P@{S\-T\-A\-R\-T\-U\-P}}
+\index{S\-T\-A\-R\-T\-U\-P@{S\-T\-A\-R\-T\-U\-P}!lapic.c@{lapic.\-c}}
+\subsubsection[{S\-T\-A\-R\-T\-U\-P}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-T\-A\-R\-T\-U\-P~0x00000600}}\label{lapic_8c_ad0dd8aa1d9d769cf15609ca108af4af9}
+
+
+Definition at line 20 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a062fc16f4eacb723c76e2c87c8495412}{\index{lapic.\-c@{lapic.\-c}!S\-V\-R@{S\-V\-R}}
+\index{S\-V\-R@{S\-V\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{S\-V\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-V\-R~(0x00\-F0/4)}}\label{lapic_8c_a062fc16f4eacb723c76e2c87c8495412}
+
+
+Definition at line 15 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a1a73e99a3dd2d2d7dc6bbf084638e044}{\index{lapic.\-c@{lapic.\-c}!T\-C\-C\-R@{T\-C\-C\-R}}
+\index{T\-C\-C\-R@{T\-C\-C\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{T\-C\-C\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-C\-C\-R~(0x0390/4)}}\label{lapic_8c_a1a73e99a3dd2d2d7dc6bbf084638e044}
+
+
+Definition at line 38 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a11b0b699f28c2043fcd6da289fff7375}{\index{lapic.\-c@{lapic.\-c}!T\-D\-C\-R@{T\-D\-C\-R}}
+\index{T\-D\-C\-R@{T\-D\-C\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{T\-D\-C\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-D\-C\-R~(0x03\-E0/4)}}\label{lapic_8c_a11b0b699f28c2043fcd6da289fff7375}
+
+
+Definition at line 39 of file lapic.\-c.
+
+\hypertarget{lapic_8c_af1d7a14061b402e4718eff6d9ef7ada4}{\index{lapic.\-c@{lapic.\-c}!T\-I\-C\-R@{T\-I\-C\-R}}
+\index{T\-I\-C\-R@{T\-I\-C\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{T\-I\-C\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-C\-R~(0x0380/4)}}\label{lapic_8c_af1d7a14061b402e4718eff6d9ef7ada4}
+
+
+Definition at line 37 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a599217205dc3092c26567a2bd868ef3a}{\index{lapic.\-c@{lapic.\-c}!T\-I\-M\-E\-R@{T\-I\-M\-E\-R}}
+\index{T\-I\-M\-E\-R@{T\-I\-M\-E\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{T\-I\-M\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-I\-M\-E\-R~(0x0320/4)}}\label{lapic_8c_a599217205dc3092c26567a2bd868ef3a}
+
+
+Definition at line 29 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a0d378efcaaff1100c96bff8856bfc036}{\index{lapic.\-c@{lapic.\-c}!T\-P\-R@{T\-P\-R}}
+\index{T\-P\-R@{T\-P\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{T\-P\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-P\-R~(0x0080/4)}}\label{lapic_8c_a0d378efcaaff1100c96bff8856bfc036}
+
+
+Definition at line 13 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a98ed931f97fef7e06e3ea441d0326c67}{\index{lapic.\-c@{lapic.\-c}!V\-E\-R@{V\-E\-R}}
+\index{V\-E\-R@{V\-E\-R}!lapic.c@{lapic.\-c}}
+\subsubsection[{V\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\-E\-R~(0x0030/4)}}\label{lapic_8c_a98ed931f97fef7e06e3ea441d0326c67}
+
+
+Definition at line 12 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a1964818ccd90a6173ea48cecb652feeb}{\index{lapic.\-c@{lapic.\-c}!X1@{X1}}
+\index{X1@{X1}!lapic.c@{lapic.\-c}}
+\subsubsection[{X1}]{\setlength{\rightskip}{0pt plus 5cm}\#define X1~0x0000000\-B}}\label{lapic_8c_a1964818ccd90a6173ea48cecb652feeb}
+
+
+Definition at line 30 of file lapic.\-c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{lapic_8c_ad07bc98847d46ba9772ab5ad4f52e6ec}{\index{lapic.\-c@{lapic.\-c}!cpunum@{cpunum}}
+\index{cpunum@{cpunum}!lapic.c@{lapic.\-c}}
+\subsubsection[{cpunum}]{\setlength{\rightskip}{0pt plus 5cm}int cpunum (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{lapic_8c_ad07bc98847d46ba9772ab5ad4f52e6ec}
+
+
+Definition at line 98 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a42fdd0783bbeb7cdc646d360191cdcac}{\index{lapic.\-c@{lapic.\-c}!lapiceoi@{lapiceoi}}
+\index{lapiceoi@{lapiceoi}!lapic.c@{lapic.\-c}}
+\subsubsection[{lapiceoi}]{\setlength{\rightskip}{0pt plus 5cm}void lapiceoi (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{lapic_8c_a42fdd0783bbeb7cdc646d360191cdcac}
+
+
+Definition at line 119 of file lapic.\-c.
+
+\hypertarget{lapic_8c_abd5f53c2ab772d7cd392bf54122b3b9a}{\index{lapic.\-c@{lapic.\-c}!lapicinit@{lapicinit}}
+\index{lapicinit@{lapicinit}!lapic.c@{lapic.\-c}}
+\subsubsection[{lapicinit}]{\setlength{\rightskip}{0pt plus 5cm}void lapicinit (
+\begin{DoxyParamCaption}
+\item[{int}]{c}
+\end{DoxyParamCaption}
+)}}\label{lapic_8c_abd5f53c2ab772d7cd392bf54122b3b9a}
+
+
+Definition at line 51 of file lapic.\-c.
+
+\hypertarget{lapic_8c_a54df00c792282426648d2876835958fa}{\index{lapic.\-c@{lapic.\-c}!lapicstartap@{lapicstartap}}
+\index{lapicstartap@{lapicstartap}!lapic.c@{lapic.\-c}}
+\subsubsection[{lapicstartap}]{\setlength{\rightskip}{0pt plus 5cm}void lapicstartap (
+\begin{DoxyParamCaption}
+\item[{{\bf uchar}}]{apicid, }
+\item[{{\bf uint}}]{addr}
+\end{DoxyParamCaption}
+)}}\label{lapic_8c_a54df00c792282426648d2876835958fa}
+
+
+Definition at line 137 of file lapic.\-c.
+
+\hypertarget{lapic_8c_ae0ac6441d1d76d8ef821cdbbc6b6fc2f}{\index{lapic.\-c@{lapic.\-c}!microdelay@{microdelay}}
+\index{microdelay@{microdelay}!lapic.c@{lapic.\-c}}
+\subsubsection[{microdelay}]{\setlength{\rightskip}{0pt plus 5cm}void microdelay (
+\begin{DoxyParamCaption}
+\item[{int}]{us}
+\end{DoxyParamCaption}
+)}}\label{lapic_8c_ae0ac6441d1d76d8ef821cdbbc6b6fc2f}
+
+
+Definition at line 128 of file lapic.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{lapic_8c_a4029f3e2439d5912f93543b8addd10ec}{\index{lapic.\-c@{lapic.\-c}!lapic@{lapic}}
+\index{lapic@{lapic}!lapic.c@{lapic.\-c}}
+\subsubsection[{lapic}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf uint}$\ast$ lapic}}\label{lapic_8c_a4029f3e2439d5912f93543b8addd10ec}
+
+
+Definition at line 41 of file lapic.\-c.
+

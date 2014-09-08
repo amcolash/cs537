@@ -1,0 +1,106 @@
+\hypertarget{grep_8c}{\section{user/grep.c File Reference}
+\label{grep_8c}\index{user/grep.\-c@{user/grep.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stat.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}user.\-h\char`\"{}}\\*
+Include dependency graph for grep.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{grep_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}{match} (char $\ast$, char $\ast$)
+\item 
+void \hyperlink{grep_8c_aefb6587871b683544f860d4e2b518718}{grep} (char $\ast$pattern, int fd)
+\item 
+int \hyperlink{grep_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}\mbox{[}$\,$\mbox{]})
+\item 
+int \hyperlink{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{matchhere} (char $\ast$, char $\ast$)
+\item 
+int \hyperlink{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}{matchstar} (int, char $\ast$, char $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}{buf} \mbox{[}1024\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{grep_8c_aefb6587871b683544f860d4e2b518718}{\index{grep.\-c@{grep.\-c}!grep@{grep}}
+\index{grep@{grep}!grep.c@{grep.\-c}}
+\subsubsection[{grep}]{\setlength{\rightskip}{0pt plus 5cm}void grep (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pattern, }
+\item[{int}]{fd}
+\end{DoxyParamCaption}
+)}}\label{grep_8c_aefb6587871b683544f860d4e2b518718}
+
+
+Definition at line 11 of file grep.\-c.
+
+\hypertarget{grep_8c_a0ddf1224851353fc92bfbff6f499fa97}{\index{grep.\-c@{grep.\-c}!main@{main}}
+\index{main@{main}!grep.c@{grep.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{grep_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Definition at line 38 of file grep.\-c.
+
+\hypertarget{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}{\index{grep.\-c@{grep.\-c}!match@{match}}
+\index{match@{match}!grep.c@{grep.\-c}}
+\subsubsection[{match}]{\setlength{\rightskip}{0pt plus 5cm}int match (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{re, }
+\item[{char $\ast$}]{text}
+\end{DoxyParamCaption}
+)}}\label{grep_8c_a21a26bd0e26e51f529e7fcc1f7ffbb0c}
+
+
+Definition at line 72 of file grep.\-c.
+
+\hypertarget{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}{\index{grep.\-c@{grep.\-c}!matchhere@{matchhere}}
+\index{matchhere@{matchhere}!grep.c@{grep.\-c}}
+\subsubsection[{matchhere}]{\setlength{\rightskip}{0pt plus 5cm}int matchhere (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{re, }
+\item[{char $\ast$}]{text}
+\end{DoxyParamCaption}
+)}}\label{grep_8c_a179fc8565cee7d1e5c9cf742e61f78e4}
+
+
+Definition at line 84 of file grep.\-c.
+
+\hypertarget{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}{\index{grep.\-c@{grep.\-c}!matchstar@{matchstar}}
+\index{matchstar@{matchstar}!grep.c@{grep.\-c}}
+\subsubsection[{matchstar}]{\setlength{\rightskip}{0pt plus 5cm}int matchstar (
+\begin{DoxyParamCaption}
+\item[{int}]{c, }
+\item[{char $\ast$}]{re, }
+\item[{char $\ast$}]{text}
+\end{DoxyParamCaption}
+)}}\label{grep_8c_a1775658a8b4077f2284310c5cdab3ef1}
+
+
+Definition at line 98 of file grep.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}{\index{grep.\-c@{grep.\-c}!buf@{buf}}
+\index{buf@{buf}!grep.c@{grep.\-c}}
+\subsubsection[{buf}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf buf}\mbox{[}1024\mbox{]}}}\label{grep_8c_ac75fce8692fd1d41a8985f6aacc4a175}
+
+
+Definition at line 7 of file grep.\-c.
+

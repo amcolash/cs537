@@ -1,0 +1,19 @@
+<map id="kernel/mmu.h" name="kernel/mmu.h">
+<area shape="rect" id="node2" href="$console_8c.html" title="kernel/console.c" alt="" coords="5,80,121,107"/>
+<area shape="rect" id="node3" href="$exec_8c.html" title="kernel/exec.c" alt="" coords="146,80,245,107"/>
+<area shape="rect" id="node4" href="$fs_8c.html" title="kernel/fs.c" alt="" coords="269,80,351,107"/>
+<area shape="rect" id="node5" href="$ide_8c.html" title="kernel/ide.c" alt="" coords="377,80,465,107"/>
+<area shape="rect" id="node6" href="$kalloc_8c.html" title="kernel/kalloc.c" alt="" coords="491,80,597,107"/>
+<area shape="rect" id="node7" href="$lapic_8c.html" title="kernel/lapic.c" alt="" coords="621,80,720,107"/>
+<area shape="rect" id="node8" href="$main_8c.html" title="kernel/main.c" alt="" coords="745,80,844,107"/>
+<area shape="rect" id="node9" href="$mp_8c.html" title="kernel/mp.c" alt="" coords="869,80,960,107"/>
+<area shape="rect" id="node10" href="$pipe_8c.html" title="kernel/pipe.c" alt="" coords="984,80,1080,107"/>
+<area shape="rect" id="node11" href="$proc_8c.html" title="kernel/proc.c" alt="" coords="1105,80,1201,107"/>
+<area shape="rect" id="node12" href="$spinlock_8c.html" title="kernel/spinlock.c" alt="" coords="1227,80,1347,107"/>
+<area shape="rect" id="node13" href="$syscall_8c.html" title="kernel/syscall.c" alt="" coords="1371,80,1484,107"/>
+<area shape="rect" id="node14" href="$sysfile_8c.html" title="kernel/sysfile.c" alt="" coords="1509,80,1619,107"/>
+<area shape="rect" id="node15" href="$sysproc_8c.html" title="kernel/sysproc.c" alt="" coords="1643,80,1761,107"/>
+<area shape="rect" id="node16" href="$trap_8c.html" title="kernel/trap.c" alt="" coords="1786,80,1880,107"/>
+<area shape="rect" id="node17" href="$uart_8c.html" title="kernel/uart.c" alt="" coords="1905,80,1999,107"/>
+<area shape="rect" id="node18" href="$vm_8c.html" title="kernel/vm.c" alt="" coords="2024,80,2115,107"/>
+</map>

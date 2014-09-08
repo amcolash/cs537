@@ -1,0 +1,218 @@
+\hypertarget{console_8c}{\section{kernel/console.c File Reference}
+\label{console_8c}\index{kernel/console.\-c@{kernel/console.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traps.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spinlock.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}file.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}proc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+Include dependency graph for console.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{console_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{console_8c_a629568514359445d2fbda71d70eeb1ce}{B\-A\-C\-K\-S\-P\-A\-C\-E}~0x100
+\item 
+\#define \hyperlink{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{C\-R\-T\-P\-O\-R\-T}~0x3d4
+\item 
+\#define \hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{I\-N\-P\-U\-T\-\_\-\-B\-U\-F}~128
+\item 
+\#define \hyperlink{console_8c_ac54ae397901fe700628cafadea3c5208}{C}(x)~((x)-\/'@')
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{console_8c_a90f0742d846503e4ed1804f1df421ec6}{cprintf} (char $\ast$fmt,...)
+\item 
+void \hyperlink{console_8c_a95c0aca5d6d7487933984f08b189917a}{panic} (char $\ast$s)
+\item 
+void \hyperlink{console_8c_aad3d6ca39f23bb6d2686d2967e415193}{consoleintr} (int($\ast$getc)(void))
+\item 
+int \hyperlink{console_8c_a28ac85a90987662e306ca8efbfe16074}{consoleread} (struct \hyperlink{structinode}{inode} $\ast$ip, char $\ast$dst, int n)
+\item 
+int \hyperlink{console_8c_a6af7eb39268127d389792cec37785666}{consolewrite} (struct \hyperlink{structinode}{inode} $\ast$ip, char $\ast$\hyperlink{structbuf}{buf}, int n)
+\item 
+void \hyperlink{console_8c_ab508ff0f4db26fe35cd25fa648f9ee75}{consoleinit} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \hyperlink{structspinlock}{spinlock} \hyperlink{console_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}\\
+\>char \hyperlink{console_8c_aa427837782b05b05204809dfba33c8f5}{buf} \mbox{[}\hyperlink{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{INPUT\_BUF}\mbox{]}\\
+\>\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{r}\\
+\>\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{console_8c_afdeff54db9a334718662b709641fdfe1}{w}\\
+\>\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{console_8c_ab56fa7c992b725d84916b987c3d532ea}{e}\\
+\} \hyperlink{console_8c_a41db130acd332cdb95756628cfb2e48b}{input}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{console_8c_a629568514359445d2fbda71d70eeb1ce}{\index{console.\-c@{console.\-c}!B\-A\-C\-K\-S\-P\-A\-C\-E@{B\-A\-C\-K\-S\-P\-A\-C\-E}}
+\index{B\-A\-C\-K\-S\-P\-A\-C\-E@{B\-A\-C\-K\-S\-P\-A\-C\-E}!console.c@{console.\-c}}
+\subsubsection[{B\-A\-C\-K\-S\-P\-A\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-A\-C\-K\-S\-P\-A\-C\-E~0x100}}\label{console_8c_a629568514359445d2fbda71d70eeb1ce}
+
+
+Definition at line 119 of file console.\-c.
+
+\hypertarget{console_8c_ac54ae397901fe700628cafadea3c5208}{\index{console.\-c@{console.\-c}!C@{C}}
+\index{C@{C}!console.c@{console.\-c}}
+\subsubsection[{C}]{\setlength{\rightskip}{0pt plus 5cm}\#define C(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)~((x)-\/'@')}}\label{console_8c_ac54ae397901fe700628cafadea3c5208}
+
+
+Definition at line 179 of file console.\-c.
+
+\hypertarget{console_8c_a2e3959df0a0c54f50f20d4776b14487f}{\index{console.\-c@{console.\-c}!C\-R\-T\-P\-O\-R\-T@{C\-R\-T\-P\-O\-R\-T}}
+\index{C\-R\-T\-P\-O\-R\-T@{C\-R\-T\-P\-O\-R\-T}!console.c@{console.\-c}}
+\subsubsection[{C\-R\-T\-P\-O\-R\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define C\-R\-T\-P\-O\-R\-T~0x3d4}}\label{console_8c_a2e3959df0a0c54f50f20d4776b14487f}
+
+
+Definition at line 120 of file console.\-c.
+
+\hypertarget{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}{\index{console.\-c@{console.\-c}!I\-N\-P\-U\-T\-\_\-\-B\-U\-F@{I\-N\-P\-U\-T\-\_\-\-B\-U\-F}}
+\index{I\-N\-P\-U\-T\-\_\-\-B\-U\-F@{I\-N\-P\-U\-T\-\_\-\-B\-U\-F}!console.c@{console.\-c}}
+\subsubsection[{I\-N\-P\-U\-T\-\_\-\-B\-U\-F}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-N\-P\-U\-T\-\_\-\-B\-U\-F~128}}\label{console_8c_a5d85434f2a29f6c3048aeac34d0ce41d}
+
+
+Definition at line 170 of file console.\-c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{console_8c_ab508ff0f4db26fe35cd25fa648f9ee75}{\index{console.\-c@{console.\-c}!consoleinit@{consoleinit}}
+\index{consoleinit@{consoleinit}!console.c@{console.\-c}}
+\subsubsection[{consoleinit}]{\setlength{\rightskip}{0pt plus 5cm}void consoleinit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{console_8c_ab508ff0f4db26fe35cd25fa648f9ee75}
+
+
+Definition at line 275 of file console.\-c.
+
+\hypertarget{console_8c_aad3d6ca39f23bb6d2686d2967e415193}{\index{console.\-c@{console.\-c}!consoleintr@{consoleintr}}
+\index{consoleintr@{consoleintr}!console.c@{console.\-c}}
+\subsubsection[{consoleintr}]{\setlength{\rightskip}{0pt plus 5cm}void consoleintr (
+\begin{DoxyParamCaption}
+\item[{int($\ast$)(void)}]{getc}
+\end{DoxyParamCaption}
+)}}\label{console_8c_aad3d6ca39f23bb6d2686d2967e415193}
+
+
+Definition at line 182 of file console.\-c.
+
+\hypertarget{console_8c_a28ac85a90987662e306ca8efbfe16074}{\index{console.\-c@{console.\-c}!consoleread@{consoleread}}
+\index{consoleread@{consoleread}!console.c@{console.\-c}}
+\subsubsection[{consoleread}]{\setlength{\rightskip}{0pt plus 5cm}int consoleread (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inode} $\ast$}]{ip, }
+\item[{char $\ast$}]{dst, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{console_8c_a28ac85a90987662e306ca8efbfe16074}
+
+
+Definition at line 222 of file console.\-c.
+
+\hypertarget{console_8c_a6af7eb39268127d389792cec37785666}{\index{console.\-c@{console.\-c}!consolewrite@{consolewrite}}
+\index{consolewrite@{consolewrite}!console.c@{console.\-c}}
+\subsubsection[{consolewrite}]{\setlength{\rightskip}{0pt plus 5cm}int consolewrite (
+\begin{DoxyParamCaption}
+\item[{struct {\bf inode} $\ast$}]{ip, }
+\item[{char $\ast$}]{buf, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{console_8c_a6af7eb39268127d389792cec37785666}
+
+
+Definition at line 260 of file console.\-c.
+
+\hypertarget{console_8c_a90f0742d846503e4ed1804f1df421ec6}{\index{console.\-c@{console.\-c}!cprintf@{cprintf}}
+\index{cprintf@{cprintf}!console.c@{console.\-c}}
+\subsubsection[{cprintf}]{\setlength{\rightskip}{0pt plus 5cm}void cprintf (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fmt, }
+\item[{}]{...}
+\end{DoxyParamCaption}
+)}}\label{console_8c_a90f0742d846503e4ed1804f1df421ec6}
+
+
+Definition at line 52 of file console.\-c.
+
+\hypertarget{console_8c_a95c0aca5d6d7487933984f08b189917a}{\index{console.\-c@{console.\-c}!panic@{panic}}
+\index{panic@{panic}!console.c@{console.\-c}}
+\subsubsection[{panic}]{\setlength{\rightskip}{0pt plus 5cm}void panic (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{console_8c_a95c0aca5d6d7487933984f08b189917a}
+
+
+Definition at line 101 of file console.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{console_8c_aa427837782b05b05204809dfba33c8f5}{\index{console.\-c@{console.\-c}!buf@{buf}}
+\index{buf@{buf}!console.c@{console.\-c}}
+\subsubsection[{buf}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf buf}\mbox{[}{\bf I\-N\-P\-U\-T\-\_\-\-B\-U\-F}\mbox{]}}}\label{console_8c_aa427837782b05b05204809dfba33c8f5}
+
+
+Definition at line 173 of file console.\-c.
+
+\hypertarget{console_8c_ab56fa7c992b725d84916b987c3d532ea}{\index{console.\-c@{console.\-c}!e@{e}}
+\index{e@{e}!console.c@{console.\-c}}
+\subsubsection[{e}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} e}}\label{console_8c_ab56fa7c992b725d84916b987c3d532ea}
+
+
+Definition at line 176 of file console.\-c.
+
+\hypertarget{console_8c_a41db130acd332cdb95756628cfb2e48b}{\index{console.\-c@{console.\-c}!input@{input}}
+\index{input@{input}!console.c@{console.\-c}}
+\subsubsection[{input}]{\setlength{\rightskip}{0pt plus 5cm}struct \{ ... \}   input}}\label{console_8c_a41db130acd332cdb95756628cfb2e48b}
+\hypertarget{console_8c_ab28e82cd5dda7d960095706a3ea20572}{\index{console.\-c@{console.\-c}!lock@{lock}}
+\index{lock@{lock}!console.c@{console.\-c}}
+\subsubsection[{lock}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf spinlock} lock}}\label{console_8c_ab28e82cd5dda7d960095706a3ea20572}
+
+
+Definition at line 21 of file console.\-c.
+
+\hypertarget{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}{\index{console.\-c@{console.\-c}!locking@{locking}}
+\index{locking@{locking}!console.c@{console.\-c}}
+\subsubsection[{locking}]{\setlength{\rightskip}{0pt plus 5cm}int locking}}\label{console_8c_ae51110da3bc13ef49e32d1e2cda5d55c}
+
+
+Definition at line 22 of file console.\-c.
+
+\hypertarget{console_8c_af10fa12dd785c91e29528fbdc50cf9af}{\index{console.\-c@{console.\-c}!r@{r}}
+\index{r@{r}!console.c@{console.\-c}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} r}}\label{console_8c_af10fa12dd785c91e29528fbdc50cf9af}
+
+
+Definition at line 174 of file console.\-c.
+
+\hypertarget{console_8c_afdeff54db9a334718662b709641fdfe1}{\index{console.\-c@{console.\-c}!w@{w}}
+\index{w@{w}!console.c@{console.\-c}}
+\subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} w}}\label{console_8c_afdeff54db9a334718662b709641fdfe1}
+
+
+Definition at line 175 of file console.\-c.
+

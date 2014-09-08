@@ -1,0 +1,22 @@
+var searchData=
+[
+  ['s',['s',['../structsegdesc.html#a35181190d39e3d895c0ab657aceabb54',1,'segdesc::s()'],['../structgatedesc.html#a35181190d39e3d895c0ab657aceabb54',1,'gatedesc::s()'],['../unionheader.html#a1e57a8830c353d3a6cd627503cb18986',1,'header::s()']]],
+  ['sb',['sb',['../mkfs_8c.html#a0248d0bac625de5a1415f2f8c91f3343',1,'mkfs.c']]],
+  ['scheduler',['scheduler',['../structcpu.html#a98d6c9467c7b12be6c9c95a7f2cd76ee',1,'cpu']]],
+  ['sector',['sector',['../structbuf.html#ac4ea84582da27724e7735325dd490a92',1,'buf']]],
+  ['shentsize',['shentsize',['../structelfhdr.html#af9b275643c2083bb195d46bd28e5160f',1,'elfhdr']]],
+  ['shnum',['shnum',['../structelfhdr.html#a56c0f0300ab098f73d32e42ad4d7c31e',1,'elfhdr']]],
+  ['shoff',['shoff',['../structelfhdr.html#a1f92826759f4567afd19bfe924be7f2b',1,'elfhdr']]],
+  ['shstrndx',['shstrndx',['../structelfhdr.html#a8cab050781091046b4cd1369c5988d48',1,'elfhdr']]],
+  ['signature',['signature',['../structmp.html#a086ff3269e8b74e0f05b9120d4cac23b',1,'mp::signature()'],['../structmpconf.html#a086ff3269e8b74e0f05b9120d4cac23b',1,'mpconf::signature()'],['../structmpproc.html#a086ff3269e8b74e0f05b9120d4cac23b',1,'mpproc::signature()']]],
+  ['size',['size',['../structsuperblock.html#a22d26304a3b3aca97e6311f6939dd1bf',1,'superblock::size()'],['../structdinode.html#a22d26304a3b3aca97e6311f6939dd1bf',1,'dinode::size()'],['../structstat.html#a22d26304a3b3aca97e6311f6939dd1bf',1,'stat::size()'],['../structinode.html#a22d26304a3b3aca97e6311f6939dd1bf',1,'inode::size()'],['../unionheader.html#a22d26304a3b3aca97e6311f6939dd1bf',1,'header::size()'],['../mkfs_8c.html#a439227feff9d7f55384e8780cfc2eb82',1,'size():&#160;mkfs.c']]],
+  ['specrev',['specrev',['../structmp.html#a3241a69299a13c78c22ccfe7ec22e90d',1,'mp']]],
+  ['ss',['ss',['../structtrapframe.html#aa518aeb56634c5237632789fbe00b635',1,'trapframe::ss()'],['../structtaskstate.html#aa518aeb56634c5237632789fbe00b635',1,'taskstate::ss()']]],
+  ['ss0',['ss0',['../structtaskstate.html#a9648f5e19cd4adcae28d51f6e326d6f4',1,'taskstate']]],
+  ['ss1',['ss1',['../structtaskstate.html#afc8f1257b84a23a426b3b5b2794d98df',1,'taskstate']]],
+  ['ss2',['ss2',['../structtaskstate.html#a6a7c092edd3dde61711a7e349e4eb191',1,'taskstate']]],
+  ['state',['state',['../structproc.html#a59425505202fc7e53a519d95707cb26b',1,'proc']]],
+  ['stdout',['stdout',['../usertests_8c.html#adc9da8a05ab98e52153fe99402f93613',1,'usertests.c']]],
+  ['symbols',['symbols',['../sh_8c.html#ab385d981fc73a48a1b732173200f46e5',1,'sh.c']]],
+  ['sz',['sz',['../structproc.html#aad1b9173bbedb8de751a61a0864dcb3b',1,'proc']]]
+];

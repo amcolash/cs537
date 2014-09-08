@@ -1,0 +1,125 @@
+\hypertarget{fs_8h}{\section{include/fs.h File Reference}
+\label{fs_8h}\index{include/fs.\-h@{include/fs.\-h}}
+}
+This graph shows which files directly or indirectly include this file\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{fs_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structsuperblock}{superblock}
+\item 
+struct \hyperlink{structdinode}{dinode}
+\item 
+struct \hyperlink{structdirent}{dirent}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{fs_8h_a22c8ea96d09283ed6496347806cc72a0}{R\-O\-O\-T\-I\-N\-O}~1
+\item 
+\#define \hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\-S\-I\-Z\-E}~512
+\item 
+\#define \hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{N\-D\-I\-R\-E\-C\-T}~12
+\item 
+\#define \hyperlink{fs_8h_a6d24f098ea2928d61ff80b123d761715}{N\-I\-N\-D\-I\-R\-E\-C\-T}~(\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\-S\-I\-Z\-E} / sizeof(\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}))
+\item 
+\#define \hyperlink{fs_8h_a714b2485a6dd312e37226e1f833728a9}{M\-A\-X\-F\-I\-L\-E}~(\hyperlink{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{N\-D\-I\-R\-E\-C\-T} + \hyperlink{fs_8h_a6d24f098ea2928d61ff80b123d761715}{N\-I\-N\-D\-I\-R\-E\-C\-T})
+\item 
+\#define \hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\-P\-B}~(\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\-S\-I\-Z\-E} / sizeof(struct \hyperlink{structdinode}{dinode}))
+\item 
+\#define \hyperlink{fs_8h_ab114c389e176f9583562c70112425a44}{I\-B\-L\-O\-C\-K}(i)~((i) / \hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\-P\-B} + 2)
+\item 
+\#define \hyperlink{fs_8h_a3c88fd21abb83ef11461ce750c466828}{B\-P\-B}~(\hyperlink{fs_8h_a403cf3149c084cea115b85c90721039a}{B\-S\-I\-Z\-E}$\ast$8)
+\item 
+\#define \hyperlink{fs_8h_a3a09a26794f37ae657225b8f4444f368}{B\-B\-L\-O\-C\-K}(b, \hyperlink{mkfs_8c_a2df6f8ae5d8798691d40217c434098e5}{ninodes})~(b/\hyperlink{fs_8h_a3c88fd21abb83ef11461ce750c466828}{B\-P\-B} + (\hyperlink{mkfs_8c_a2df6f8ae5d8798691d40217c434098e5}{ninodes})/\hyperlink{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{I\-P\-B} + 3)
+\item 
+\#define \hyperlink{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}{D\-I\-R\-S\-I\-Z}~14
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{fs_8h_a3a09a26794f37ae657225b8f4444f368}{\index{fs.\-h@{fs.\-h}!B\-B\-L\-O\-C\-K@{B\-B\-L\-O\-C\-K}}
+\index{B\-B\-L\-O\-C\-K@{B\-B\-L\-O\-C\-K}!fs.h@{fs.\-h}}
+\subsubsection[{B\-B\-L\-O\-C\-K}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-B\-L\-O\-C\-K(
+\begin{DoxyParamCaption}
+\item[{}]{b, }
+\item[{}]{{\bf ninodes}}
+\end{DoxyParamCaption}
+)~(b/{\bf B\-P\-B} + ({\bf ninodes})/{\bf I\-P\-B} + 3)}}\label{fs_8h_a3a09a26794f37ae657225b8f4444f368}
+
+
+Definition at line 45 of file fs.\-h.
+
+\hypertarget{fs_8h_a3c88fd21abb83ef11461ce750c466828}{\index{fs.\-h@{fs.\-h}!B\-P\-B@{B\-P\-B}}
+\index{B\-P\-B@{B\-P\-B}!fs.h@{fs.\-h}}
+\subsubsection[{B\-P\-B}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-P\-B~({\bf B\-S\-I\-Z\-E}$\ast$8)}}\label{fs_8h_a3c88fd21abb83ef11461ce750c466828}
+
+
+Definition at line 42 of file fs.\-h.
+
+\hypertarget{fs_8h_a403cf3149c084cea115b85c90721039a}{\index{fs.\-h@{fs.\-h}!B\-S\-I\-Z\-E@{B\-S\-I\-Z\-E}}
+\index{B\-S\-I\-Z\-E@{B\-S\-I\-Z\-E}!fs.h@{fs.\-h}}
+\subsubsection[{B\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-S\-I\-Z\-E~512}}\label{fs_8h_a403cf3149c084cea115b85c90721039a}
+
+
+Definition at line 12 of file fs.\-h.
+
+\hypertarget{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}{\index{fs.\-h@{fs.\-h}!D\-I\-R\-S\-I\-Z@{D\-I\-R\-S\-I\-Z}}
+\index{D\-I\-R\-S\-I\-Z@{D\-I\-R\-S\-I\-Z}!fs.h@{fs.\-h}}
+\subsubsection[{D\-I\-R\-S\-I\-Z}]{\setlength{\rightskip}{0pt plus 5cm}\#define D\-I\-R\-S\-I\-Z~14}}\label{fs_8h_a48246fb9e5cb7f6a71ebc9ebc2f06562}
+
+
+Definition at line 48 of file fs.\-h.
+
+\hypertarget{fs_8h_ab114c389e176f9583562c70112425a44}{\index{fs.\-h@{fs.\-h}!I\-B\-L\-O\-C\-K@{I\-B\-L\-O\-C\-K}}
+\index{I\-B\-L\-O\-C\-K@{I\-B\-L\-O\-C\-K}!fs.h@{fs.\-h}}
+\subsubsection[{I\-B\-L\-O\-C\-K}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-B\-L\-O\-C\-K(
+\begin{DoxyParamCaption}
+\item[{}]{i}
+\end{DoxyParamCaption}
+)~((i) / {\bf I\-P\-B} + 2)}}\label{fs_8h_ab114c389e176f9583562c70112425a44}
+
+
+Definition at line 39 of file fs.\-h.
+
+\hypertarget{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}{\index{fs.\-h@{fs.\-h}!I\-P\-B@{I\-P\-B}}
+\index{I\-P\-B@{I\-P\-B}!fs.h@{fs.\-h}}
+\subsubsection[{I\-P\-B}]{\setlength{\rightskip}{0pt plus 5cm}\#define I\-P\-B~({\bf B\-S\-I\-Z\-E} / sizeof(struct {\bf dinode}))}}\label{fs_8h_aadb6c866a6d0a173f5f0a6ed9c7e0228}
+
+
+Definition at line 36 of file fs.\-h.
+
+\hypertarget{fs_8h_a714b2485a6dd312e37226e1f833728a9}{\index{fs.\-h@{fs.\-h}!M\-A\-X\-F\-I\-L\-E@{M\-A\-X\-F\-I\-L\-E}}
+\index{M\-A\-X\-F\-I\-L\-E@{M\-A\-X\-F\-I\-L\-E}!fs.h@{fs.\-h}}
+\subsubsection[{M\-A\-X\-F\-I\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-X\-F\-I\-L\-E~({\bf N\-D\-I\-R\-E\-C\-T} + {\bf N\-I\-N\-D\-I\-R\-E\-C\-T})}}\label{fs_8h_a714b2485a6dd312e37226e1f833728a9}
+
+
+Definition at line 23 of file fs.\-h.
+
+\hypertarget{fs_8h_acd38e9532d4b3623f844b93c012a8e06}{\index{fs.\-h@{fs.\-h}!N\-D\-I\-R\-E\-C\-T@{N\-D\-I\-R\-E\-C\-T}}
+\index{N\-D\-I\-R\-E\-C\-T@{N\-D\-I\-R\-E\-C\-T}!fs.h@{fs.\-h}}
+\subsubsection[{N\-D\-I\-R\-E\-C\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-D\-I\-R\-E\-C\-T~12}}\label{fs_8h_acd38e9532d4b3623f844b93c012a8e06}
+
+
+Definition at line 21 of file fs.\-h.
+
+\hypertarget{fs_8h_a6d24f098ea2928d61ff80b123d761715}{\index{fs.\-h@{fs.\-h}!N\-I\-N\-D\-I\-R\-E\-C\-T@{N\-I\-N\-D\-I\-R\-E\-C\-T}}
+\index{N\-I\-N\-D\-I\-R\-E\-C\-T@{N\-I\-N\-D\-I\-R\-E\-C\-T}!fs.h@{fs.\-h}}
+\subsubsection[{N\-I\-N\-D\-I\-R\-E\-C\-T}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\-I\-N\-D\-I\-R\-E\-C\-T~({\bf B\-S\-I\-Z\-E} / sizeof({\bf uint}))}}\label{fs_8h_a6d24f098ea2928d61ff80b123d761715}
+
+
+Definition at line 22 of file fs.\-h.
+
+\hypertarget{fs_8h_a22c8ea96d09283ed6496347806cc72a0}{\index{fs.\-h@{fs.\-h}!R\-O\-O\-T\-I\-N\-O@{R\-O\-O\-T\-I\-N\-O}}
+\index{R\-O\-O\-T\-I\-N\-O@{R\-O\-O\-T\-I\-N\-O}!fs.h@{fs.\-h}}
+\subsubsection[{R\-O\-O\-T\-I\-N\-O}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-O\-O\-T\-I\-N\-O~1}}\label{fs_8h_a22c8ea96d09283ed6496347806cc72a0}
+
+
+Definition at line 11 of file fs.\-h.
+

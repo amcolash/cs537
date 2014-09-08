@@ -1,0 +1,148 @@
+\hypertarget{ulib_8c}{\section{user/ulib.c File Reference}
+\label{ulib_8c}\index{user/ulib.\-c@{user/ulib.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stat.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fcntl.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}user.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+Include dependency graph for ulib.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{ulib_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{ulib_8c_a169c7307235282a3c53d4aaf311f8f64}{strcpy} (char $\ast$s, char $\ast$t)
+\item 
+int \hyperlink{ulib_8c_a20f61ccd139bc66f11fc83ff9d66d4cf}{strcmp} (const char $\ast$p, const char $\ast$q)
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{ulib_8c_a380598cee3cfecc2da3fe6e8769746cc}{strlen} (char $\ast$s)
+\item 
+void $\ast$ \hyperlink{ulib_8c_acbd02c899d9723092ddf5f8a4df32b33}{memset} (void $\ast$dst, int c, \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} n)
+\item 
+char $\ast$ \hyperlink{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{strchr} (const char $\ast$s, char c)
+\item 
+char $\ast$ \hyperlink{ulib_8c_a3702e71383a007c873d8e7b84dcbe62a}{gets} (char $\ast$\hyperlink{structbuf}{buf}, int max)
+\item 
+int \hyperlink{ulib_8c_a1e4d8285a07be2b1852c7b058349df66}{stat} (char $\ast$n, struct \hyperlink{structstat}{stat} $\ast$st)
+\item 
+int \hyperlink{ulib_8c_a30670a60464f77af17dfb353353d6df8}{atoi} (const char $\ast$s)
+\item 
+void $\ast$ \hyperlink{ulib_8c_a394751700923187382f8b6f3a2d31e3d}{memmove} (void $\ast$vdst, void $\ast$vsrc, int n)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{ulib_8c_a30670a60464f77af17dfb353353d6df8}{\index{ulib.\-c@{ulib.\-c}!atoi@{atoi}}
+\index{atoi@{atoi}!ulib.c@{ulib.\-c}}
+\subsubsection[{atoi}]{\setlength{\rightskip}{0pt plus 5cm}int atoi (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a30670a60464f77af17dfb353353d6df8}
+
+
+Definition at line 85 of file ulib.\-c.
+
+\hypertarget{ulib_8c_a3702e71383a007c873d8e7b84dcbe62a}{\index{ulib.\-c@{ulib.\-c}!gets@{gets}}
+\index{gets@{gets}!ulib.c@{ulib.\-c}}
+\subsubsection[{gets}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ gets (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{buf, }
+\item[{int}]{max}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a3702e71383a007c873d8e7b84dcbe62a}
+
+
+Definition at line 53 of file ulib.\-c.
+
+\hypertarget{ulib_8c_a394751700923187382f8b6f3a2d31e3d}{\index{ulib.\-c@{ulib.\-c}!memmove@{memmove}}
+\index{memmove@{memmove}!ulib.c@{ulib.\-c}}
+\subsubsection[{memmove}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ memmove (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{vdst, }
+\item[{void $\ast$}]{vsrc, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a394751700923187382f8b6f3a2d31e3d}
+
+
+Definition at line 96 of file ulib.\-c.
+
+\hypertarget{ulib_8c_acbd02c899d9723092ddf5f8a4df32b33}{\index{ulib.\-c@{ulib.\-c}!memset@{memset}}
+\index{memset@{memset}!ulib.c@{ulib.\-c}}
+\subsubsection[{memset}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ memset (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{dst, }
+\item[{int}]{c, }
+\item[{{\bf uint}}]{n}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_acbd02c899d9723092ddf5f8a4df32b33}
+
+
+Definition at line 37 of file ulib.\-c.
+
+\hypertarget{ulib_8c_a1e4d8285a07be2b1852c7b058349df66}{\index{ulib.\-c@{ulib.\-c}!stat@{stat}}
+\index{stat@{stat}!ulib.c@{ulib.\-c}}
+\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf stat} (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{n, }
+\item[{struct {\bf stat} $\ast$}]{st}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a1e4d8285a07be2b1852c7b058349df66}
+
+
+Definition at line 71 of file ulib.\-c.
+
+\hypertarget{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}{\index{ulib.\-c@{ulib.\-c}!strchr@{strchr}}
+\index{strchr@{strchr}!ulib.c@{ulib.\-c}}
+\subsubsection[{strchr}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ strchr (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{s, }
+\item[{char}]{c}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_aa409596a785c33c8fabee6d6464df3ff}
+
+
+Definition at line 44 of file ulib.\-c.
+
+\hypertarget{ulib_8c_a20f61ccd139bc66f11fc83ff9d66d4cf}{\index{ulib.\-c@{ulib.\-c}!strcmp@{strcmp}}
+\index{strcmp@{strcmp}!ulib.c@{ulib.\-c}}
+\subsubsection[{strcmp}]{\setlength{\rightskip}{0pt plus 5cm}int strcmp (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{p, }
+\item[{const char $\ast$}]{q}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a20f61ccd139bc66f11fc83ff9d66d4cf}
+
+
+Definition at line 19 of file ulib.\-c.
+
+\hypertarget{ulib_8c_a169c7307235282a3c53d4aaf311f8f64}{\index{ulib.\-c@{ulib.\-c}!strcpy@{strcpy}}
+\index{strcpy@{strcpy}!ulib.c@{ulib.\-c}}
+\subsubsection[{strcpy}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ strcpy (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{s, }
+\item[{char $\ast$}]{t}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a169c7307235282a3c53d4aaf311f8f64}
+
+
+Definition at line 8 of file ulib.\-c.
+
+\hypertarget{ulib_8c_a380598cee3cfecc2da3fe6e8769746cc}{\index{ulib.\-c@{ulib.\-c}!strlen@{strlen}}
+\index{strlen@{strlen}!ulib.c@{ulib.\-c}}
+\subsubsection[{strlen}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} strlen (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{s}
+\end{DoxyParamCaption}
+)}}\label{ulib_8c_a380598cee3cfecc2da3fe6e8769746cc}
+
+
+Definition at line 27 of file ulib.\-c.
+

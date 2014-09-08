@@ -1,0 +1,76 @@
+\hypertarget{umalloc_8c}{\section{user/umalloc.c File Reference}
+\label{umalloc_8c}\index{user/umalloc.\-c@{user/umalloc.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stat.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}user.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+Include dependency graph for umalloc.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=320pt]{umalloc_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+union \hyperlink{unionheader}{header}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef long \hyperlink{umalloc_8c_aa508dd61e627680e57643837d292d89f}{Align}
+\item 
+typedef union \hyperlink{unionheader}{header} \hyperlink{umalloc_8c_a1a2bfaef0959ba21a357a6f8feaa477b}{Header}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{umalloc_8c_adebb229f063e66907017098087cbe791}{free} (void $\ast$ap)
+\item 
+void $\ast$ \hyperlink{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{malloc} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} nbytes)
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{umalloc_8c_aa508dd61e627680e57643837d292d89f}{\index{umalloc.\-c@{umalloc.\-c}!Align@{Align}}
+\index{Align@{Align}!umalloc.c@{umalloc.\-c}}
+\subsubsection[{Align}]{\setlength{\rightskip}{0pt plus 5cm}typedef long {\bf Align}}}\label{umalloc_8c_aa508dd61e627680e57643837d292d89f}
+
+
+Definition at line 9 of file umalloc.\-c.
+
+\hypertarget{umalloc_8c_a1a2bfaef0959ba21a357a6f8feaa477b}{\index{umalloc.\-c@{umalloc.\-c}!Header@{Header}}
+\index{Header@{Header}!umalloc.c@{umalloc.\-c}}
+\subsubsection[{Header}]{\setlength{\rightskip}{0pt plus 5cm}typedef union {\bf header} {\bf Header}}}\label{umalloc_8c_a1a2bfaef0959ba21a357a6f8feaa477b}
+
+
+Definition at line 19 of file umalloc.\-c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{umalloc_8c_adebb229f063e66907017098087cbe791}{\index{umalloc.\-c@{umalloc.\-c}!free@{free}}
+\index{free@{free}!umalloc.c@{umalloc.\-c}}
+\subsubsection[{free}]{\setlength{\rightskip}{0pt plus 5cm}void free (
+\begin{DoxyParamCaption}
+\item[{void $\ast$}]{ap}
+\end{DoxyParamCaption}
+)}}\label{umalloc_8c_adebb229f063e66907017098087cbe791}
+
+
+Definition at line 25 of file umalloc.\-c.
+
+\hypertarget{umalloc_8c_a94267ee40e0547410676894ab3f23c15}{\index{umalloc.\-c@{umalloc.\-c}!malloc@{malloc}}
+\index{malloc@{malloc}!umalloc.c@{umalloc.\-c}}
+\subsubsection[{malloc}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ malloc (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{nbytes}
+\end{DoxyParamCaption}
+)}}\label{umalloc_8c_a94267ee40e0547410676894ab3f23c15}
+
+
+Definition at line 64 of file umalloc.\-c.
+

@@ -1,0 +1,5 @@
+<map id="kernel/sysfunc.h" name="kernel/sysfunc.h">
+<area shape="rect" id="node2" href="$syscall_8c.html" title="kernel/syscall.c" alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node3" href="$sysfile_8c.html" title="kernel/sysfile.c" alt="" coords="142,80,252,107"/>
+<area shape="rect" id="node4" href="$sysproc_8c.html" title="kernel/sysproc.c" alt="" coords="277,80,395,107"/>
+</map>

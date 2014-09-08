@@ -1,0 +1,9 @@
+<map id="include/fcntl.h" name="include/fcntl.h">
+<area shape="rect" id="node2" href="$sysfile_8c.html" title="kernel/sysfile.c" alt="" coords="5,80,115,107"/>
+<area shape="rect" id="node3" href="$mkfs_8c.html" title="tools/mkfs.c" alt="" coords="139,80,233,107"/>
+<area shape="rect" id="node4" href="$init_8c.html" title="user/init.c" alt="" coords="258,80,336,107"/>
+<area shape="rect" id="node5" href="$sh_8c.html" title="user/sh.c" alt="" coords="361,80,436,107"/>
+<area shape="rect" id="node6" href="$stressfs_8c.html" title="user/stressfs.c" alt="" coords="461,80,571,107"/>
+<area shape="rect" id="node7" href="$ulib_8c.html" title="user/ulib.c" alt="" coords="595,80,676,107"/>
+<area shape="rect" id="node8" href="$usertests_8c.html" title="user/usertests.c" alt="" coords="702,80,817,107"/>
+</map>

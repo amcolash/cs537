@@ -1,0 +1,12 @@
+<map id="include/fs.h" name="include/fs.h">
+<area shape="rect" id="node2" href="$console_8c.html" title="kernel/console.c" alt="" coords="5,80,121,107"/>
+<area shape="rect" id="node3" href="$file_8c.html" title="kernel/file.c" alt="" coords="147,80,236,107"/>
+<area shape="rect" id="node4" href="$fs_8c.html" title="kernel/fs.c" alt="" coords="261,80,343,107"/>
+<area shape="rect" id="node5" href="$pipe_8c.html" title="kernel/pipe.c" alt="" coords="368,80,464,107"/>
+<area shape="rect" id="node6" href="$sysfile_8c.html" title="kernel/sysfile.c" alt="" coords="489,80,599,107"/>
+<area shape="rect" id="node7" href="$uart_8c.html" title="kernel/uart.c" alt="" coords="623,80,717,107"/>
+<area shape="rect" id="node8" href="$mkfs_8c.html" title="tools/mkfs.c" alt="" coords="742,80,836,107"/>
+<area shape="rect" id="node9" href="$ls_8c.html" title="user/ls.c" alt="" coords="861,80,933,107"/>
+<area shape="rect" id="node10" href="$stressfs_8c.html" title="user/stressfs.c" alt="" coords="957,80,1067,107"/>
+<area shape="rect" id="node11" href="$usertests_8c.html" title="user/usertests.c" alt="" coords="1091,80,1207,107"/>
+</map>

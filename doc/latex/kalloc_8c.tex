@@ -1,0 +1,102 @@
+\hypertarget{kalloc_8c}{\section{kernel/kalloc.c File Reference}
+\label{kalloc_8c}\index{kernel/kalloc.\-c@{kernel/kalloc.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spinlock.\-h\char`\"{}}\\*
+Include dependency graph for kalloc.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{kalloc_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structrun}{run}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{kalloc_8c_a71d803d14f0e1b0682e2c20e7c2a7f7a}{kinit} (void)
+\item 
+void \hyperlink{kalloc_8c_aced59ecf8411235f6dffc065236711a5}{kfree} (char $\ast$v)
+\item 
+char $\ast$ \hyperlink{kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed}{kalloc} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>struct \hyperlink{structspinlock}{spinlock} \hyperlink{kalloc_8c_ab28e82cd5dda7d960095706a3ea20572}{lock}\\
+\>struct \hyperlink{structrun}{run} $\ast$ \hyperlink{kalloc_8c_a25f1f0e27ad1cafebbde0b8b7455afb4}{freelist}\\
+\} \hyperlink{kalloc_8c_a2954ba14fcdb793e2e0ca451af37607f}{kmem}\\
+
+\end{tabbing}\item 
+char \hyperlink{kalloc_8c_af4f810c521bcfd87215d3007005a8325}{end} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed}{\index{kalloc.\-c@{kalloc.\-c}!kalloc@{kalloc}}
+\index{kalloc@{kalloc}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{kalloc}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ kalloc (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{kalloc_8c_a3af104ba40b66dcec8363ac5a70907ed}
+
+
+Definition at line 60 of file kalloc.\-c.
+
+\hypertarget{kalloc_8c_aced59ecf8411235f6dffc065236711a5}{\index{kalloc.\-c@{kalloc.\-c}!kfree@{kfree}}
+\index{kfree@{kfree}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{kfree}]{\setlength{\rightskip}{0pt plus 5cm}void kfree (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{v}
+\end{DoxyParamCaption}
+)}}\label{kalloc_8c_aced59ecf8411235f6dffc065236711a5}
+
+
+Definition at line 39 of file kalloc.\-c.
+
+\hypertarget{kalloc_8c_a71d803d14f0e1b0682e2c20e7c2a7f7a}{\index{kalloc.\-c@{kalloc.\-c}!kinit@{kinit}}
+\index{kinit@{kinit}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{kinit}]{\setlength{\rightskip}{0pt plus 5cm}void kinit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{kalloc_8c_a71d803d14f0e1b0682e2c20e7c2a7f7a}
+
+
+Definition at line 24 of file kalloc.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{kalloc_8c_af4f810c521bcfd87215d3007005a8325}{\index{kalloc.\-c@{kalloc.\-c}!end@{end}}
+\index{end@{end}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}char end\mbox{[}$\,$\mbox{]}}}\label{kalloc_8c_af4f810c521bcfd87215d3007005a8325}
+\hypertarget{kalloc_8c_a25f1f0e27ad1cafebbde0b8b7455afb4}{\index{kalloc.\-c@{kalloc.\-c}!freelist@{freelist}}
+\index{freelist@{freelist}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{freelist}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf run}$\ast$ freelist}}\label{kalloc_8c_a25f1f0e27ad1cafebbde0b8b7455afb4}
+
+
+Definition at line 17 of file kalloc.\-c.
+
+\hypertarget{kalloc_8c_a2954ba14fcdb793e2e0ca451af37607f}{\index{kalloc.\-c@{kalloc.\-c}!kmem@{kmem}}
+\index{kmem@{kmem}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{kmem}]{\setlength{\rightskip}{0pt plus 5cm}struct \{ ... \}   kmem}}\label{kalloc_8c_a2954ba14fcdb793e2e0ca451af37607f}
+\hypertarget{kalloc_8c_ab28e82cd5dda7d960095706a3ea20572}{\index{kalloc.\-c@{kalloc.\-c}!lock@{lock}}
+\index{lock@{lock}!kalloc.c@{kalloc.\-c}}
+\subsubsection[{lock}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf spinlock} lock}}\label{kalloc_8c_ab28e82cd5dda7d960095706a3ea20572}
+
+
+Definition at line 16 of file kalloc.\-c.
+

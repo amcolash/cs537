@@ -1,0 +1,11 @@
+<map id="pipe" name="pipe">
+<area shape="rect" id="node9" href="$structfile.html" title="file" alt="" coords="261,96,299,123"/>
+<area shape="rect" id="node2" href="$structspinlock.html" title="spinlock" alt="" coords="23,368,93,395"/>
+<area shape="rect" id="node3" href="$structcpu.html" title="cpu" alt="" coords="157,277,200,304"/>
+<area shape="rect" id="node4" href="$structsegdesc.html" title="segdesc" alt="" coords="59,187,129,213"/>
+<area shape="rect" id="node5" href="$structcontext.html" title="context" alt="" coords="159,96,224,123"/>
+<area shape="rect" id="node6" href="$structproc.html" title="proc" alt="" coords="271,187,317,213"/>
+<area shape="rect" id="node7" href="$structinode.html" title="inode" alt="" coords="348,5,401,32"/>
+<area shape="rect" id="node8" href="$structtrapframe.html" title="trapframe" alt="" coords="323,96,399,123"/>
+<area shape="rect" id="node10" href="$structtaskstate.html" title="taskstate" alt="" coords="407,187,483,213"/>
+</map>

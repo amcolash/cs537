@@ -1,0 +1,116 @@
+\hypertarget{structcpu}{\section{cpu Struct Reference}
+\label{structcpu}\index{cpu@{cpu}}
+}
+
+
+{\ttfamily \#include $<$proc.\-h$>$}
+
+
+
+Collaboration diagram for cpu\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=330pt]{structcpu__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{types_8h_a65f85814a8290f9797005d3b28e7e5fc}{uchar} \hyperlink{structcpu_a1a656e73d1ea05b0fe2307f8a5eab1b1}{id}
+\item 
+struct \hyperlink{structcontext}{context} $\ast$ \hyperlink{structcpu_a98d6c9467c7b12be6c9c95a7f2cd76ee}{scheduler}
+\item 
+struct \hyperlink{structtaskstate}{taskstate} \hyperlink{structcpu_a20aef12941acee6e8f1a0693b1fbf681}{ts}
+\item 
+struct \hyperlink{structsegdesc}{segdesc} \hyperlink{structcpu_ad9d6d1fdf72705e51d5024df0f2e69a5}{gdt} \mbox{[}\hyperlink{proc_8h_a2fca412c6ed6584438e96f43ccce030a}{N\-S\-E\-G\-S}\mbox{]}
+\item 
+volatile \hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{structcpu_abf27dd9e6a92da384cbfd35ec3325919}{booted}
+\item 
+int \hyperlink{structcpu_a47f2115921397412b52d8aa2680510ec}{ncli}
+\item 
+int \hyperlink{structcpu_ad4abc2486db103b06edb4f8870d1cda8}{intena}
+\item 
+struct \hyperlink{structcpu}{cpu} $\ast$ \hyperlink{structcpu_a01255252d6a6f1a4d5550f72dfe3a733}{cpu}
+\item 
+struct \hyperlink{structproc}{proc} $\ast$ \hyperlink{structcpu_a333f53825c4bbc35baa89f385e8bafc8}{proc}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 14 of file proc.\-h.
+
+
+
+\subsection{Field Documentation}
+\hypertarget{structcpu_abf27dd9e6a92da384cbfd35ec3325919}{\index{cpu@{cpu}!booted@{booted}}
+\index{booted@{booted}!cpu@{cpu}}
+\subsubsection[{booted}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf uint} booted}}\label{structcpu_abf27dd9e6a92da384cbfd35ec3325919}
+
+
+Definition at line 19 of file proc.\-h.
+
+\hypertarget{structcpu_a01255252d6a6f1a4d5550f72dfe3a733}{\index{cpu@{cpu}!cpu@{cpu}}
+\index{cpu@{cpu}!cpu@{cpu}}
+\subsubsection[{cpu}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf cpu}$\ast$ {\bf cpu}}}\label{structcpu_a01255252d6a6f1a4d5550f72dfe3a733}
+
+
+Definition at line 24 of file proc.\-h.
+
+\hypertarget{structcpu_ad9d6d1fdf72705e51d5024df0f2e69a5}{\index{cpu@{cpu}!gdt@{gdt}}
+\index{gdt@{gdt}!cpu@{cpu}}
+\subsubsection[{gdt}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf segdesc} gdt\mbox{[}{\bf N\-S\-E\-G\-S}\mbox{]}}}\label{structcpu_ad9d6d1fdf72705e51d5024df0f2e69a5}
+
+
+Definition at line 18 of file proc.\-h.
+
+\hypertarget{structcpu_a1a656e73d1ea05b0fe2307f8a5eab1b1}{\index{cpu@{cpu}!id@{id}}
+\index{id@{id}!cpu@{cpu}}
+\subsubsection[{id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uchar} id}}\label{structcpu_a1a656e73d1ea05b0fe2307f8a5eab1b1}
+
+
+Definition at line 15 of file proc.\-h.
+
+\hypertarget{structcpu_ad4abc2486db103b06edb4f8870d1cda8}{\index{cpu@{cpu}!intena@{intena}}
+\index{intena@{intena}!cpu@{cpu}}
+\subsubsection[{intena}]{\setlength{\rightskip}{0pt plus 5cm}int intena}}\label{structcpu_ad4abc2486db103b06edb4f8870d1cda8}
+
+
+Definition at line 21 of file proc.\-h.
+
+\hypertarget{structcpu_a47f2115921397412b52d8aa2680510ec}{\index{cpu@{cpu}!ncli@{ncli}}
+\index{ncli@{ncli}!cpu@{cpu}}
+\subsubsection[{ncli}]{\setlength{\rightskip}{0pt plus 5cm}int ncli}}\label{structcpu_a47f2115921397412b52d8aa2680510ec}
+
+
+Definition at line 20 of file proc.\-h.
+
+\hypertarget{structcpu_a333f53825c4bbc35baa89f385e8bafc8}{\index{cpu@{cpu}!proc@{proc}}
+\index{proc@{proc}!cpu@{cpu}}
+\subsubsection[{proc}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf proc}$\ast$ {\bf proc}}}\label{structcpu_a333f53825c4bbc35baa89f385e8bafc8}
+
+
+Definition at line 25 of file proc.\-h.
+
+\hypertarget{structcpu_a98d6c9467c7b12be6c9c95a7f2cd76ee}{\index{cpu@{cpu}!scheduler@{scheduler}}
+\index{scheduler@{scheduler}!cpu@{cpu}}
+\subsubsection[{scheduler}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf context}$\ast$ scheduler}}\label{structcpu_a98d6c9467c7b12be6c9c95a7f2cd76ee}
+
+
+Definition at line 16 of file proc.\-h.
+
+\hypertarget{structcpu_a20aef12941acee6e8f1a0693b1fbf681}{\index{cpu@{cpu}!ts@{ts}}
+\index{ts@{ts}!cpu@{cpu}}
+\subsubsection[{ts}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf taskstate} ts}}\label{structcpu_a20aef12941acee6e8f1a0693b1fbf681}
+
+
+Definition at line 17 of file proc.\-h.
+
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+kernel/\hyperlink{proc_8h}{proc.\-h}\end{DoxyCompactItemize}

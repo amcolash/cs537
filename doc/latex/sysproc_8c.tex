@@ -1,0 +1,128 @@
+\hypertarget{sysproc_8c}{\section{kernel/sysproc.c File Reference}
+\label{sysproc_8c}\index{kernel/sysproc.\-c@{kernel/sysproc.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}proc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}sysfunc.\-h\char`\"{}}\\*
+Include dependency graph for sysproc.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{sysproc_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{sysproc_8c_a3b05102e512b34446a54334f916ba5cd}{sys\-\_\-fork} (void)
+\item 
+int \hyperlink{sysproc_8c_aee72faa31a0c32b410aba558ef1d59f2}{sys\-\_\-exit} (void)
+\item 
+int \hyperlink{sysproc_8c_ad202e06addda05ba6fe60f05d3f61913}{sys\-\_\-wait} (void)
+\item 
+int \hyperlink{sysproc_8c_ad766b54842470b464a6497bb5c514e59}{sys\-\_\-kill} (void)
+\item 
+int \hyperlink{sysproc_8c_ac81965412a0725574b8c72afda11243e}{sys\-\_\-getpid} (void)
+\item 
+int \hyperlink{sysproc_8c_ab21d46be776cf6075a997af525a1a628}{sys\-\_\-sbrk} (void)
+\item 
+int \hyperlink{sysproc_8c_a59778ec9bfa6b6f2100b43fbba000573}{sys\-\_\-sleep} (void)
+\item 
+int \hyperlink{sysproc_8c_aaf8553903ba8f2776247679d4db0d121}{sys\-\_\-uptime} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{sysproc_8c_aee72faa31a0c32b410aba558ef1d59f2}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-exit@{sys\-\_\-exit}}
+\index{sys\-\_\-exit@{sys\-\_\-exit}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-exit}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-exit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_aee72faa31a0c32b410aba558ef1d59f2}
+
+
+Definition at line 16 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_a3b05102e512b34446a54334f916ba5cd}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-fork@{sys\-\_\-fork}}
+\index{sys\-\_\-fork@{sys\-\_\-fork}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-fork}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-fork (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_a3b05102e512b34446a54334f916ba5cd}
+
+
+Definition at line 10 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_ac81965412a0725574b8c72afda11243e}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-getpid@{sys\-\_\-getpid}}
+\index{sys\-\_\-getpid@{sys\-\_\-getpid}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-getpid}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-getpid (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_ac81965412a0725574b8c72afda11243e}
+
+
+Definition at line 39 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_ad766b54842470b464a6497bb5c514e59}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-kill@{sys\-\_\-kill}}
+\index{sys\-\_\-kill@{sys\-\_\-kill}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-kill}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-kill (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_ad766b54842470b464a6497bb5c514e59}
+
+
+Definition at line 29 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_ab21d46be776cf6075a997af525a1a628}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-sbrk@{sys\-\_\-sbrk}}
+\index{sys\-\_\-sbrk@{sys\-\_\-sbrk}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-sbrk}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-sbrk (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_ab21d46be776cf6075a997af525a1a628}
+
+
+Definition at line 45 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_a59778ec9bfa6b6f2100b43fbba000573}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-sleep@{sys\-\_\-sleep}}
+\index{sys\-\_\-sleep@{sys\-\_\-sleep}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-sleep}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-sleep (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_a59778ec9bfa6b6f2100b43fbba000573}
+
+
+Definition at line 59 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_aaf8553903ba8f2776247679d4db0d121}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-uptime@{sys\-\_\-uptime}}
+\index{sys\-\_\-uptime@{sys\-\_\-uptime}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-uptime}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-uptime (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_aaf8553903ba8f2776247679d4db0d121}
+
+
+Definition at line 82 of file sysproc.\-c.
+
+\hypertarget{sysproc_8c_ad202e06addda05ba6fe60f05d3f61913}{\index{sysproc.\-c@{sysproc.\-c}!sys\-\_\-wait@{sys\-\_\-wait}}
+\index{sys\-\_\-wait@{sys\-\_\-wait}!sysproc.c@{sysproc.\-c}}
+\subsubsection[{sys\-\_\-wait}]{\setlength{\rightskip}{0pt plus 5cm}int sys\-\_\-wait (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{sysproc_8c_ad202e06addda05ba6fe60f05d3f61913}
+
+
+Definition at line 23 of file sysproc.\-c.
+

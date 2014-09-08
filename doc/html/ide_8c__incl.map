@@ -1,0 +1,11 @@
+<map id="kernel/ide.c" name="kernel/ide.c">
+<area shape="rect" id="node2" href="$types_8h.html" title="types.h" alt="" coords="5,80,69,107"/>
+<area shape="rect" id="node3" href="$defs_8h.html" title="defs.h" alt="" coords="95,80,152,107"/>
+<area shape="rect" id="node4" href="$param_8h.html" title="param.h" alt="" coords="177,80,247,107"/>
+<area shape="rect" id="node5" href="$mmu_8h.html" title="mmu.h" alt="" coords="271,80,333,107"/>
+<area shape="rect" id="node6" href="$proc_8h.html" title="proc.h" alt="" coords="359,80,416,107"/>
+<area shape="rect" id="node7" href="$x86_8h.html" title="x86.h" alt="" coords="442,80,496,107"/>
+<area shape="rect" id="node8" href="$traps_8h.html" title="traps.h" alt="" coords="521,80,583,107"/>
+<area shape="rect" id="node9" href="$spinlock_8h.html" title="spinlock.h" alt="" coords="607,80,688,107"/>
+<area shape="rect" id="node10" href="$buf_8h.html" title="buf.h" alt="" coords="713,80,764,107"/>
+</map>

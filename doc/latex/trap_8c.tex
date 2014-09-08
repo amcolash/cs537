@@ -1,0 +1,102 @@
+\hypertarget{trap_8c}{\section{kernel/trap.c File Reference}
+\label{trap_8c}\index{kernel/trap.\-c@{kernel/trap.\-c}}
+}
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}defs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}param.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mmu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}proc.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}x86.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}traps.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}spinlock.\-h\char`\"{}}\\*
+Include dependency graph for trap.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{trap_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{trap_8c_a9e7167b8e20e217c4af4e757f612ba6a}{tvinit} (void)
+\item 
+void \hyperlink{trap_8c_a9b6e7f6c302700cb54216ad22cbc1591}{idtinit} (void)
+\item 
+void \hyperlink{trap_8c_a372d166e36c086c91e5f5d81e5fead3a}{trap} (struct \hyperlink{structtrapframe}{trapframe} $\ast$tf)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structgatedesc}{gatedesc} \hyperlink{trap_8c_a3facbc1e1e6618fb238fc124bd9aa827}{idt} \mbox{[}256\mbox{]}
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{trap_8c_a3e6e0e8b5ba8014e09de2d9aa3740486}{vectors} \mbox{[}$\,$\mbox{]}
+\item 
+struct \hyperlink{structspinlock}{spinlock} \hyperlink{trap_8c_a094a4703b62095e2fa469fab3ffea5c7}{tickslock}
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{trap_8c_a7fcd6915876e066781399d7b00f1b1f0}{ticks}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{trap_8c_a9b6e7f6c302700cb54216ad22cbc1591}{\index{trap.\-c@{trap.\-c}!idtinit@{idtinit}}
+\index{idtinit@{idtinit}!trap.c@{trap.\-c}}
+\subsubsection[{idtinit}]{\setlength{\rightskip}{0pt plus 5cm}void idtinit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{trap_8c_a9b6e7f6c302700cb54216ad22cbc1591}
+
+
+Definition at line 29 of file trap.\-c.
+
+\hypertarget{trap_8c_a372d166e36c086c91e5f5d81e5fead3a}{\index{trap.\-c@{trap.\-c}!trap@{trap}}
+\index{trap@{trap}!trap.c@{trap.\-c}}
+\subsubsection[{trap}]{\setlength{\rightskip}{0pt plus 5cm}void trap (
+\begin{DoxyParamCaption}
+\item[{struct {\bf trapframe} $\ast$}]{tf}
+\end{DoxyParamCaption}
+)}}\label{trap_8c_a372d166e36c086c91e5f5d81e5fead3a}
+
+
+Definition at line 35 of file trap.\-c.
+
+\hypertarget{trap_8c_a9e7167b8e20e217c4af4e757f612ba6a}{\index{trap.\-c@{trap.\-c}!tvinit@{tvinit}}
+\index{tvinit@{tvinit}!trap.c@{trap.\-c}}
+\subsubsection[{tvinit}]{\setlength{\rightskip}{0pt plus 5cm}void tvinit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{trap_8c_a9e7167b8e20e217c4af4e757f612ba6a}
+
+
+Definition at line 17 of file trap.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{trap_8c_a3facbc1e1e6618fb238fc124bd9aa827}{\index{trap.\-c@{trap.\-c}!idt@{idt}}
+\index{idt@{idt}!trap.c@{trap.\-c}}
+\subsubsection[{idt}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf gatedesc} idt\mbox{[}256\mbox{]}}}\label{trap_8c_a3facbc1e1e6618fb238fc124bd9aa827}
+
+
+Definition at line 11 of file trap.\-c.
+
+\hypertarget{trap_8c_a7fcd6915876e066781399d7b00f1b1f0}{\index{trap.\-c@{trap.\-c}!ticks@{ticks}}
+\index{ticks@{ticks}!trap.c@{trap.\-c}}
+\subsubsection[{ticks}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} ticks}}\label{trap_8c_a7fcd6915876e066781399d7b00f1b1f0}
+
+
+Definition at line 14 of file trap.\-c.
+
+\hypertarget{trap_8c_a094a4703b62095e2fa469fab3ffea5c7}{\index{trap.\-c@{trap.\-c}!tickslock@{tickslock}}
+\index{tickslock@{tickslock}!trap.c@{trap.\-c}}
+\subsubsection[{tickslock}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf spinlock} tickslock}}\label{trap_8c_a094a4703b62095e2fa469fab3ffea5c7}
+
+
+Definition at line 13 of file trap.\-c.
+
+\hypertarget{trap_8c_a3e6e0e8b5ba8014e09de2d9aa3740486}{\index{trap.\-c@{trap.\-c}!vectors@{vectors}}
+\index{vectors@{vectors}!trap.c@{trap.\-c}}
+\subsubsection[{vectors}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} vectors\mbox{[}$\,$\mbox{]}}}\label{trap_8c_a3e6e0e8b5ba8014e09de2d9aa3740486}

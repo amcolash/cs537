@@ -1,0 +1,362 @@
+\hypertarget{mkfs_8c}{\section{tools/mkfs.c File Reference}
+\label{mkfs_8c}\index{tools/mkfs.\-c@{tools/mkfs.\-c}}
+}
+{\ttfamily \#include $<$stdio.\-h$>$}\\*
+{\ttfamily \#include $<$sys/types.\-h$>$}\\*
+{\ttfamily \#include $<$sys/stat.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$string.\-h$>$}\\*
+{\ttfamily \#include $<$fcntl.\-h$>$}\\*
+{\ttfamily \#include $<$assert.\-h$>$}\\*
+{\ttfamily \#include $<$dirent.\-h$>$}\\*
+{\ttfamily \#include $<$stdbool.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}fs.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stat.\-h\char`\"{}}\\*
+Include dependency graph for mkfs.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mkfs_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{mkfs_8c_a149da0702b060478da4d59ffe807adac}{stat}~xv6\-\_\-stat
+\item 
+\#define \hyperlink{mkfs_8c_a89957e9be80ef12a50eb4eca72ecd888}{dirent}~xv6\-\_\-dirent
+\item 
+\#define \hyperlink{mkfs_8c_ad51ded0bbd705f02f73fc60c0b721ced}{B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E}~(512)
+\item 
+\#define \hyperlink{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}{min}(a, b)~((a) $<$ (b) ? (a) \-: (b))
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}{balloc} (int)
+\item 
+void \hyperlink{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{wsect} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}, void $\ast$)
+\item 
+void \hyperlink{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}{winode} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint}, struct \hyperlink{structdinode}{dinode} $\ast$)
+\item 
+void \hyperlink{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}{rinode} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} inum, struct \hyperlink{structdinode}{dinode} $\ast$ip)
+\item 
+void \hyperlink{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{rsect} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} sec, void $\ast$\hyperlink{structbuf}{buf})
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}{ialloc} (\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort} type)
+\item 
+void \hyperlink{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{iappend} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} inum, void $\ast$p, int n)
+\item 
+\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort} \hyperlink{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{xshort} (\hyperlink{types_8h_ab95f123a6c9bcfee6a343170ef8c5f69}{ushort} x)
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{xint} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} x)
+\item 
+int \hyperlink{mkfs_8c_a59734ca282783f7b1f228e3b92850965}{mkfs} (int \hyperlink{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{nblocks}, int \hyperlink{mkfs_8c_a2df6f8ae5d8798691d40217c434098e5}{ninodes}, int \hyperlink{mkfs_8c_a439227feff9d7f55384e8780cfc2eb82}{size})
+\item 
+int \hyperlink{mkfs_8c_a1cb4970907bf34dbcd0bf9b2a9b81af0}{add\-\_\-dir} (D\-I\-R $\ast$cur\-\_\-dir, int cur\-\_\-inode, int parent\-\_\-inode)
+\item 
+int \hyperlink{mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$\hyperlink{init_8c_abd1a2cf54950f450187ef24c1cdcac0c}{argv}\mbox{[}$\,$\mbox{]})
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_ae71060354d8078db85fbc7b21ccb3292}{i2b} (\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} inum)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{nblocks} = 995
+\item 
+int \hyperlink{mkfs_8c_a2df6f8ae5d8798691d40217c434098e5}{ninodes} = 200
+\item 
+int \hyperlink{mkfs_8c_a439227feff9d7f55384e8780cfc2eb82}{size} = 1024
+\item 
+int \hyperlink{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{fsfd}
+\item 
+struct \hyperlink{structsuperblock}{superblock} \hyperlink{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{sb}
+\item 
+char \hyperlink{mkfs_8c_acfc6531cf5986cddcab420a16cc7f7ff}{zeroes} \mbox{[}512\mbox{]}
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{freeblock}
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_ac88cd5b9c7c3cdd1747427b705b3f3df}{usedblocks}
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_a64107ad2f4fc60e3781593ebbea94582}{bitblocks}
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}{freeinode} = 1
+\item 
+\hyperlink{types_8h_a91ad9478d81a7aaf2593e8d9c3d06a14}{uint} \hyperlink{mkfs_8c_a3354962984da06bc4aae686a3ef3d702}{root\-\_\-inode}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{mkfs_8c_ad51ded0bbd705f02f73fc60c0b721ced}{\index{mkfs.\-c@{mkfs.\-c}!B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E@{B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E}}
+\index{B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E@{B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-L\-O\-C\-K\-\_\-\-S\-I\-Z\-E~(512)}}\label{mkfs_8c_ad51ded0bbd705f02f73fc60c0b721ced}
+
+
+Definition at line 20 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a89957e9be80ef12a50eb4eca72ecd888}{\index{mkfs.\-c@{mkfs.\-c}!dirent@{dirent}}
+\index{dirent@{dirent}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{dirent}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf dirent}~xv6\-\_\-dirent}}\label{mkfs_8c_a89957e9be80ef12a50eb4eca72ecd888}
+
+
+Definition at line 13 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}{\index{mkfs.\-c@{mkfs.\-c}!min@{min}}
+\index{min@{min}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{min}]{\setlength{\rightskip}{0pt plus 5cm}\#define min(
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{b}
+\end{DoxyParamCaption}
+)~((a) $<$ (b) ? (a) \-: (b))}}\label{mkfs_8c_ac6afabdc09a49a433ee19d8a9486056d}
+
+
+Definition at line 326 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a149da0702b060478da4d59ffe807adac}{\index{mkfs.\-c@{mkfs.\-c}!stat@{stat}}
+\index{stat@{stat}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{stat}]{\setlength{\rightskip}{0pt plus 5cm}\#define {\bf stat}~xv6\-\_\-stat}}\label{mkfs_8c_a149da0702b060478da4d59ffe807adac}
+
+
+Definition at line 12 of file mkfs.\-c.
+
+
+
+\subsection{Function Documentation}
+\hypertarget{mkfs_8c_a1cb4970907bf34dbcd0bf9b2a9b81af0}{\index{mkfs.\-c@{mkfs.\-c}!add\-\_\-dir@{add\-\_\-dir}}
+\index{add\-\_\-dir@{add\-\_\-dir}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{add\-\_\-dir}]{\setlength{\rightskip}{0pt plus 5cm}int add\-\_\-dir (
+\begin{DoxyParamCaption}
+\item[{D\-I\-R $\ast$}]{cur\-\_\-dir, }
+\item[{int}]{cur\-\_\-inode, }
+\item[{int}]{parent\-\_\-inode}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a1cb4970907bf34dbcd0bf9b2a9b81af0}
+
+
+Definition at line 98 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}{\index{mkfs.\-c@{mkfs.\-c}!balloc@{balloc}}
+\index{balloc@{balloc}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{balloc}]{\setlength{\rightskip}{0pt plus 5cm}void balloc (
+\begin{DoxyParamCaption}
+\item[{int}]{used}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a327cdfc7a74165d8922ec6c8ba256906}
+
+
+Definition at line 311 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_ae71060354d8078db85fbc7b21ccb3292}{\index{mkfs.\-c@{mkfs.\-c}!i2b@{i2b}}
+\index{i2b@{i2b}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{i2b}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} i2b (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{inum}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_ae71060354d8078db85fbc7b21ccb3292}
+
+
+Definition at line 251 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}{\index{mkfs.\-c@{mkfs.\-c}!ialloc@{ialloc}}
+\index{ialloc@{ialloc}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{ialloc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} ialloc (
+\begin{DoxyParamCaption}
+\item[{{\bf ushort}}]{type}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a341af7faeda3d6fcb57a5a9fe3a0104a}
+
+
+Definition at line 297 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}{\index{mkfs.\-c@{mkfs.\-c}!iappend@{iappend}}
+\index{iappend@{iappend}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{iappend}]{\setlength{\rightskip}{0pt plus 5cm}void iappend (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{inum, }
+\item[{void $\ast$}]{p, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a268b61616f575ff072f5bb34c83e02e9}
+
+
+Definition at line 329 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97}{\index{mkfs.\-c@{mkfs.\-c}!main@{main}}
+\index{main@{main}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+Definition at line 201 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a59734ca282783f7b1f228e3b92850965}{\index{mkfs.\-c@{mkfs.\-c}!mkfs@{mkfs}}
+\index{mkfs@{mkfs}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{mkfs}]{\setlength{\rightskip}{0pt plus 5cm}int mkfs (
+\begin{DoxyParamCaption}
+\item[{int}]{nblocks, }
+\item[{int}]{ninodes, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a59734ca282783f7b1f228e3b92850965}
+
+
+Definition at line 68 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}{\index{mkfs.\-c@{mkfs.\-c}!rinode@{rinode}}
+\index{rinode@{rinode}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{rinode}]{\setlength{\rightskip}{0pt plus 5cm}void rinode (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{inum, }
+\item[{struct {\bf dinode} $\ast$}]{ip}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a3b6cb1258a963010211a8e5ddf99defe}
+
+
+Definition at line 271 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}{\index{mkfs.\-c@{mkfs.\-c}!rsect@{rsect}}
+\index{rsect@{rsect}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{rsect}]{\setlength{\rightskip}{0pt plus 5cm}void rsect (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{sec, }
+\item[{void $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a22ea835ad23cd716a962f30e4882ee80}
+
+
+Definition at line 284 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}{\index{mkfs.\-c@{mkfs.\-c}!winode@{winode}}
+\index{winode@{winode}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{winode}]{\setlength{\rightskip}{0pt plus 5cm}void winode (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{inum, }
+\item[{struct {\bf dinode} $\ast$}]{ip}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a2540c48cea7dc865909cfb3f8450a887}
+
+
+Definition at line 257 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}{\index{mkfs.\-c@{mkfs.\-c}!wsect@{wsect}}
+\index{wsect@{wsect}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{wsect}]{\setlength{\rightskip}{0pt plus 5cm}void wsect (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{sec, }
+\item[{void $\ast$}]{buf}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_ac62d827d836d1807e4d6f365f32348bb}
+
+
+Definition at line 238 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}{\index{mkfs.\-c@{mkfs.\-c}!xint@{xint}}
+\index{xint@{xint}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{xint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} xint (
+\begin{DoxyParamCaption}
+\item[{{\bf uint}}]{x}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_a0cb088f1b4dabee9a6056b88a8f813ef}
+
+
+Definition at line 55 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}{\index{mkfs.\-c@{mkfs.\-c}!xshort@{xshort}}
+\index{xshort@{xshort}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{xshort}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ushort} xshort (
+\begin{DoxyParamCaption}
+\item[{{\bf ushort}}]{x}
+\end{DoxyParamCaption}
+)}}\label{mkfs_8c_ac6dbbb3aaeee7114cf795be284be08ce}
+
+
+Definition at line 45 of file mkfs.\-c.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{mkfs_8c_a64107ad2f4fc60e3781593ebbea94582}{\index{mkfs.\-c@{mkfs.\-c}!bitblocks@{bitblocks}}
+\index{bitblocks@{bitblocks}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{bitblocks}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} bitblocks}}\label{mkfs_8c_a64107ad2f4fc60e3781593ebbea94582}
+
+
+Definition at line 31 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}{\index{mkfs.\-c@{mkfs.\-c}!freeblock@{freeblock}}
+\index{freeblock@{freeblock}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{freeblock}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} freeblock}}\label{mkfs_8c_a8d3a0b59d5f6e59c8b7c0bbdab41ab15}
+
+
+Definition at line 29 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}{\index{mkfs.\-c@{mkfs.\-c}!freeinode@{freeinode}}
+\index{freeinode@{freeinode}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{freeinode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} freeinode = 1}}\label{mkfs_8c_acee9059b25c8d81ef2b9cfedded17d48}
+
+
+Definition at line 32 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}{\index{mkfs.\-c@{mkfs.\-c}!fsfd@{fsfd}}
+\index{fsfd@{fsfd}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{fsfd}]{\setlength{\rightskip}{0pt plus 5cm}int fsfd}}\label{mkfs_8c_a44f12de41bc5a5ada9e5fff19c18201c}
+
+
+Definition at line 26 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}{\index{mkfs.\-c@{mkfs.\-c}!nblocks@{nblocks}}
+\index{nblocks@{nblocks}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{nblocks}]{\setlength{\rightskip}{0pt plus 5cm}int nblocks = 995}}\label{mkfs_8c_a076c8e8b7f7acccc46cd356bd8776b26}
+
+
+Definition at line 22 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a2df6f8ae5d8798691d40217c434098e5}{\index{mkfs.\-c@{mkfs.\-c}!ninodes@{ninodes}}
+\index{ninodes@{ninodes}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{ninodes}]{\setlength{\rightskip}{0pt plus 5cm}int ninodes = 200}}\label{mkfs_8c_a2df6f8ae5d8798691d40217c434098e5}
+
+
+Definition at line 23 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a3354962984da06bc4aae686a3ef3d702}{\index{mkfs.\-c@{mkfs.\-c}!root\-\_\-inode@{root\-\_\-inode}}
+\index{root\-\_\-inode@{root\-\_\-inode}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{root\-\_\-inode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} root\-\_\-inode}}\label{mkfs_8c_a3354962984da06bc4aae686a3ef3d702}
+
+
+Definition at line 33 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}{\index{mkfs.\-c@{mkfs.\-c}!sb@{sb}}
+\index{sb@{sb}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{sb}]{\setlength{\rightskip}{0pt plus 5cm}struct {\bf superblock} sb}}\label{mkfs_8c_a0248d0bac625de5a1415f2f8c91f3343}
+
+
+Definition at line 27 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_a439227feff9d7f55384e8780cfc2eb82}{\index{mkfs.\-c@{mkfs.\-c}!size@{size}}
+\index{size@{size}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}int size = 1024}}\label{mkfs_8c_a439227feff9d7f55384e8780cfc2eb82}
+
+
+Definition at line 24 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_ac88cd5b9c7c3cdd1747427b705b3f3df}{\index{mkfs.\-c@{mkfs.\-c}!usedblocks@{usedblocks}}
+\index{usedblocks@{usedblocks}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{usedblocks}]{\setlength{\rightskip}{0pt plus 5cm}{\bf uint} usedblocks}}\label{mkfs_8c_ac88cd5b9c7c3cdd1747427b705b3f3df}
+
+
+Definition at line 30 of file mkfs.\-c.
+
+\hypertarget{mkfs_8c_acfc6531cf5986cddcab420a16cc7f7ff}{\index{mkfs.\-c@{mkfs.\-c}!zeroes@{zeroes}}
+\index{zeroes@{zeroes}!mkfs.c@{mkfs.\-c}}
+\subsubsection[{zeroes}]{\setlength{\rightskip}{0pt plus 5cm}char zeroes\mbox{[}512\mbox{]}}}\label{mkfs_8c_acfc6531cf5986cddcab420a16cc7f7ff}
+
+
+Definition at line 28 of file mkfs.\-c.
+
