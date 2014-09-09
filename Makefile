@@ -9,7 +9,7 @@
 
 # Default make target
 .PHONY: all
-all: xv6.img fs.img docs
+all: xv6.img fs.img docs tags
 
 ################################################################################
 # Build options
@@ -93,7 +93,7 @@ include user/makefile.mk
 include tools/makefile.mk
 DEPS := $(KERNEL_DEPS) $(USER_DEPS) $(TOOLS_DEPS)
 CLEAN := $(KERNEL_CLEAN) $(USER_CLEAN) $(TOOLS_CLEAN) \
-	fs fs.img .gdbinit .bochsrc dist doc/*
+	fs fs.img .gdbinit .bochsrc dist doc/* tags
 
 .PHONY: clean distclean run depend qemu qemu-nox qemu-gdb qemu-nox-gdb bochs
 
@@ -105,6 +105,9 @@ run: qemu
 
 docs:
 	doxygen
+
+tags:
+	ctags -R
 
 # run xv6 in qemu
 qemu: fs.img xv6.img
