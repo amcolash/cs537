@@ -6,6 +6,8 @@
 #include "proc.h"
 #include "sysfunc.h"
 
+int number_counter;
+
 int
 sys_fork(void)
 {
@@ -94,6 +96,7 @@ int sys_addnum(void) {
   if(argint(0, &n) < 0) {
     return -1;
   } else {
-    return n;
+    number_counter = n + number_counter;
+    return number_counter;
   }
 }
