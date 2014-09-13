@@ -4,7 +4,7 @@
 
 #define TRIALS 1000
 
-int main() {
+int main(int argc, char *argv[]) {
 
   /* Declare variables */
   FILE * inFile;
@@ -13,15 +13,26 @@ int main() {
   int sampleSize;
   int dupTrials;
 
+  // TODO
+  if (argc != 3 ) {
+    printf("usage: %s inFile outFile", argv[0]);
+  }
+
   /* Initialize files */
   inFile = fopen("sampleIn.txt", "r");
   outFile = fopen("sampleOut.txt", "w");
 
   if (inFile == NULL || outFile == NULL) {
-    fprintf(stderr, "Cannot open file\n");
+    if (inFile == NULL) {
+      fprintf(stderr, "Error: Cannot open file %s\n", inFile);
+    }
+    if (outFile == NULL) {
+      fprintf(stderr, "Error: Cannot open file %s\n", outFile);
+    }
+
     fclose(inFile);
     fclose(outFile);
-    return 1;
+    exit(1);
 
   } else {
     /* Initialze random number generator */
@@ -87,8 +98,9 @@ int main() {
         }
         float ratio;
         ratio = ((float)dupTrials / (float)TRIALS);
-        printf("Samples: %i, Trials: %i, Ratio: (%i / %i) = %f\n", sampleSize, TRIALS, dupTrials, TRIALS, ratio);
-        //fputs(buffer, outFile);
+        printf("Samples: %i, Trials: %i, Ratio: (%i / %i) = %.2f\n", sampleSize, TRIALS, dupTrials, TRIALS, ratio);
+        sprintf(buffer, "%.2f\n", ratio);
+        fputs(buffer, outFile);
       }
     }
 
@@ -96,6 +108,6 @@ int main() {
 
   fclose(inFile);
   fclose(outFile);
-  return 0;
+  exit(0);
 
 }
