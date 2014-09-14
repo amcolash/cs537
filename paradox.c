@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <getopt.h>
 
 #define TRIALS 1000
+
+void usage() {
+  printf("usage: paradox -i <inFile> -o <outFile>\n");
+  exit(1);
+}
 
 int main(int argc, char *argv[]) {
 
@@ -10,15 +16,28 @@ int main(int argc, char *argv[]) {
   FILE * inFile;
   FILE * outFile;
   char buffer [1024];
+  int option;
   int sampleSize;
   int dupTrials;
   int * randNumber;
   int * dupNumber;
 
-  // TODO
   if (argc != 3 ) {
-    printf("usage: %s inFile outFile", argv[0]);
+    usage();
   }
+
+  while ((option = getopt(argc, argv, "df:mps:")) != -1)
+    switch (option) {
+      case 'i':
+        inFile = optarg;
+        break;
+      case 'o':
+        outFile = optarg;
+        break;
+      case '?':
+        usage();
+        break;
+    }
 
   /* Initialize files */
   inFile = fopen("sampleIn.txt", "r");
