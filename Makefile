@@ -14,7 +14,8 @@ paradox: paradox.c
 
 test: paradox
 	@echo "----------------------------------------------------------------------"
-	@./paradox -i sampleIn.txt -o sampleOut.txt
+	java -jar ~cs537-2/ta/tests/test1a/P1aTest.jar ~/private/537/p1-537/
+	@#./paradox -i sampleIn.txt -o sampleOut.txt
 	@echo "----------------------------------------------------------------------"
 
 error: paradox
