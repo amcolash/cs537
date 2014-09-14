@@ -5,25 +5,25 @@
 ###
 
 CC = gcc
-args = -Wall -g
+args = -O -Wall
 
 all:: test
 
-paradox.o: paradox.c
-	$(CC) $(args) paradox.c -o paradox.o
+paradox: paradox.c
+	$(CC) $(args) paradox.c -o paradox
 
-test: paradox.o
+test: paradox
 	@echo "----------------------------------------------------------------------"
-	@./paradox.o -i sampleIn.txt -o sampleOut.txt
+	@./paradox -i sampleIn.txt -o sampleOut.txt
 	@echo "----------------------------------------------------------------------"
 
-error: paradox.o
+error: paradox
 	@echo "----------------------------------------------------------------------"
-	@./paradox.o -i in.txt -o out.txt
+	@./paradox -i in.txt -o out.txt
 	@echo "----------------------------------------------------------------------"
 
 ###
 # clean workspace
 ###
 clean::
-	rm -f paradox.o sampleOut.txt
+	rm -f paradox sampleOut.txt

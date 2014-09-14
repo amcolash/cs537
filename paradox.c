@@ -6,7 +6,7 @@
 #define TRIALS 1000
 
 void usage() {
-  printf("usage: paradox -i <inFile> -o <outFile>\n");
+  printf("Usage: paradox -i <inFile> -o <outFile>\n");
   exit(1);
 }
 
