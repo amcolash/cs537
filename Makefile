@@ -14,14 +14,16 @@ paradox.o: paradox.c
 
 test: paradox.o
 	@echo "----------------------------------------------------------------------"
-	@./paradox.o -i inFile.txt -o outFile.txt
+	@./paradox.o -i sampleIn.txt -o sampleOut.txt
 	@echo "----------------------------------------------------------------------"
-#@cat sampleOut.txt
-#@echo "----------------------------------------------------------------------"
+
+error: paradox.o
+	@echo "----------------------------------------------------------------------"
+	@./paradox.o -i in.txt -o out.txt
+	@echo "----------------------------------------------------------------------"
 
 ###
 # clean workspace
 ###
 clean::
 	rm -f paradox.o sampleOut.txt
-	touch sampleOut.txt
