@@ -14,8 +14,9 @@ paradox: paradox.c
 
 test: paradox
 	@echo "----------------------------------------------------------------------"
-	java -jar ~cs537-2/ta/tests/test1a/P1aTest.jar ~/private/537/p1-537/
 	@#./paradox -i sampleIn.txt -o sampleOut.txt
+	@./paradox -i input -o sampleOut.txt
+	@java -jar ~cs537-2/ta/tests/test1a/P1aTest.jar ~/private/537/p1-537/
 	@echo "----------------------------------------------------------------------"
 
 error: paradox
@@ -27,4 +28,4 @@ error: paradox
 # clean workspace
 ###
 clean::
-	rm -f paradox sampleOut.txt
+	rm -f paradox paradox.o output sampleOut.txt
