@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 #define MAXARGS 20
 
@@ -38,8 +39,7 @@ int main(int argc, char *argv[]) {
 
   /* Declare variables */
   char buffer [1024];
-  int argCount;
-  int i;
+  int argCount, status, i;
   pid_t pid;
 
   while (strcmp(buffer, "exit") != 0) {
@@ -54,8 +54,14 @@ int main(int argc, char *argv[]) {
       //printf("arg[%i]: %s\n", i, args[i]);
     }
 
-    if (strcmp(buffer, "pwd") == 0) {
+    if (strcmp(args[0], "pwd") == 0) {
       printf("%s\n", getcwd(buffer, 1024));
+    } else if (strcmp(args[0], "cd") == 0) {
+      if (args[1] == NULL) {
+        chdir(getenv("HOME"));
+      } else {
+        chdir(args[1]);
+      }
     } else {
 
       pid = fork();
@@ -65,7 +71,7 @@ int main(int argc, char *argv[]) {
         exit(1);
       } else {
 
-        wait();
+        wait(&status);
 
       }
     }
