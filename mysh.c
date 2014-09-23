@@ -20,36 +20,41 @@ int countArg(char * buffer) {
 
 void parseCmd(char * buffer, char * args[]) {
   char * temp;
-  int count;
+  int i;
 
-  count = 0;
+  i = 0;
   temp = strtok(buffer," \n");
 
-  while (temp != NULL && count < MAXARGS - 1) {
-    printf("[%d]: %s\n",count, temp);
-    args[count] = temp;
+  while (temp != NULL && i < MAXARGS - 1) {
+    printf("[%d]: %s\n", i, temp);
+    args[i] = temp;
     temp = strtok(NULL, " \n");
-    count++;
+    i++;
   }
-  args[count] = NULL;
+  args[i] = NULL;
 }
 
 int main(int argc, char *argv[]) {
 
   /* Declare variables */
   char buffer [1024];
-  char * args[MAXARGS];
   int argCount;
+  int i;
 
   while (strcmp(buffer, "exit") != 0) {
     printf("mysh> ");
     fgets(buffer, 1024, stdin);
-    printf("Num args: %d\n", countArg(buffer));
+    argCount = countArg(buffer);
+    char * args[argCount + 1];
 
-    //argCount = parseCmd(buffer, args);
+    parseCmd(buffer, args);
+
+    for(i = 0; i < argCount; i++) {
+      printf("arg[%i]: %s\n", i, args[i]);
+    }
 
     //char* arg[] = {"ls", "-l", NULL};
-    //execvp(arg[0],arg);
+    execvp(args[0], args);
 
 
     if (strcmp(buffer, "test") == 0) {
@@ -57,7 +62,6 @@ int main(int argc, char *argv[]) {
     } else {
       // something new
     }
-
   }
 
   exit(0);
