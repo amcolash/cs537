@@ -7,8 +7,7 @@
 #define MAXARGS 20
 
 int countArg(char * buffer) {
-  int count;
-  int i;
+  int count, i;
   count = 1;
   for (i = 0; i < strlen(buffer); i++) {
     if (buffer[i] == ' ') {
@@ -39,42 +38,41 @@ int main(int argc, char *argv[]) {
 
   /* Declare variables */
   char buffer [1024];
-  int argCount, status, i;
+  int argCount, status;
   pid_t pid;
 
-  while (strcmp(buffer, "exit") != 0) {
+  while (1) {
     printf("mysh> ");
     fgets(buffer, 1024, stdin);
     argCount = countArg(buffer);
     char * args[argCount + 1];
 
     parseCmd(buffer, args);
-
-    for(i = 0; i < argCount; i++) {
-      //printf("arg[%i]: %s\n", i, args[i]);
-    }
-
-    if (strcmp(args[0], "pwd") == 0) {
-      printf("%s\n", getcwd(buffer, 1024));
-    } else if (strcmp(args[0], "cd") == 0) {
-      if (args[1] == NULL) {
-        chdir(getenv("HOME"));
-      } else {
-        chdir(args[1]);
-      }
-    } else {
-
-      pid = fork();
-      //printf("This line is from pid %d\n", pid);
-      if (pid == 0) {
-        execvp(args[0], args);
-        exit(1);
-      } else {
-
-        wait(&status);
-
+    if (strcmp(buffer, "\n") != 0) {
+      if (strcmp(args[0], "exit") == 0) {
+        exit(0);
+      } else if (strcmp(args[0], "pwd") == 0) {
+        printf("%s\n", getcwd(buffer, 1024));
+      } else if (strcmp(args[0], "cd") == 0) {
+        if (args[1] == NULL) {
+          chdir(getenv("HOME"));
+        } else {
+          chdir(args[1]);
+        }
+      } else if (strcmp(buffer, "\n") != 0) {
+        pid = fork();
+        //printf("This line is from pid %d\n", pid);
+        if (pid == 0) {
+          if (execvp(args[0], args) == -1) {
+            fprintf(stderr, "Error!\n");
+          }
+          exit(1);
+        } else {
+          wait(&status);
+        }
       }
     }
+
   }
 
   exit(0);
