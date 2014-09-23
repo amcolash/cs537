@@ -26,7 +26,7 @@ void parseCmd(char * buffer, char * args[]) {
   temp = strtok(buffer," \n");
 
   while (temp != NULL && i < MAXARGS - 1) {
-    printf("[%d]: %s\n", i, temp);
+    //printf("[%d]: %s\n", i, temp);
     args[i] = temp;
     temp = strtok(NULL, " \n");
     i++;
@@ -40,6 +40,7 @@ int main(int argc, char *argv[]) {
   char buffer [1024];
   int argCount;
   int i;
+  pid_t pid;
 
   while (strcmp(buffer, "exit") != 0) {
     printf("mysh> ");
@@ -50,17 +51,23 @@ int main(int argc, char *argv[]) {
     parseCmd(buffer, args);
 
     for(i = 0; i < argCount; i++) {
-      printf("arg[%i]: %s\n", i, args[i]);
+      //printf("arg[%i]: %s\n", i, args[i]);
     }
 
-    //char* arg[] = {"ls", "-l", NULL};
-    execvp(args[0], args);
-
-
-    if (strcmp(buffer, "test") == 0) {
-      printf("something fancy!\n");
+    if (strcmp(buffer, "pwd") == 0) {
+      printf("%s\n", getcwd(buffer, 1024));
     } else {
-      // something new
+
+      pid = fork();
+      //printf("This line is from pid %d\n", pid);
+      if (pid == 0) {
+        execvp(args[0], args);
+        exit(1);
+      } else {
+
+        wait();
+
+      }
     }
   }
 
