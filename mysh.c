@@ -5,7 +5,20 @@
 
 #define MAXARGS 20
 
-int parseCmd(char * buffer, char * args[]) {
+int countArg(char * buffer) {
+  int count;
+  int i;
+  count = 1;
+  for (i = 0; i < strlen(buffer); i++) {
+    if (buffer[i] == ' ') {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+void parseCmd(char * buffer, char * args[]) {
   char * temp;
   int count;
 
@@ -19,8 +32,6 @@ int parseCmd(char * buffer, char * args[]) {
     count++;
   }
   args[count] = NULL;
-
-  return count;
 }
 
 int main(int argc, char *argv[]) {
@@ -33,10 +44,12 @@ int main(int argc, char *argv[]) {
   while (strcmp(buffer, "exit") != 0) {
     printf("mysh> ");
     fgets(buffer, 1024, stdin);
-    argCount = parseCmd(buffer, args);
+    printf("Num args: %d\n", countArg(buffer));
 
-    char* arg[] = {"ls", "-l", NULL};
-    execvp(arg[0],arg);
+    //argCount = parseCmd(buffer, args);
+
+    //char* arg[] = {"ls", "-l", NULL};
+    //execvp(arg[0],arg);
 
 
     if (strcmp(buffer, "test") == 0) {
