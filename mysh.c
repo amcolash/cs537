@@ -18,6 +18,14 @@ int countArg(char * buffer) {
   return count;
 }
 
+int hasChar(char * buffer, char search) {
+  if (strchr(buffer, search) != NULL) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 void parseCmd(char * buffer, char * args[]) {
   char * temp;
   int i;
@@ -47,6 +55,8 @@ int main(int argc, char *argv[]) {
     argCount = countArg(buffer);
     char * args[argCount + 1];
 
+    printf("hasChar('>'): %d\n", hasChar(buffer, '>'));
+
     parseCmd(buffer, args);
     if (strcmp(buffer, "\n") != 0) {
       if (strcmp(args[0], "exit") == 0) {
@@ -59,7 +69,7 @@ int main(int argc, char *argv[]) {
         } else {
           chdir(args[1]);
         }
-      } else if (strcmp(buffer, "\n") != 0) {
+      } else {
         pid = fork();
         //printf("This line is from pid %d\n", pid);
         if (pid == 0) {
