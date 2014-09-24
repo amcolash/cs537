@@ -26,37 +26,27 @@ int hasChar(char * buffer, char search) {
   }
 }
 
-int parseCmd(char * buffer, char * args[], int argCount) {
+void parseCmd(char * buffer, char * args[]) {
   char * temp;
-  int i, special;
+  int i;
 
-  special = 0;
   i = 0;
   temp = strtok(buffer," \n");
-  while (temp != NULL && i < MAXARGS - 1) {
-    if (strcmp(temp, ">") == 0 && i == (argCount - 2)) {
-      special = 1;
-    } else if (strcmp(temp, ">>") == 0 && i == (argCount - 2)) {
-      special = 2;
-    } else if (strcmp(temp, "|") == 0 && i == (argCount - 2)) {
-      special = 3;
-    }
 
-    //printf("%s, special: %d\n", temp, special);
+  while (temp != NULL && i < MAXARGS - 1) {
+    //printf("[%d]: %s\n", i, temp);
     args[i] = temp;
     temp = strtok(NULL, " \n");
     i++;
   }
-
   args[i] = NULL;
-  return special;
 }
 
 int main(int argc, char *argv[]) {
 
   /* Declare variables */
   char buffer [1024];
-  int argCount, status, special;
+  int argCount, status;
   pid_t pid;
 
   while (1) {
@@ -64,13 +54,10 @@ int main(int argc, char *argv[]) {
     fgets(buffer, 1024, stdin);
     argCount = countArg(buffer);
     char * args[argCount + 1];
-    //printf("hasChar('>'): %d\n", hasChar(buffer, '>'));
-    special = parseCmd(buffer, args, argCount);
 
-    if (special != 0) {
-      printf("Need to do something special ;)\n");
-    }
+    printf("hasChar('>'): %d\n", hasChar(buffer, '>'));
 
+    parseCmd(buffer, args);
     if (strcmp(buffer, "\n") != 0) {
       if (strcmp(args[0], "exit") == 0) {
         exit(0);
