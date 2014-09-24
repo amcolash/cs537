@@ -1,8 +1,9 @@
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
 #define MAXARGS 20
 
@@ -56,7 +57,7 @@ int main(int argc, char *argv[]) {
 
   /* Declare variables */
   char buffer [1024];
-  int argCount, status, special;
+  int argCount, outFile, status, special;
   pid_t pid;
 
   while (1) {
@@ -67,9 +68,6 @@ int main(int argc, char *argv[]) {
     //printf("hasChar('>'): %d\n", hasChar(buffer, '>'));
     special = parseCmd(buffer, args, argCount);
 
-    if (special != 0) {
-      printf("Need to do something special ;)\n");
-    }
 
     if (strcmp(buffer, "\n") != 0) {
       if (strcmp(args[0], "exit") == 0) {
@@ -83,9 +81,32 @@ int main(int argc, char *argv[]) {
           chdir(args[1]);
         }
       } else {
+
         pid = fork();
+
         //printf("This line is from pid %d\n", pid);
         if (pid == 0) {
+
+          if (special == 1) {
+            printf("Using file: %s\n", args[argCount - 1]);
+            outFile = open(args[argCount - 1], O_CREAT | O_TRUNC | O_WRONLY );
+            if (outFile < 0) {
+              fprintf(stderr, "Error: Cannot open output file: %s\n", args[argCount - 1]);
+              exit(1);
+            }
+            if (dup2(outFile, 1) != 0) {
+              printf("error! - dup2\n");
+            }
+            args[argCount - 1] = NULL;
+            args[argCount - 2] = NULL;
+
+          } else if (special == 2) {
+            printf("Output + append\n");
+          } else if (special == 3) {
+            printf("Piping output\n");
+          }
+
+
           if (execvp(args[0], args) == -1) {
             fprintf(stderr, "Error!\n");
           }
