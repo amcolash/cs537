@@ -35,3 +35,37 @@ paradox
 *.x86_64
 *.hex
 *.plist
+
+# dependancy files
+*.d
+
+# generated assembly
+*.asm
+
+# generated symbols
+*.sym
+
+# disk images
+fs.img
+xv6.img
+xv6memfs.img
+
+# other generated files
+bootother
+initcode
+TAGS
+.gdbinit
+fs/
+kernel/vectors.S
+kernel/bootblock
+kernel/bootblock.out
+kernel/bootother.out
+kernel/initcode.out
+kernel/kernel
+bootother
+initcode
+user/bin/
+tools/mkfs
+version
+doc/*
+tags
