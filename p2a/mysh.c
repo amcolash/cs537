@@ -65,7 +65,6 @@ int main(int argc, char *argv[]) {
   /* Declare variables */
   char buffer [1024];
   int argCount, outFile, status, special;
-  int pipeFd[2];
   pid_t pid;
 
   // Loop forever, exit case below
@@ -108,9 +107,12 @@ int main(int argc, char *argv[]) {
           char * args2[argCount - special];
           int i;
 
+          printf("args1 size: %ld\n", sizeof(args1) / sizeof(args1[0]));
+          printf("args2 size: %ld\n", sizeof(args2) / sizeof(args2[0]));
+
           // Set up args for execvp (if piped)
           args1[special] = NULL;
-          args[argCount - special] = NULL;
+          args2[argCount - special + 1] = NULL;
 
           printf("special: %d\n", special);
 
@@ -140,9 +142,6 @@ int main(int argc, char *argv[]) {
           // Piping output to another file
           } else if (special > 0) {
             // Set up a pipe for output
-            pipe(pipeFd);
-            printf("Piping output\n");
-            close(pipeFd[1]);
 
             for (i = 0; i < special; i++) {
               args1[i] = args[i];
@@ -151,14 +150,14 @@ int main(int argc, char *argv[]) {
             for (i = 0; i < argCount - special; i++) {
               args2[i] = args[i + special + 1];
             }
-/*
+
             for (i = 0; i < sizeof(args1)/sizeof(args1[0]); i++) {
               printf("args1[%d]: %s\n", i, args1[i]);
             }
-            for (i = 0; i < sizeof(args1)/sizeof(args2[0]); i++) {
+            for (i = 0; i < sizeof(args2)/sizeof(args2[0]); i++) {
               printf("args2[%d]: %s\n", i, args2[i]);
             }
-*/
+
             // ls -la | grep Makefile
             // 0   1  2  3      4
             //
@@ -168,19 +167,51 @@ int main(int argc, char *argv[]) {
 
           }
 
+          // Run normal execvp if not piping
           if (special < 1) {
             if (execvp(args[0], args) == -1) {
               fprintf(stderr, "Error!\n");
             }
+          // If piping, fork process again and then execvp both commands
           } else {
-            printf("piping time!\n");
+            int pipeFd[2];
+            int pipeId;
+            pipe(pipeFd);
+
+            pipeId = fork();
+            // Run 1st command (giving output)
+            if (pipeId > 0) {
+              // Close unused input pipe
+              close(pipeFd[0]);
+              // Close stdout, and replace with the pipe
+              dup2(pipeFd[1], 1);
+              // Close now non-used output pipe pointer
+              close(pipeFd[1]);
+              // Run 1st command
+              if (execvp(args1[0], args1) == -1) {
+                fprintf(stderr, "Error\n");
+                exit(1);
+              }
+              exit(0);
+            // Run 2nd command (recieving input)
+            } else {
+              // Close unused output pipe
+              close(pipeFd[1]);
+              // Close stdin, and replace with the pipe
+              dup2(pipeFd[0], 0);
+              // Close now non-used input pipe pointer
+              close(pipeFd[0]);
+              // Run 2st command
+              if (execvp(args2[0], args2) == -1) {
+                fprintf(stderr, "Error\n");
+                exit(1);
+              }
+              exit(0);
+            }
           }
           exit(1);
+        // Parent process will wait for child process to exit
         } else { // Parent process
-          if (special > 0) {
-            close(pipeFd[1]);
-          }
-
           wait(&status);
         }
       }
