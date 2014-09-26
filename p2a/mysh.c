@@ -107,14 +107,14 @@ int main(int argc, char *argv[]) {
           char * args2[argCount - special];
           int i;
 
-          printf("args1 size: %ld\n", sizeof(args1) / sizeof(args1[0]));
-          printf("args2 size: %ld\n", sizeof(args2) / sizeof(args2[0]));
+          //printf("args1 size: %ld\n", sizeof(args1) / sizeof(args1[0]));
+          //printf("args2 size: %ld\n", sizeof(args2) / sizeof(args2[0]));
 
           // Set up args for execvp (if piped)
           args1[special] = NULL;
           args2[argCount - special + 1] = NULL;
 
-          printf("special: %d\n", special);
+          //printf("special: %d\n", special);
 
           // If going to redirect output to a file
           if (special == -1 || special == -2) {
@@ -143,6 +143,11 @@ int main(int argc, char *argv[]) {
           } else if (special > 0) {
             // Set up a pipe for output
 
+            if (special == argCount - 1) {
+              fprintf(stderr, "Error!\n");
+              exit(1);
+            }
+
             for (i = 0; i < special; i++) {
               args1[i] = args[i];
             }
@@ -151,12 +156,14 @@ int main(int argc, char *argv[]) {
               args2[i] = args[i + special + 1];
             }
 
+/*
             for (i = 0; i < sizeof(args1)/sizeof(args1[0]); i++) {
               printf("args1[%d]: %s\n", i, args1[i]);
             }
             for (i = 0; i < sizeof(args2)/sizeof(args2[0]); i++) {
               printf("args2[%d]: %s\n", i, args2[i]);
             }
+*/
 
             // ls -la | grep Makefile
             // 0   1  2  3      4
@@ -176,8 +183,9 @@ int main(int argc, char *argv[]) {
           } else {
             int pipeFd[2];
             int pipeId;
-            pipe(pipeFd);
 
+            // Pipe output and fork into 2 processes
+            pipe(pipeFd);
             pipeId = fork();
             // Run 1st command (giving output)
             if (pipeId > 0) {
