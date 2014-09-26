@@ -193,13 +193,13 @@ int main(int argc, char *argv[]) {
               close(pipeFd[0]);
               // Close stdout, and replace with the pipe
               dup2(pipeFd[1], 1);
-              // Close now non-used output pipe pointer
-              close(pipeFd[1]);
               // Run 1st command
               if (execvp(args1[0], args1) == -1) {
                 fprintf(stderr, "Error\n");
                 exit(1);
               }
+              // Close now non-used output pipe pointer
+              close(pipeFd[1]);
               exit(0);
             // Run 2nd command (recieving input)
             } else {
@@ -207,13 +207,13 @@ int main(int argc, char *argv[]) {
               close(pipeFd[1]);
               // Close stdin, and replace with the pipe
               dup2(pipeFd[0], 0);
-              // Close now non-used input pipe pointer
-              close(pipeFd[0]);
               // Run 2st command
               if (execvp(args2[0], args2) == -1) {
                 fprintf(stderr, "Error\n");
                 exit(1);
               }
+              // Close now non-used input pipe pointer
+              close(pipeFd[0]);
               exit(0);
             }
           }
