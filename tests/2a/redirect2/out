@@ -1,0 +1,7 @@
+rm -f 1.out
+/usr/bin/seq 2 2 8>1.out
+cat 1.out
+2
+4
+6
+8

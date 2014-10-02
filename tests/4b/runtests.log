@@ -1,0 +1,20 @@
+build - build xv6 using make
+clone - clone and verify that address space is shared
+clone2 - clone and play with the argument
+clone3 - clone copies file descriptors, but doesn't share
+badclone - clone with bad stack argument
+stack - set up stack correctly (and without extra items)
+join - clone and join syscalls
+join2 - join argument checking
+join3 - join should not handle child processes (forked)
+join4 - join, not wait, should handle threads
+thread - thread user library functions
+thread2 - memory leaks from thread library?
+multi - multiple threads with some depth of function calls
+locks - test lock correctness
+cond - test cv_wait and cv_signal, cannot leave cv_wait without lock
+cond2 - test cv_wait and cv_signal, don't wakeup on wrong cv
+cond3 - test cv_wait and cv_signal, signal, don't broadcast
+race - race condition in CV? (must atomically release lock and sleep)
+noexit - no exit call in thread, should trap at bogus address
+size - check that address space size is updated in threads
