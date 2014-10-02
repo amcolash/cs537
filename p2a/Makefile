@@ -7,16 +7,19 @@
 CC = gcc
 args = -O -Wall
 
-all:: test
+all:: mysh
 
-mysh.o: mysh.c
-	$(CC) $(args) mysh.c -o mysh.o
+mysh: mysh.c
+	$(CC) $(args) -o mysh mysh.c
 
-test: mysh.o
-	@./mysh.o
+test: mysh
+	@./mysh
+
+tests: mysh
+	@python ~cs537-2/testing/ShellTest.pyc .
 
 ###
 # clean workspace
 ###
 clean::
-	rm -f mysh.o
+	rm -f mysh

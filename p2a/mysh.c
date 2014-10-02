@@ -84,7 +84,11 @@ int main(int argc, char *argv[]) {
     if (strcmp(buffer, "\n") != 0) {
       // Exit if necessary
       if (strcmp(args[0], "exit") == 0) {
-        exit(0);
+        if (argCount != 1) {
+          fprintf(stderr, "Error!\n");
+        } else {
+          exit(0);
+        }
       // Print working directory
       } else if (strcmp(args[0], "pwd") == 0) {
         printf("%s\n", getcwd(buffer, 1024));
@@ -93,7 +97,9 @@ int main(int argc, char *argv[]) {
         if (args[1] == NULL) {
           chdir(getenv("HOME"));
         } else {
-          chdir(args[1]);
+          if (chdir(args[1]) == -1) {
+            fprintf(stderr, "Error!\n");
+          }
         }
       } else {
 
