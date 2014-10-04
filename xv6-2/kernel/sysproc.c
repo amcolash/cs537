@@ -115,5 +115,7 @@ int sys_spot(void) {
 
 // Get info on all running processes
 int sys_getpinfo(void) {
-  return 75;
+  set_rnd_seed(123456);
+  getpinfo();
+  return rand_int();
 }

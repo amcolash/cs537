@@ -40,6 +40,33 @@ int rand_int (void) {
 }
 /* End random number generation code */
 
+void getpinfo(void) {
+  static char *states[] = {
+    [UNUSED]    "unused",
+    [EMBRYO]    "embryo",
+    [SLEEPING]  "sleep ",
+    [RUNNABLE]  "runble",
+    [RUNNING]   "run   ",
+    [ZOMBIE]    "zombie"
+  };
+  struct proc *p;
+  char *state;
+
+  cprintf("PID\tSTATE\tNAME\tPERCENT\tBID\n");
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state == UNUSED)
+      continue;
+    if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
+      state = states[p->state];
+    else
+      state = "???";
+    cprintf("%d\t%s\t%s\n", p->pid, state, p->name, p->percent, p->bid);
+
+  }
+}
+
+
+
   void
 pinit(void)
 {

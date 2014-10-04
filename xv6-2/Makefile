@@ -105,7 +105,7 @@ clean:
 
 run: qemu
 
-tags:
+tags::
 	ctags -R
 
 # run xv6 in qemu

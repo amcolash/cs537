@@ -109,6 +109,9 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+void            set_rnd_seed (int);
+int             rand_int (void);
+void            getpinfo();
 
 // swtch.S
 void            swtch(struct context**, struct context*);
