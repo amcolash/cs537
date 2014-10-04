@@ -25,6 +25,9 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int reserve(int);
+int spot(int);
+int getpinfo(void);
 
 // user library functions (ulib.c)
 int stat(char*, struct stat*);

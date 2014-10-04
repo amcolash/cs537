@@ -8,8 +8,10 @@
 # http://www.gnu.org/software/make/manual/
 
 # Default make target
-.PHONY: all
-all: xv6.img fs.img tags
+.PHONY: qemu-nox
+all: xv6.img fs.img tags qemu-nox
+#.PHONY: all
+#all: xv6.img fs.img tags
 
 ################################################################################
 # Build options
@@ -93,7 +95,7 @@ include user/makefile.mk
 include tools/makefile.mk
 DEPS := $(KERNEL_DEPS) $(USER_DEPS) $(TOOLS_DEPS)
 CLEAN := $(KERNEL_CLEAN) $(USER_CLEAN) $(TOOLS_CLEAN) \
-	fs fs.img .gdbinit .bochsrc dist doc/* tags
+	fs fs.img .gdbinit .bochsrc dist doc/*
 
 .PHONY: clean distclean run depend qemu qemu-nox qemu-gdb qemu-nox-gdb bochs
 

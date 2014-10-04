@@ -60,7 +60,7 @@ sys_sleep(void)
 {
   int n;
   uint ticks0;
-  
+
   if(argint(0, &n) < 0)
     return -1;
   acquire(&tickslock);
@@ -82,9 +82,38 @@ int
 sys_uptime(void)
 {
   uint xticks;
-  
+
   acquire(&tickslock);
   xticks = ticks;
   release(&tickslock);
   return xticks;
+}
+
+// Reserve n-percentage of the CPU for a given process
+int sys_reserve(void) {
+  int n;
+  if(argint(0, &n) < 0) {
+    return -1;
+  } else {
+    return n;
+  }
+
+  return 0;
+}
+
+// Bid on computing time
+int sys_spot(void) {
+  int n;
+  if(argint(0, &n) < 0) {
+    return -1;
+  } else {
+    return n;
+  }
+
+  return 0;
+}
+
+// Get info on all running processes
+int sys_getpinfo(void) {
+  return 75;
 }

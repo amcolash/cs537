@@ -25,6 +25,7 @@ xv6memfs.img
 # other generated files
 bootother
 initcode
+tags
 TAGS
 .gdbinit
 fs/
