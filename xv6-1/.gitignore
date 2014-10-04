@@ -27,6 +27,7 @@ bootother
 initcode
 tags
 TAGS
+doc/
 .gdbinit
 fs/
 kernel/vectors.S
