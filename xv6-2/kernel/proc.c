@@ -9,6 +9,8 @@
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
+  int cpu1;
+  int cpu2;
 } ptable;
 
 static struct proc *initproc;
@@ -52,7 +54,8 @@ void getpinfo(void) {
   struct proc *p;
   char *state;
 
-  cprintf("PID\tSTATE\tNAME\tPERCENT\tBID\n");
+  cprintf("CPU1: %d\%, CPU2: %d\%\n", ptable.cpu1, ptable.cpu2);
+  cprintf("PID\tSTATE\tNAME\tPERCENT\tBID\tCharge\n");
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state == UNUSED)
       continue;
@@ -60,7 +63,7 @@ void getpinfo(void) {
       state = states[p->state];
     else
       state = "???";
-    cprintf("%d\t%s\t%s\n", p->pid, state, p->name, p->percent, p->bid);
+    cprintf("%d\t%s\t%s\t%d\t%d\t$%d.%d\n", p->pid, state, p->name, p->percent, p->bid, p->chargeDollar, p->chargeCent);
 
   }
 }
@@ -93,6 +96,11 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+  p->percent = 0;
+  p->bid = 0;
+  p->chargeDollar = 0;
+  p->chargeCent = 0;
+
   release(&ptable.lock);
 
   // Allocate kernel stack if possible.
