@@ -60,10 +60,12 @@ void getpinfo(void) {
   }
 
   stat = (struct pstat*) tempPointer;
+  tempPointer = -1;
   stat->time[0] = 0;
 
-  cprintf("PID\tSTATE\tNAME\tPERCENT\tBID\tCharge\n");
+  cprintf("Actual:\nPID\tSTATE\tNAME\tPERCENT\tBID\tCharge\n");
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    tempPointer++;
     if(p->state == UNUSED)
       continue;
     if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
@@ -71,9 +73,10 @@ void getpinfo(void) {
     else
       state = "???";
       cprintf("%d\t%s\t%s\t%d\t%d\t%d\n", p->pid, state, p->name, p->percent, p->bid);
-      //stat->time[NPROC]);
-
+      stat->inuse[tempPointer] = 1;
+      stat->pid[tempPointer] = p->pid;
   }
+  cprintf("-----------------------------------------------------\n");
 }
 
 
