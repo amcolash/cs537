@@ -76,8 +76,6 @@ struct proc {
   char name[16];               // Process name (debugging)
   int percent;                 // Amount of cpu scheduling required
   int bid;                     // Bid amount for a spot process
-  double chargeDollar;         // Cose of process for running - dollars
-  double chargeCent;           // Cost of process for running - cents
 };
 
 // Process memory is laid out contiguously, low addresses first:

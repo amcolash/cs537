@@ -93,24 +93,24 @@ sys_uptime(void)
 int sys_reserve(void) {
   int n;
   if(argint(0, &n) < 0) {
-    return -1;
+    n = -1;
   } else {
-    return n;
+
   }
 
-  return 0;
+  return n;
 }
 
 // Bid on computing time
 int sys_spot(void) {
   int n;
   if(argint(0, &n) < 0) {
-    return -1;
+    n = -1;
   } else {
-    return n;
+
   }
 
-  return 0;
+  return n;
 }
 
 // Get info on all running processes

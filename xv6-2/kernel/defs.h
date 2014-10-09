@@ -9,6 +9,7 @@ struct pipe;
 struct proc;
 struct spinlock;
 struct stat;
+struct pstat;
 
 // bio.c
 void            binit(void);
@@ -111,7 +112,7 @@ void            wakeup(void*);
 void            yield(void);
 void            set_rnd_seed (int);
 int             rand_int (void);
-void            getpinfo();
+void            getpinfo(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

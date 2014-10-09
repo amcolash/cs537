@@ -5,12 +5,11 @@
 #include "x86.h"
 #include "proc.h"
 #include "spinlock.h"
+#include "pstat.h"
 
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
-  int cpu1;
-  int cpu2;
 } ptable;
 
 static struct proc *initproc;
@@ -52,9 +51,17 @@ void getpinfo(void) {
     [ZOMBIE]    "zombie"
   };
   struct proc *p;
+  struct pstat *stat;
   char *state;
+  int tempPointer;
 
-  cprintf("CPU1: %d\%, CPU2: %d\%\n", ptable.cpu1, ptable.cpu2);
+  if (argint(0, &tempPointer) < 0) {
+    cprintf("Info error!\n");
+  }
+
+  stat = (struct pstat*) tempPointer;
+  stat->time[0] = 0;
+
   cprintf("PID\tSTATE\tNAME\tPERCENT\tBID\tCharge\n");
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state == UNUSED)
@@ -63,7 +70,8 @@ void getpinfo(void) {
       state = states[p->state];
     else
       state = "???";
-    cprintf("%d\t%s\t%s\t%d\t%d\t$%d.%d\n", p->pid, state, p->name, p->percent, p->bid, p->chargeDollar, p->chargeCent);
+      cprintf("%d\t%s\t%s\t%d\t%d\t%d\n", p->pid, state, p->name, p->percent, p->bid);
+      //stat->time[NPROC]);
 
   }
 }
@@ -96,11 +104,6 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-  p->percent = 0;
-  p->bid = 0;
-  p->chargeDollar = 0;
-  p->chargeCent = 0;
-
   release(&ptable.lock);
 
   // Allocate kernel stack if possible.
