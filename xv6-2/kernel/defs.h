@@ -9,7 +9,6 @@ struct pipe;
 struct proc;
 struct spinlock;
 struct stat;
-struct pstat;
 
 // bio.c
 void            binit(void);

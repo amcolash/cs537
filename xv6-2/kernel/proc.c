@@ -41,7 +41,15 @@ int rand_int (void) {
 }
 /* End random number generation code */
 
+int fill_pstat(void) {
+  void *temp;
+  argint(0, (struct pstat**) &temp);
+}
+
 void getpinfo(void) {
+  cprintf("Remove me!\n");
+
+  /*
   static char *states[] = {
     [UNUSED]    "unused",
     [EMBRYO]    "embryo",
@@ -54,6 +62,7 @@ void getpinfo(void) {
   struct pstat *stat;
   char *state;
   int tempPointer;
+
 
   if (argint(0, &tempPointer) < 0) {
     cprintf("Info error!\n");
@@ -76,6 +85,8 @@ void getpinfo(void) {
       stat->inuse[tempPointer] = 1;
       stat->pid[tempPointer] = p->pid;
   }
+
+  */
   cprintf("-----------------------------------------------------\n");
 }
 
