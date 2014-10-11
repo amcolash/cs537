@@ -10,24 +10,16 @@ int main(int argc, char *argv[]) {
   struct pstat stat;
   int i;
 
-  getpinfo((char*) &stat);
-
-  for (i=0; i < NPROC; i++) {
-    if (stat.pid[i] != 0) {
-      printf(1, "PID: %d, Inuse: %d\n", stat.pid[i], stat.inuse[i]);
+  if (getpinfo((char*) &stat) != -1) {
+    printf(1, "PID\tInuse\tChosen\tTime\tCharge\n");
+    for (i=0; i < NPROC; i++) {
+      if (stat.pid[i] != 0) {
+        printf(1, "%d\t%d\t%d\t%d\t%d\t\n", stat.pid[i], stat.inuse[i], stat.time[i], stat.chosen[i], stat.charge[i]);
+      }
     }
+  } else {
+    printf(2, "Error getting pinfo\n");
   }
-
-  // Loop though the stat struct and output information about active processes
-  //for(i = 0; i < NPROC; i++) {
-    // Without defining first, seems to be caching issues!?
-
-    //int inuse = stat->inuse[i];
-    //printf(1, "%d\n", inuse);
-    //if(stat->inuse[i] == 1) {
-      //printf(1, "--In P-Table, %d: here is process: %d (pid)--\n", i, stat->pid[i]);
-    //}
-  //}
 
   exit();
 }

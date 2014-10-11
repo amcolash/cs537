@@ -41,29 +41,38 @@ int rand_int (void) {
 }
 /* End random number generation code */
 
-void fill_pstat(struct pstat* stat) {
+int fill_pstat(struct pstat* stat) {
+  if (stat == NULL) {
+    return -1;
+  }
 
-  int tempPointer;
+  int i;
   struct proc *p;
 
-  tempPointer = 0;
+  i = 0;
 
   // Go through the process list and build pstat
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
     // Assign the values of pstat
-    stat->pid[tempPointer] = p->pid;
-    stat->chosen[tempPointer] = p->chosen;
-    stat->time[tempPointer] = p->time;
-    stat->charge[tempPointer] = p->charge_micro;
+    stat->pid[i] = p->pid;
+    stat->chosen[i] = p->chosen;
+    stat->time[i] = p->time;
+    stat->charge[i] = p->charge_micro;
 
     if(p->state == RUNNING) {
-      stat->inuse[tempPointer] = 1;
+      stat->inuse[i] = 1;
     } else {
-      stat->inuse[tempPointer] = 0;
+      stat->inuse[i] = 0;
     }
 
-    tempPointer++;
+    // Extra info about process
+    stat->percent[i] = p->percent;
+    stat->bid[i] = p->bid;
+
+    i++;
   }
+
+  return 0;
 }
 
 

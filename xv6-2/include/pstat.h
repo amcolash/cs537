@@ -10,6 +10,9 @@ struct pstat {
   int time[NPROC]; // the number of ms the process has run
   int charge[NPROC]; // how much money (microdollars) the process has been charged
 
+  // Extra info about process
+  int percent[NPROC];
+  int bid[NPROC];
 };
 
 

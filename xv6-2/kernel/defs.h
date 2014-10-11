@@ -112,7 +112,7 @@ void            wakeup(void*);
 void            yield(void);
 void            set_rnd_seed (int);
 int             rand_int (void);
-void            fill_pstat(struct pstat*);
+int             fill_pstat(struct pstat*);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

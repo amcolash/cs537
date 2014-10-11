@@ -123,6 +123,10 @@ int sys_getpinfo(void) {
   argptr(0, &ptr, sizeof(struct pstat));
   stat = (struct pstat*) ptr;
 
+  if (stat == NULL) {
+    return -1;
+  }
+
   // Fill pstat with information
   fill_pstat(stat);
 
