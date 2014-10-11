@@ -12,8 +12,10 @@ int main(int argc, char *argv[]) {
 
   getpinfo((char*) &stat);
 
-  for (i=0; i < 2; i++) {
-    printf(1, "Pointer: %d\n", stat.pid[i]);
+  for (i=0; i < NPROC; i++) {
+    if (stat.pid[i] != 0) {
+      printf(1, "PID: %d, Inuse: %d\n", stat.pid[i], stat.inuse[i]);
+    }
   }
 
   // Loop though the stat struct and output information about active processes

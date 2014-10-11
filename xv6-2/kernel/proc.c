@@ -41,55 +41,29 @@ int rand_int (void) {
 }
 /* End random number generation code */
 
-int fill_pstat(struct pstat* stat) {
-  stat->pid[1] = 42;
-  //void *temp;
-  //argint(0, (struct pstat**) &temp);
-  return 0;
-}
+void fill_pstat(struct pstat* stat) {
 
-void getpinfo(struct pstat* stat) {
-  cprintf("Remove me!\n");
-
-  /*
-  static char *states[] = {
-    [UNUSED]    "unused",
-    [EMBRYO]    "embryo",
-    [SLEEPING]  "sleep ",
-    [RUNNABLE]  "runble",
-    [RUNNING]   "run   ",
-    [ZOMBIE]    "zombie"
-  };
-  struct proc *p;
-  struct pstat *stat;
-  char *state;
   int tempPointer;
+  struct proc *p;
 
+  tempPointer = 0;
 
-  if (argint(0, &tempPointer) < 0) {
-    cprintf("Info error!\n");
-  }
+  // Go through the process list and build pstat
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+    // Assign the values of pstat
+    stat->pid[tempPointer] = p->pid;
+    stat->chosen[tempPointer] = p->chosen;
+    stat->time[tempPointer] = p->time;
+    stat->charge[tempPointer] = p->charge_micro;
 
-  stat = (struct pstat*) tempPointer;
-  tempPointer = -1;
-  stat->time[0] = 0;
-
-  cprintf("Actual:\nPID\tSTATE\tNAME\tPERCENT\tBID\tCharge\n");
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    tempPointer++;
-    if(p->state == UNUSED)
-      continue;
-    if(p->state >= 0 && p->state < NELEM(states) && states[p->state])
-      state = states[p->state];
-    else
-      state = "???";
-      cprintf("%d\t%s\t%s\t%d\t%d\t%d\n", p->pid, state, p->name, p->percent, p->bid);
+    if(p->state == RUNNING) {
       stat->inuse[tempPointer] = 1;
-      stat->pid[tempPointer] = p->pid;
-  }
+    } else {
+      stat->inuse[tempPointer] = 0;
+    }
 
-  */
-  cprintf("-----------------------------------------------------\n");
+    tempPointer++;
+  }
 }
 
 
