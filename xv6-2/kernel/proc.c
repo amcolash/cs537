@@ -41,12 +41,14 @@ int rand_int (void) {
 }
 /* End random number generation code */
 
-int fill_pstat(void) {
-  void *temp;
-  argint(0, (struct pstat**) &temp);
+int fill_pstat(struct pstat* stat) {
+  stat->pid[1] = 42;
+  //void *temp;
+  //argint(0, (struct pstat**) &temp);
+  return 0;
 }
 
-void getpinfo(void) {
+void getpinfo(struct pstat* stat) {
   cprintf("Remove me!\n");
 
   /*

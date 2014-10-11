@@ -69,3 +69,4 @@ tools/mkfs
 version
 doc/*
 tags
+*.swp

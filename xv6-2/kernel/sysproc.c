@@ -5,6 +5,7 @@
 #include "mmu.h"
 #include "proc.h"
 #include "sysfunc.h"
+#include "pstat.h"
 
 int
 sys_fork(void)
@@ -116,7 +117,17 @@ int sys_spot(void) {
 // Get info on all running processes
 int sys_getpinfo(void) {
   //set_rnd_seed(123456);
-  getpinfo();
-  return 0;  
+  struct pstat* stat;
+  char * ptr;
+  //int i, size;
+
+  argptr(0, &ptr, sizeof(struct pstat));
+  stat = (struct pstat*) ptr;
+  stat->pid[0] = 666;
+  //p = (struct pstat*) ptr;
+
+  fill_pstat(stat);
+  //getpinfo();
+  return 0;
   //return rand_int();
 }
