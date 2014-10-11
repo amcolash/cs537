@@ -41,11 +41,13 @@ int main(int argc, char *argv[]) {
   }
   */
   reserve(50);
+  /*
   if (fork() == 0) {
-    spot(25);
+    reserve(25);
   } else {
     wait();
   }
+  */
 
   //listProc();
   exit();
