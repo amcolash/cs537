@@ -10,6 +10,8 @@
 #define SEG_TSS   6  // this process's task state
 #define NSEGS     7
 
+int percentReserved;
+
 // Per-CPU state
 struct cpu {
   uchar id;                    // Local APIC ID; index into cpus[] below
@@ -74,13 +76,13 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
-  
+
   int percent;                 // Amount of cpu scheduling required
   int bid;                     // Bid amount for a spot process
   int chosen;                  // Number of times the process has been chosen
   int time;                    // Amount of time (ms) the process has run
   int charge_nano;
-  int charge_micro;                  
+  int charge_micro;
 };
 
 // Process memory is laid out contiguously, low addresses first:

@@ -7,6 +7,8 @@
 #include "spinlock.h"
 #include "pstat.h"
 
+int percentReserved;
+
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
@@ -133,6 +135,8 @@ found:
   void
 userinit(void)
 {
+  percentReserved = 0;
+
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
 

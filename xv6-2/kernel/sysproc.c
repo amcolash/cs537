@@ -94,24 +94,39 @@ sys_uptime(void)
 int sys_reserve(void) {
   int n;
   if(argint(0, &n) < 0) {
-    n = -1;
+    return -1;
   } else {
-
+    if (n < 0 || n > 100) {
+      cprintf("Error: Reservation not within 1-100\n");
+      return -1;
+    } else if (percentReserved + n > 200) {
+      cprintf("Error: Reservation not allowed because not enough free CPU\n");
+    } else {
+      proc->bid = 0;
+      proc->percent = n;
+      percentReserved += n;
+    }
   }
 
-  return n;
+  return 0;
 }
 
 // Bid on computing time
 int sys_spot(void) {
   int n;
   if(argint(0, &n) < 0) {
-    n = -1;
+    return -1;
   } else {
-
+    if (n < 1) {
+      cprintf("Error: Must place a positive bid!\n");
+      return -1;
+    } else {
+      proc->percent = 0;
+      proc->bid = n;
+    }
   }
 
-  return n;
+  return 0;
 }
 
 // Get info on all running processes
