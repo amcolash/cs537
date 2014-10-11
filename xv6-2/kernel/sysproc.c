@@ -95,16 +95,16 @@ int sys_reserve(void) {
   int n;
   if(argint(0, &n) < 0) {
     return -1;
-  } else {
+  }
+  else {
     if (n < 0 || n > 100) {
       cprintf("Error: Reservation not within 1-100\n");
       return -1;
     } else if (percentReserved + n > 200) {
       cprintf("Error: Reservation not allowed because not enough free CPU\n");
+      return -1;
     } else {
-      proc->bid = 0;
-      proc->percent = n;
-      percentReserved += n;
+      proc_reserve(n);
     }
   }
 
@@ -121,8 +121,7 @@ int sys_spot(void) {
       cprintf("Error: Must place a positive bid!\n");
       return -1;
     } else {
-      proc->percent = 0;
-      proc->bid = n;
+      proc_spot(n);
     }
   }
 

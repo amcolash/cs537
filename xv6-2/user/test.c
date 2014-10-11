@@ -8,6 +8,7 @@ void listProc() {
   int i;
 
   if (getpinfo(&stat) != -1) {
+//    printf("Total reserved: %d\n", percentReserved);
     printf(1, "PID\tInuse\tChosen\tTime\tCharge\tBid\tPercent\n");
     for (i=0; i < NPROC; i++) {
       if (stat.pid[i] != 0) {

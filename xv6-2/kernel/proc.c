@@ -7,8 +7,6 @@
 #include "spinlock.h"
 #include "pstat.h"
 
-int percentReserved;
-
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
@@ -21,6 +19,11 @@ extern void forkret(void);
 extern void trapret(void);
 
 static void wakeup1(void *chan);
+
+struct {
+  struct spinlock lock;
+  int reservation;
+} reservation;
 
 /* Random number generator taken from:
  * http://www.christianpinder.com/articles/pseudo-random-number-generation/ */
@@ -54,6 +57,7 @@ int fill_pstat(struct pstat* stat) {
   i = 0;
 
   // Go through the process list and build pstat
+  acquire(&ptable.lock);
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
     // Assign the values of pstat
     stat->pid[i] = p->pid;
@@ -73,11 +77,31 @@ int fill_pstat(struct pstat* stat) {
 
     i++;
   }
+  release(&ptable.lock);
 
   return 0;
 }
 
+void proc_reserve(int percent) {
+  proc->bid = 0;
+  proc->percent = percent;
+  // Lock reservation percent when changing
+  acquire(&reservation.lock);
+  percentReserved += percent;
+  release(&reservation.lock);
+}
 
+void proc_spot(int spot) {
+  // Remove reservation of CPU if necessary
+  if (proc->percent > 0) {
+    acquire(&reservation.lock);
+    percentReserved -= proc->percent;
+    release(&reservation.lock);
+  }
+
+  proc->percent = 0;
+  proc->bid = spot;
+}
 
   void
 pinit(void)
@@ -258,6 +282,8 @@ exit(void)
     }
   }
 
+  percentReserved -= p->percent;
+
   // Jump into the scheduler, never to return.
   proc->state = ZOMBIE;
   sched();
@@ -326,6 +352,8 @@ scheduler(void)
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+
+      //cprintf("Holding a lottery!\nChose ticket %d\n", 0);
       if(p->state != RUNNABLE)
         continue;
 
