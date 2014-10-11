@@ -97,18 +97,8 @@ int sys_reserve(void) {
     return -1;
   }
   else {
-    if (n < 0 || n > 100) {
-      cprintf("Error: Reservation not within 1-100\n");
-      return -1;
-    } else if (percentReserved + n > 200) {
-      cprintf("Error: Reservation not allowed because not enough free CPU\n");
-      return -1;
-    } else {
-      proc_reserve(n);
-    }
+    return (proc_reserve(n));
   }
-
-  return 0;
 }
 
 // Bid on computing time
@@ -117,15 +107,8 @@ int sys_spot(void) {
   if(argint(0, &n) < 0) {
     return -1;
   } else {
-    if (n < 1) {
-      cprintf("Error: Must place a positive bid!\n");
-      return -1;
-    } else {
-      proc_spot(n);
-    }
+    return(proc_spot(n));
   }
-
-  return 0;
 }
 
 // Get info on all running processes

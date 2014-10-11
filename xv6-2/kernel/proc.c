@@ -22,7 +22,7 @@ static void wakeup1(void *chan);
 
 struct {
   struct spinlock lock;
-  int reservation;
+  int percent;
 } reservation;
 
 /* Random number generator taken from:
@@ -82,25 +82,40 @@ int fill_pstat(struct pstat* stat) {
   return 0;
 }
 
-void proc_reserve(int percent) {
-  proc->bid = 0;
-  proc->percent = percent;
-  // Lock reservation percent when changing
-  acquire(&reservation.lock);
-  percentReserved += percent;
-  release(&reservation.lock);
+int proc_reserve(int percent) {
+  if (percent < 1 || percent > 100) {
+    cprintf("Error: Reservation not within 1-100\n");
+    return -1;
+  } else if (reservation.percent + percent > 200) {
+    cprintf("Error: Reservation not allowed because not enough free CPU\n");
+    return -1;
+  } else {
+    proc->bid = 0;
+    proc->percent = percent;
+    // Lock reservation percent when changing
+    acquire(&reservation.lock);
+    reservation.percent += percent;
+    release(&reservation.lock);
+  }
+  return 0;
 }
 
-void proc_spot(int spot) {
+int proc_spot(int spot) {
+  if (spot < 1) {
+    cprintf("Error: Must bid > 0!\n");
+    return -1;
+  }
   // Remove reservation of CPU if necessary
   if (proc->percent > 0) {
     acquire(&reservation.lock);
-    percentReserved -= proc->percent;
+    reservation.percent -= proc->percent;
     release(&reservation.lock);
   }
 
   proc->percent = 0;
   proc->bid = spot;
+
+  return 0;
 }
 
   void
@@ -159,7 +174,9 @@ found:
   void
 userinit(void)
 {
-  percentReserved = 0;
+  acquire(&reservation.lock);
+  reservation.percent = 0;
+  release(&reservation.lock);
 
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
@@ -282,7 +299,11 @@ exit(void)
     }
   }
 
-  percentReserved -= p->percent;
+  // Remove total reservation when exiting
+  acquire(&reservation.lock);
+  reservation.percent -= p->percent;
+  cprintf("Killed %s, now have %d percent reserved\n", proc->name, reservation.percent);
+  release(&reservation.lock);
 
   // Jump into the scheduler, never to return.
   proc->state = ZOMBIE;
@@ -351,9 +372,12 @@ scheduler(void)
 
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
-    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
 
-      //cprintf("Holding a lottery!\nChose ticket %d\n", 0);
+    int chosenTicket;
+    chosenTicket = rand_int();
+    cprintf("Holding a lottery!\nChose ticket %d\n", chosenTicket);
+
+    for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
 

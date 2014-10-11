@@ -113,8 +113,8 @@ void            yield(void);
 void            set_rnd_seed (int);
 int             rand_int (void);
 int             fill_pstat(struct pstat*);
-void            proc_reserve(int);
-void            proc_spot(int);
+int            proc_reserve(int);
+int            proc_spot(int);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
