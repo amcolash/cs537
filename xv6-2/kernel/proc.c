@@ -68,8 +68,8 @@ int fill_pstat(struct pstat* stat) {
     }
 
     // Extra info about process
-    stat->percent[i] = p->percent;
-    stat->bid[i] = p->bid;
+    //stat->percent[i] = p->percent;
+    //stat->bid[i] = p->bid;
 
     i++;
   }

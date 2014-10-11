@@ -8,10 +8,12 @@ void listProc() {
   int i;
 
   if (getpinfo((char*) &stat) != -1) {
-    printf(1, "PID\tInuse\tChosen\tTime\tCharge\tBid\tPercent\n");
+    printf(1, "PID\tInuse\tChosen\tTime\tCharge\n");
+    //\tBid\tPercent\n");
     for (i=0; i < NPROC; i++) {
       if (stat.pid[i] != 0) {
-        printf(1, "%d\t%d\t%d\t%d\t%d\t%d\t%d\n", stat.pid[i], stat.inuse[i], stat.time[i], stat.chosen[i], stat.charge[i], stat.bid[i], stat.percent[i]);
+        printf(1, "%d\t%d\t%d\t%d\t%d\t%d\t%d\n", stat.pid[i], stat.inuse[i], stat.time[i], stat.chosen[i], stat.charge[i]);
+        //stat.bid[i], stat.percent[i]);
       }
     }
   } else {
