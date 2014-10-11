@@ -23,28 +23,24 @@ static void wakeup1(void *chan);
 struct {
   struct spinlock lock;
   int percent;
+  int seed;
 } reservation;
 
-/* Random number generator taken from:
- * http://www.christianpinder.com/articles/pseudo-random-number-generation/ */
-static int rnd_seed;
-
 void set_rnd_seed (int new_seed) {
-  rnd_seed = new_seed;
+  acquire(&reservation.lock);
+  reservation.seed = new_seed;
+  release(&reservation.lock);
 }
 
 int rand_int (void) {
-  int k1;
-  int ix = rnd_seed;
-
-  k1 = ix / 127773;
-  ix = 16807 * (ix - k1 * 127773) - k1 * 2836;
-  if (ix < 0)
-    ix += 2147483647;
-  rnd_seed = ix;
-  return rnd_seed;
+  int num;
+  acquire(&reservation.lock);
+  reservation.seed = (8253729 * reservation.seed + 2396403);
+  num = reservation.seed  % 200;
+  release(&reservation.lock);
+  if (num < 0) { num *= -1; }
+  return num;
 }
-/* End random number generation code */
 
 int fill_pstat(struct pstat* stat) {
   if (stat == NULL) {
@@ -177,6 +173,7 @@ userinit(void)
   acquire(&reservation.lock);
   reservation.percent = 0;
   release(&reservation.lock);
+  set_rnd_seed(123456789);
 
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
