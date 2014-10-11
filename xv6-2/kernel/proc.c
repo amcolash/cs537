@@ -23,6 +23,7 @@ static void wakeup1(void *chan);
 struct {
   struct spinlock lock;
   int table[200];
+  int bid[NPROC];
   int percent;
   int seed;
 } reservation;
@@ -119,14 +120,23 @@ int proc_spot(int spot) {
 
 void proc_table() {
   struct proc *p;
-  int current, i;
+  int current, i, b;
   current = 0;
+  b = 0;
   acquire(&ptable.lock);
   acquire(&reservation.lock);
+
+  // Reset reservation table
   for (i = 0; i < 200; i++) {
     reservation.table[i] = 0;
   }
 
+  // Reset bid table
+  for (i = 0; i < NPROC; i++) {
+    reservation.bid[i] = 0;
+  }
+
+  // Loop through running process table and figure out reservations and bids
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if (p->percent > 0) {
       for(i = current; i < current + p->percent; i++) {
@@ -134,11 +144,20 @@ void proc_table() {
       }
       current += p->percent;
     }
+    if (p->bid > 0) {
+      reservation.bid[b] = p->pid;
+      b++;
+    }
   }
 
   for (i = 0; i < 200; i++) {
     cprintf("%d, ", reservation.table[i]);
   }
+  cprintf("\n---------------\n");
+  for (i = 0; i < NPROC; i++) {
+    cprintf("%d, ", reservation.bid[i]);
+  }
+
   cprintf("\n\n");
   release(&reservation.lock);
   release(&ptable.lock);

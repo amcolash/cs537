@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
   */
   reserve(50);
   if (fork() == 0) {
-    reserve(25);
+    spot(25);
   } else {
     wait();
   }
