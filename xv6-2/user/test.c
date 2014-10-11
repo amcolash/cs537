@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
   //printf(1, "I am going to reserve %d\%\n", reserve(25));
   //printf(1, "Spot bid on for %d\n", spot(50));
 
+  /*
   int n, times;
   times = 2;
 
@@ -38,7 +39,14 @@ int main(int argc, char *argv[]) {
       wait();
     }
   }
+  */
+  reserve(50);
+  if (fork() == 0) {
+    reserve(25);
+  } else {
+    wait();
+  }
 
-  listProc();
+  //listProc();
   exit();
 }
