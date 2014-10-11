@@ -11,8 +11,8 @@ struct pstat {
   int charge[NPROC]; // how much money (microdollars) the process has been charged
 
   // Extra info about process
-  //int percent[NPROC];
-  //int bid[NPROC];
+  int percent[NPROC];
+  int bid[NPROC];
 };
 
 
