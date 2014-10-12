@@ -12,7 +12,7 @@ void listProc() {
     printf(1, "PID\tInuse\tChosen\tTime\tCharge\tBid\tPercent\n");
     for (i=0; i < NPROC; i++) {
       if (stat.pid[i] != 0) {
-        printf(1, "%d\t%d\t%d\t%d\t%d\t%d\t%d\n", stat.pid[i], stat.inuse[i], stat.time[i], stat.chosen[i], stat.charge[i], stat.bid[i], stat.percent[i]);
+        printf(1, "%d\t%d\t%d\t%d\t%d\t%d\t%d\n", stat.pid[i], stat.inuse[i], stat.chosen[i], stat.time[i], stat.charge[i], stat.bid[i], stat.percent[i]);
       }
     }
   } else {
@@ -41,18 +41,23 @@ int main(int argc, char *argv[]) {
   }
   */
   int i;
+
+  listProc();
   reserve(50);
+
   for (i = 0; i < 500; i++) {
     printf(1, "%d, ", i);
   }
-  printf(1, "all done with test.c\n");
+  printf(1, "\n\n");
+
   /*
   if (fork() == 0) {
-    reserve(25);
+    spot(25);
   } else {
     wait();
   }
   */
 
+  listProc();
   exit();
 }

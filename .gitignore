@@ -70,3 +70,4 @@ version
 doc/*
 tags
 *.swp
+*.swo
