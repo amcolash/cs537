@@ -10,6 +10,11 @@
 struct {
   struct spinlock lock;
   struct proc proc[NPROC];
+
+  int table[200];
+  int bid[NPROC];
+  int percent;
+  int seed;
 } ptable;
 
 static struct proc *initproc;
@@ -31,7 +36,7 @@ struct {
 void set_rnd_seed (int new_seed) {
   //cprintf("reservation.lock - set_rnd_seed\n");
   //acquire(&reservation.lock);
-  reservation.seed = new_seed;
+  ptable.seed = new_seed;
   //release(&reservation.lock);
 }
 
@@ -39,8 +44,8 @@ int rand_int (void) {
   int num;
   //cprintf("reservation.lock - rand_int\n");
   //acquire(&reservation.lock);
-  reservation.seed = (8253729 * reservation.seed + 2396403);
-  num = reservation.seed  % 200;
+  ptable.seed = (8253729 * ptable.seed + 2396403);
+  num = ptable.seed  % 200;
   //release(&reservation.lock);
   if (num < 0) { num *= -1; }
   return num;
@@ -83,29 +88,37 @@ int fill_pstat(struct pstat* stat) {
 }
 
 int proc_reserve(int percent) {
+
   if (percent < 1 || percent > 100) {
     cprintf("Error: Reservation not within 1-100\n");
     return -1;
-  } else if (reservation.percent + percent > 200) {
+  } else if (ptable.percent + percent > 200) {
     cprintf("Error: Reservation not allowed because not enough free CPU\n");
     return -1;
   } else {
-    // Lock reservation percent when changing
+
+    if (ptable.lock.locked == 1) {
+      cprintf("need to unlock ptable for reserve\n");
+      release(&ptable.lock);
+    }
     acquire(&ptable.lock);
-    acquire(&reservation.lock);
+    // Lock reservation percent when changing
+    //acquire(&reservation.lock);
 
     proc->bid = 0;
     proc->percent = percent;
-    proc->state = RUNNABLE;
 
-    reservation.percent += percent;
-    cprintf("Reserved %s, now have %d percent reserved\n", proc->name, reservation.percent);
+    ptable.percent += percent;
+    cprintf("Reserved %s, now have %d percent reserved\n", proc->name, ptable.percent);
     cprintf("remaking proc table - reserve\n");
     proc_table();
-
-    release(&reservation.lock);
+    cprintf("done making proc table - reserve\n");
+    //release(&reservation.lock);
+    proc->state = RUNNABLE;
     release(&ptable.lock);
+
   }
+
   return 0;
 }
 
@@ -116,9 +129,9 @@ int proc_spot(int spot) {
   }
   // Remove reservation of CPU if necessary
   if (proc->percent > 0) {
-    acquire(&reservation.lock);
-    reservation.percent -= proc->percent;
-    release(&reservation.lock);
+    acquire(&ptable.lock);
+    ptable.percent -= proc->percent;
+    release(&ptable.lock);
   }
 
   proc->percent = 0;
@@ -225,16 +238,16 @@ found:
   void
 userinit(void)
 {
-  acquire(&reservation.lock);
-  reservation.percent = 0;
-  release(&reservation.lock);
-  set_rnd_seed(123456789);
-
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
 
   p = allocproc();
   acquire(&ptable.lock);
+
+  ptable.percent = 0;
+  set_rnd_seed(123456789);
+
+  //acquire(&ptable.lock);
   initproc = p;
   if((p->pgdir = setupkvm()) == 0)
     panic("userinit: out of memory?");
@@ -311,7 +324,6 @@ fork(void)
   pid = np->pid;
   np->state = RUNNABLE;
   safestrcpy(np->name, proc->name, sizeof(proc->name));
-
   return pid;
 }
 
@@ -342,13 +354,15 @@ exit(void)
   //cprintf("reservation.lock - exit\n");
   acquire(&ptable.lock);
 
-  acquire(&reservation.lock);
-  reservation.percent -= proc->percent;
-  cprintf("making proc table, exit\n");
+  //acquire(&reservation.lock);
+  ptable.percent -= proc->percent;
+  //cprintf("making proc table, exit\n");
   proc_table();
-  release(&reservation.lock);
+  //release(&reservation.lock);
   //cprintf("Killed %s, now have %d percent reserved\n", proc->name, reservation.percent);
   proc->percent = 0;
+  proc->bid = 0;
+  proc->chosen = 0;
 
   // Parent might be sleeping in wait().
   wakeup1(proc->parent);
@@ -428,16 +442,17 @@ scheduler(void)
     sti();
 
     // Loop over process table looking for process to run.
-    acquire(&ptable.lock);
-
+    //cprintf("before lock: %d\n", ptable.lock.locked);
+    //cprintf("after lock: %d\n", ptable.lock.locked);
+/*
     int percent, pid, ticket;
 
     //cprintf("reservation.lock - scheduler\n");
-    acquire(&reservation.lock);
+    //acquire(&reservation.lock);
     ticket = rand_int();
-    pid = reservation.table[ticket];
-    percent = reservation.percent;
-    release(&reservation.lock);
+    pid = ptable.table[ticket];
+    percent = ptable.percent;
+    //release(&reservation.lock);
 
 
     if (percent > 0) {
@@ -464,7 +479,8 @@ scheduler(void)
       release(&ptable.lock);
 
     } else { // Case if no reservations
-
+*/
+      acquire(&ptable.lock);
       for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
         if(p->state != RUNNABLE)
           continue;
@@ -472,21 +488,22 @@ scheduler(void)
         // Switch to chosen process.  It is the process's job
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
-        //cprintf("Switching to %s\n", p->name);
         proc = p;
+        proc->chosen = proc->chosen + 1;
+        //cprintf("%s: chosen: %d\n", p->name, p->chosen);
         switchuvm(p);
         p->state = RUNNING;
         swtch(&cpu->scheduler, proc->context);
         switchkvm();
-
         // Process is done running for now.
         // It should have changed its p->state before coming back.
         proc = 0;
       }
       release(&ptable.lock);
+
     }
 
-  }
+ // }
 }
 
 // Enter scheduler.  Must hold only ptable.lock

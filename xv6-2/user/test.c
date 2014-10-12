@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
   for (i = 0; i < 500; i++) {
     printf(1, "%d, ", i);
   }
-
+  printf(1, "all done with test.c\n");
   /*
   if (fork() == 0) {
     reserve(25);
