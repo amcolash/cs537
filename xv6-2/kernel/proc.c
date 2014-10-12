@@ -482,21 +482,27 @@ scheduler(void)
 
     } else { // Case if no reservations
       for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-        if(p->state != RUNNABLE)
+      /*
+        if ((percent < 0 && p->pid != pid) || (percent > 0 && p->state != RUNNABLE))
+          continue;
+      */
+        if((percent < 0 && p->pid != pid && p->state == RUNNABLE) || p->state != RUNNABLE)
           continue;
 
         // Switch to chosen process.  It is the process's job
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
+
         proc = p;
         proc->chosen++;
         proc->time += 10;
         proc->charge_nano += proc->bid * 10;
 
-        if (proc->charge_nano > 100000) {
+        if (proc->charge_nano > 1000) {
           proc->charge_micro += proc->charge_nano / 1000;
           proc->charge_nano = 0;
         }
+
 
 
         switchuvm(p);
