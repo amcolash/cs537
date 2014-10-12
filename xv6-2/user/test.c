@@ -45,10 +45,7 @@ int main(int argc, char *argv[]) {
   listProc();
   reserve(50);
 
-  for (i = 0; i < 500; i++) {
-    printf(1, "%d, ", i);
-  }
-  printf(1, "\n\n");
+  for (i = 0; i < 9999999; i++) {}
 
   /*
   if (fork() == 0) {

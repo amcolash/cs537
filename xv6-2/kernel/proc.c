@@ -77,7 +77,7 @@ int fill_pstat(struct pstat* stat) {
   }
   release(&ptable.lock);
 
-  return 0;
+  return i;
 }
 
 int proc_reserve(int percent) {
@@ -97,7 +97,7 @@ int proc_reserve(int percent) {
     release(&reservation.lock);
     proc_table();
   }
-  return 0;
+  return percent;
 }
 
 int proc_spot(int spot) {
@@ -116,7 +116,7 @@ int proc_spot(int spot) {
   proc->percent = 0;
   proc->bid = spot;
 
-  return 0;
+  return spot;
 }
 
 void proc_table() {
@@ -151,6 +151,7 @@ void proc_table() {
     }
   }
 
+/*
   for (i = 0; i < 200; i++) {
     cprintf("%d, ", reservation.table[i]);
   }
@@ -160,6 +161,8 @@ void proc_table() {
   }
 
   cprintf("\n\n");
+*/
+
   release(&reservation.lock);
   release(&ptable.lock);
 }
@@ -190,6 +193,14 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
+
+  p->time = 0;
+  p->chosen = 0;
+  p->percent = 0;
+  p->bid = 0;
+  p->charge_micro = 0;
+  p->charge_nano = 0;
+
   release(&ptable.lock);
 
   // Allocate kernel stack if possible.
@@ -304,7 +315,14 @@ fork(void)
   np->cwd = idup(proc->cwd);
 
   pid = np->pid;
+
   np->chosen = 0;
+  np->time = 0;
+  np->percent = 0;
+  np->bid = 0;
+  np->charge_nano = 0;
+  np->charge_micro = 0;
+
   np->state = RUNNABLE;
   safestrcpy(np->name, proc->name, sizeof(proc->name));
   return pid;
@@ -338,8 +356,6 @@ exit(void)
   reservation.percent -= proc->percent;
   cprintf("Killed %s, now have %d percent reserved\n", proc->name, reservation.percent);
   release(&reservation.lock);
-  proc->percent = 0;
-  proc->chosen = 0;
 
   proc_table();
 
@@ -432,9 +448,8 @@ scheduler(void)
     percent = reservation.percent;
     pid = reservation.table[ticket];
     release(&reservation.lock);
-    if ((pid == 500) && (percent == 500) && (ticket == 500)) {}
 
-    if (percent > 550 && pid != 0) {
+    if (percent > 500 && pid != 0) {
       for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
         if (p->pid != pid)
           continue;
@@ -443,9 +458,17 @@ scheduler(void)
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
         proc = p;
-
-        cprintf("\nrunning reserved process: %s\n", proc->name);
         proc->chosen++;
+        proc->time += 10;
+        proc->charge_nano += 1000;
+
+        if (proc->charge_nano > 100000) {
+          proc->charge_micro += proc->charge_nano / 1000;
+          proc->charge_nano = 0;
+        }
+        cprintf("\nRunning reserved process: %s\n", proc->name);
+
+        //TODO Problem right in here, no idea why
         switchuvm(p);
         p->state = RUNNING;
         swtch(&cpu->scheduler, proc->context);
@@ -455,6 +478,8 @@ scheduler(void)
         // It should have changed its p->state before coming back.
         proc = 0;
       }
+      release(&ptable.lock);
+
     } else { // Case if no reservations
       for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
         if(p->state != RUNNABLE)
@@ -465,6 +490,15 @@ scheduler(void)
         // before jumping back to us.
         proc = p;
         proc->chosen++;
+        proc->time += 10;
+        proc->charge_nano += proc->bid * 10;
+
+        if (proc->charge_nano > 100000) {
+          proc->charge_micro += proc->charge_nano / 1000;
+          proc->charge_nano = 0;
+        }
+
+
         switchuvm(p);
         p->state = RUNNING;
         swtch(&cpu->scheduler, proc->context);
@@ -474,9 +508,9 @@ scheduler(void)
         // It should have changed its p->state before coming back.
         proc = 0;
       }
+      release(&ptable.lock);
 
     }
-    release(&ptable.lock);
   }
 }
 

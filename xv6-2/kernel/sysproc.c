@@ -97,7 +97,7 @@ int sys_reserve(void) {
     return -1;
   }
   else {
-    return (proc_reserve(n));
+    return proc_reserve(n);
   }
 }
 
@@ -107,7 +107,7 @@ int sys_spot(void) {
   if(argint(0, &n) < 0) {
     return -1;
   } else {
-    return(proc_spot(n));
+    return proc_spot(n);
   }
 }
 
@@ -125,7 +125,5 @@ int sys_getpinfo(void) {
   }
 
   // Fill pstat with information
-  fill_pstat(stat);
-
-  return 0;
+  return fill_pstat(stat);
 }

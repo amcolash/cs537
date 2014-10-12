@@ -24,15 +24,9 @@ void
 acquire(struct spinlock *lk)
 {
   pushcli(); // disable interrupts to avoid deadlock.
-  if(holding(lk)) {
-    char buffer[64] = "acquire: ";
-    int i;
-    for (i = 0; i < sizeof(lk->name) + 2; i++) {
-      buffer[i+9] = lk->name[i];
-    }
-    panic(buffer);
-    //panic("acquire");
-  }
+  if(holding(lk))
+    panic("acquire");
+
   // The xchg is atomic.
   // It also serializes, so that reads after acquire are not
   // reordered before it.
@@ -48,15 +42,8 @@ acquire(struct spinlock *lk)
 void
 release(struct spinlock *lk)
 {
-  if(!holding(lk)) {
-    char buffer[64] = "release: ";
-    int i;
-    for (i = 0; i < sizeof(lk->name); i++) {
-      buffer[i+9] = lk->name[i];
-    }
-    panic(buffer);
-    //panic("release");
-  }
+  if(!holding(lk))
+    panic("release");
 
   lk->pcs[0] = 0;
   lk->cpu = 0;
