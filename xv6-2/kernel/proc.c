@@ -358,7 +358,6 @@ exit(void)
     }
   }
 
-
   // Jump into the scheduler, never to return.
   proc->state = ZOMBIE;
   sched();
@@ -429,12 +428,13 @@ scheduler(void)
     acquire(&ptable.lock);
 
     ticket = rand_int();
-
     acquire(&reservation.lock);
     percent = reservation.percent;
     pid = reservation.table[ticket];
     release(&reservation.lock);
-    if (percent > 0 && pid != 0) {
+    if ((pid == 500) && (percent == 500) && (ticket == 500)) {}
+
+    if (percent > 550 && pid != 0) {
       for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
         if (p->pid != pid)
           continue;
@@ -443,6 +443,7 @@ scheduler(void)
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
         proc = p;
+
         cprintf("\nrunning reserved process: %s\n", proc->name);
         proc->chosen++;
         switchuvm(p);
@@ -453,7 +454,6 @@ scheduler(void)
         // Process is done running for now.
         // It should have changed its p->state before coming back.
         proc = 0;
-        cprintf("time to release\n");
       }
     } else { // Case if no reservations
       for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
@@ -464,7 +464,6 @@ scheduler(void)
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
         proc = p;
-        //cprintf("running %s\n", proc->name);
         proc->chosen++;
         switchuvm(p);
         p->state = RUNNING;
@@ -475,9 +474,9 @@ scheduler(void)
         // It should have changed its p->state before coming back.
         proc = 0;
       }
+
     }
     release(&ptable.lock);
-
   }
 }
 
