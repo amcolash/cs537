@@ -40,7 +40,12 @@ int main(int argc, char *argv[]) {
     }
   }
   */
+  int i;
   reserve(50);
+  for (i = 0; i < 500; i++) {
+    printf(1, "%d, ", i);
+  }
+
   /*
   if (fork() == 0) {
     reserve(25);
@@ -49,6 +54,5 @@ int main(int argc, char *argv[]) {
   }
   */
 
-  //listProc();
   exit();
 }
