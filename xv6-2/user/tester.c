@@ -275,11 +275,15 @@ main(int argc, char *argv[])
 		int pids[NUM_PROC];
 		int i;
 		int pid;
-        for(i=0; i<NUM_PROC; i++) {
-			pid = fork();
+    for(i=0; i<NUM_PROC; i++) {
+      printf(1, "Now forking\n");
+      pid = fork();
+			printf(1, "Forked to %d\n", pid);
 			if(pid == 0) {
 				//child
+        printf(1, "Attempting to reserve\n");
 				int flag = reserve(100);
+        printf(1, "Flag is: %d, i is: %d\n", flag, i);
 				if(i==0 && flag < 0) {
 					printf(1, "ERROR: incorrect reserve failed\n");
 				}

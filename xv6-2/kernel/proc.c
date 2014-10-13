@@ -93,7 +93,7 @@ int proc_reserve(int percent) {
     proc->percent = percent;
     // Lock reservation percent when changing
     reservation.percent += percent;
-    cprintf("Reserved %s (%d) for %d percent, now have total %d percent reserved\n", proc->name, proc->pid, proc->percent, reservation.percent);
+    //cprintf("Reserved %s (%d) for %d percent, now have total %d percent reserved\n", proc->name, proc->pid, proc->percent, reservation.percent);
     release(&reservation.lock);
     proc_table();
   }
