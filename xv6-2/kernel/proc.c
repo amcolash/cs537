@@ -44,6 +44,46 @@ int rand_int (void) {
   return num;
 }
 
+/* Quick sort code taken from http://www.comp.dit.ie/rlawlor/Alg_DS/sorting/quickSort.c */
+int partition( int a[], int l, int r ) {
+  int pivot, i, j, t;
+  pivot = a[l];
+  i = l; j = r+1;
+
+  while( 1 ) {
+    do ++i; while( a[i] <= pivot && i <= r  );
+    do --j; while( a[j] > pivot  );
+    if( i >= j  ) break;
+    t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+
+  t = a[l]; a[l] = a[j]; a[j] = t;
+  return j;
+}
+
+void quickSort( int a[], int l, int r ) {
+  int j;
+  if( l < r  ) {
+    // divide and conquer
+    j = partition( a, l, r );
+    quickSort( a, l, j-1 );
+    quickSort( a, j+1, r );
+  }
+}
+/* End of quick sort code */
+
+void rev_array(int a[]) {
+  int b[NPROC];
+  int i, j;
+  for (i = NPROC, j = 0; i >= 0; i--, j++) {
+    b[i] = a[j];
+  }
+
+  for (i = 0; i < NPROC; i++) {
+    a[i] = b[i];
+  }
+}
+
 int fill_pstat(struct pstat* stat) {
   if (stat == NULL) {
     return -1;
@@ -105,16 +145,19 @@ int proc_spot(int spot) {
     cprintf("Error: Must bid > 0!\n");
     return -1;
   }
+
+  acquire(&reservation.lock);
   // Remove reservation of CPU if necessary
   if (proc->percent > 0) {
-    acquire(&reservation.lock);
     reservation.percent -= proc->percent;
-    release(&reservation.lock);
-    proc_table();
   }
 
   proc->percent = 0;
   proc->bid = spot;
+  cprintf("%s(%d) now bid for %d\n", proc->name, proc->pid, proc->bid);
+
+  release(&reservation.lock);
+  proc_table();
 
   return spot;
 }
@@ -151,21 +194,27 @@ void proc_table() {
     }
   }
 
+  // Sort bid table
+  quickSort(reservation.bid, 0, NPROC);
+  rev_array(reservation.bid);
+
   /*
      for (i = 0; i < 200; i++) {
-     cprintf("%d, ", reservation.table[i]);
+       cprintf("%d, ", reservation.table[i]);
      }
      cprintf("\n---------------\n");
+  */
      for (i = 0; i < NPROC; i++) {
-     cprintf("%d, ", reservation.bid[i]);
+       cprintf("%d, ", reservation.bid[i]);
      }
 
      cprintf("\n\n");
-     */
+     /**/
 
   release(&reservation.lock);
   release(&ptable.lock);
 }
+
 
   void
 pinit(void)
@@ -358,7 +407,6 @@ exit(void)
 
   proc_table();
 
-
   acquire(&ptable.lock);
 
   // Parent might be sleeping in wait().
@@ -464,7 +512,7 @@ scheduler(void)
 
       continue;
 
-    found:
+found:
 
       proc = p;
       proc->chosen++;
