@@ -93,7 +93,7 @@ int proc_reserve(int percent) {
     proc->percent = percent;
     // Lock reservation percent when changing
     reservation.percent += percent;
-    cprintf("Reserved %s, now have %d percent reserved\n", proc->name, reservation.percent);
+    cprintf("Reserved %s (%d) for %d percent, now have total %d percent reserved\n", proc->name, proc->pid, proc->percent, reservation.percent);
     release(&reservation.lock);
     proc_table();
   }
@@ -235,7 +235,6 @@ userinit(void)
   reservation.percent = 0;
   release(&reservation.lock);
   set_rnd_seed(123456789);
-
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
 
@@ -449,6 +448,15 @@ scheduler(void)
     pid = reservation.table[ticket];
     release(&reservation.lock);
 
+    int res= 0;
+    int rr = 0;
+
+    if (percent > 0 && pid != 0) {
+      res = 1;
+    } else {
+      rr = 1;
+    }
+
     if (percent > 500 && pid != 0) {
       for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
         if (p->pid != pid)
@@ -481,27 +489,75 @@ scheduler(void)
       release(&ptable.lock);
 
     } else { // Case if no reservations
+      int found = 0;
       for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       /*
         if ((percent < 0 && p->pid != pid) || (percent > 0 && p->state != RUNNABLE))
           continue;
       */
-        if((percent < 0 && p->pid != pid && p->state == RUNNABLE) || p->state != RUNNABLE)
+      /*
+        if (percent > 0 && p->pid == pid && p->state == RUNNABLE) {
+          cprintf("reserved prog: %s (%d)\n", p->name, p->pid);
+          reserved = 1;
+        } else if ((percent == 0 && p->state == RUNNABLE && p->percent == 0) || (percent > 0 && pid == 0)) {
+          rr = 1;
+        }
+      */
+
+
+        if (res == 1 && p->pid == pid) {
+          found = 1;
+          cprintf("lottery for reservation, ticket: %d, pid: %d, running: %d\n", ticket, pid, p->pid);
+          //cprintf("found reserved: %s (%d)\n", p->name, p->pid);
+/*
+        } else if (res == 1 && p->pid == pid && p->state != (RUNNABLE || RUNNING)) {
+          rr = 1;
+          res = 0;
+          //p = ptable.proc;
+          cprintf("didn't find reserved, current state %d\n", p->state);
+*/
+        } else if (rr == 1 && p->state == RUNNABLE) {
+          found = 1;
+          //cprintf("found normal: %s (%d)\n", p->name, p->pid);
+        }
+
+
+        if (found == 1 && (res == 1 || rr == 1)) {
+          //cprintf("we should be running %s (%d), ", p->name, p->pid);
+        }
+
+/*
+        if (p->state != RUNNABLE)
+          continue;
+*/
+        if(found != 1 && p->state != RUNNABLE)
           continue;
 
         // Switch to chosen process.  It is the process's job
         // to release ptable.lock and then reacquire it
         // before jumping back to us.
 
+        //if (res == 1) cprintf("reserved");
+        //if (rr == 1) cprintf("rr");
+        //if (pid != 0) cprintf(" + pid matched");
+        //cprintf(", ");
+//        cprintf("running: %s (%d), pgdir: %d, startup: %d", p->name, p->pid, p->pgdir, startup);
+
         proc = p;
         proc->chosen++;
         proc->time += 10;
-        proc->charge_nano += proc->bid * 10;
+
+        if (rr == 1) {
+          proc->charge_nano += proc->bid * 10;
+        } else {
+          proc->charge_nano += 1000;
+        }
 
         if (proc->charge_nano > 1000) {
           proc->charge_micro += proc->charge_nano / 1000;
           proc->charge_nano = 0;
         }
+
 
 
 

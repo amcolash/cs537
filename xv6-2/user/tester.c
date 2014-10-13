@@ -224,9 +224,10 @@ main(int argc, char *argv[])
 						}
 					}
 				}
+        printf(1, "\n");
 				for(i=0; i<NUM_PROC+1; i++) {
 					//pid,chosen,time,charge
-					printf(1, "%d,%d,%d,%d\n", pids[i], chosen[i], time[i], charge[i]);
+					printf(1, "pid: %d, chosen: %d, time: %d, charge: %d\n", pids[i], chosen[i], time[i], charge[i]);
 				}
 			}
 		}

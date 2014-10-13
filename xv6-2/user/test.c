@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
   listProc();
   reserve(50);
 
-  for (i = 0; i < 99999999; i++) {}
+  for (i = 0; i < 99999; i++) {}
 
   /*
   if (fork() == 0) {
