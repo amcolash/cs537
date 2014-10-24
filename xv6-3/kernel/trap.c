@@ -45,6 +45,16 @@ trap(struct trapframe *tf)
   }
 
   switch(tf->trapno){
+  case T_PGFLT:
+    if(tf->err == 4 || tf->err == 6) {
+      if (allocuvm(proc->pgdir, USERTOP - proc->stack_size - PGSIZE, USERTOP - proc->stack_size) == 0) {
+        proc->killed = 1;
+      }
+      proc->stack_size += PGSIZE;
+    } else {
+      proc->killed = 1;
+    }
+    break;  
   case T_IRQ0 + IRQ_TIMER:
     if(cpu->id == 0){
       acquire(&tickslock);

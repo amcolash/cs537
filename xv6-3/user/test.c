@@ -4,8 +4,12 @@
 
 int main(int argc, char *argv[]) {
   printf(1, "Attempting to make a stack overflow!\n");
-  int overflow[99999999];
-  overflow[1] = 0;
+  int overflow[9999];
+  overflow[0] = 0;
+
+  if (overflow[0] == 0) {
+    printf(1, "Yay, we didn't crash :)\n");
+  }
 
   char * i;
   i = NULL;

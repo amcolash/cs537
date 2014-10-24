@@ -111,6 +111,8 @@ growproc(int n)
 
   sz = proc->sz;
   if(n > 0){
+    if (USERTOP - proc->stack_size - PGSIZE < n + sz)
+      return -1;
     if((sz = allocuvm(proc->pgdir, sz, sz + n)) == 0)
       return -1;
   } else if(n < 0){
@@ -143,6 +145,7 @@ fork(void)
     return -1;
   }
   np->sz = proc->sz;
+  np->stack_size = proc->stack_size;
   np->parent = proc;
   *np->tf = *proc->tf;
 

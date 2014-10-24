@@ -60,6 +60,8 @@ argptr(int n, char **pp, int size)
     return -1;
   if((uint)i >= proc->sz || (uint)i+size > proc->sz)
     return -1;
+  if ((uint) i < PGSIZE || (uint)i < USERTOP - proc->stack_size || (uint)i > USERTOP)
+    return -1;
   *pp = (char*)i;
   return 0;
 }
