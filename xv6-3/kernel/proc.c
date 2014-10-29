@@ -52,13 +52,12 @@ found:
     p->state = UNUSED;
     return 0;
   }
-  // sp = p->kstack + ENDOFMEM?
   sp = p->kstack + KSTACKSIZE;
-
+  
   // Leave room for trap frame.
   sp -= sizeof *p->tf;
   p->tf = (struct trapframe*)sp;
-
+  
   // Set up new context to start executing at forkret,
   // which returns to trapret.
   sp -= 4;
@@ -78,7 +77,7 @@ userinit(void)
 {
   struct proc *p;
   extern char _binary_initcode_start[], _binary_initcode_size[];
-
+  
   p = allocproc();
   acquire(&ptable.lock);
   initproc = p;
@@ -108,12 +107,12 @@ int
 growproc(int n)
 {
   uint sz;
-
+  
   sz = proc->sz;
   if(n > 0){
-    if (USERTOP - proc->stack_size - PGSIZE < n + sz)
-      return -1;
     if((sz = allocuvm(proc->pgdir, sz, sz + n)) == 0)
+      return -1;
+    if (sz + n > USERTOP - proc->stack_size - PGSIZE)
       return -1;
   } else if(n < 0){
     if((sz = deallocuvm(proc->pgdir, sz, sz + n)) == 0)
@@ -145,10 +144,9 @@ fork(void)
     return -1;
   }
   np->sz = proc->sz;
-  np->stack_size = proc->stack_size;
   np->parent = proc;
+  np->stack_size = proc->stack_size;
   *np->tf = *proc->tf;
-
   // Clear %eax so that fork returns 0 in the child.
   np->tf->eax = 0;
 
@@ -156,7 +154,6 @@ fork(void)
     if(proc->ofile[i])
       np->ofile[i] = filedup(proc->ofile[i]);
   np->cwd = idup(proc->cwd);
-
   pid = np->pid;
   np->state = RUNNABLE;
   safestrcpy(np->name, proc->name, sizeof(proc->name));
@@ -326,7 +323,7 @@ forkret(void)
 {
   // Still holding ptable.lock from scheduler.
   release(&ptable.lock);
-
+  
   // Return to "caller", actually trapret (see allocproc).
 }
 
@@ -429,7 +426,7 @@ procdump(void)
   struct proc *p;
   char *state;
   uint pc[10];
-
+  
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
     if(p->state == UNUSED)
       continue;

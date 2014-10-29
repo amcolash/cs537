@@ -32,8 +32,7 @@ exec(char *path, char **argv)
     goto bad;
 
   // Load program into memory.
-  // sz = 0;
-  sz = PGSIZE - 1;
+  sz = 0;
   for(i=0, off=elf.phoff; i<elf.phnum; i++, off+=sizeof(ph)){
     if(readi(ip, (char*)&ph, off, sizeof(ph)) != sizeof(ph))
       goto bad;
@@ -50,8 +49,9 @@ exec(char *path, char **argv)
   ip = 0;
 
   // Allocate a one-page stack at the next page boundary
-  //sz = PGROUNDUP(sz);
-  if((sz = allocuvm(pgdir, USERTOP - PGSIZE, USERTOP)) == 0)
+  sz = PGROUNDUP(sz);
+
+  if(allocuvm(pgdir, USERTOP - PGSIZE, USERTOP) == 0)
     goto bad;
 
   // Push argument strings, prepare rest of stack in ustack.

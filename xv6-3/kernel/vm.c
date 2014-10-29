@@ -195,9 +195,7 @@ inituvm(pde_t *pgdir, char *init, uint sz)
     panic("inituvm: more than a page");
   mem = kalloc();
   memset(mem, 0, PGSIZE);
-  cprintf("--MEM: %p\n", mem);
   mappages(pgdir, 0, PGSIZE, PADDR(mem), PTE_W|PTE_U);
-  cprintf("--MEM PA: %p\n", PADDR(mem));
   memmove(mem, init, sz);
 }
 
@@ -233,6 +231,9 @@ allocuvm(pde_t *pgdir, uint oldsz, uint newsz)
   char *mem;
   uint a;
 
+  if ((oldsz == USERTOP - proc->stack_size - PGSIZE) &&
+    (oldsz < proc->stack_size + PGSIZE))
+      return 0;
   if(newsz > USERTOP)
     return 0;
   if(newsz < oldsz)
@@ -247,7 +248,13 @@ allocuvm(pde_t *pgdir, uint oldsz, uint newsz)
       return 0;
     }
     memset(mem, 0, PGSIZE);
+    if(a == 0) {
+	mappages(pgdir, (char*)a, PGSIZE, PADDR(mem), 0);
+    }
+    else
+    {
     mappages(pgdir, (char*)a, PGSIZE, PADDR(mem), PTE_W|PTE_U);
+  }
   }
   return newsz;
 }
@@ -308,8 +315,7 @@ copyuvm(pde_t *pgdir, uint sz)
 
   if((d = setupkvm()) == 0)
     return 0;
-  // Changed starting number for loop becuase memory does not start at 0 anymore
-  for(i = PGSIZE; i < sz; i += PGSIZE){
+  for(i = 0; i < sz; i += PGSIZE){
     if((pte = walkpgdir(pgdir, (void*)i, 0)) == 0)
       panic("copyuvm: pte should exist");
     if(!(*pte & PTE_P))
@@ -321,7 +327,22 @@ copyuvm(pde_t *pgdir, uint sz)
     if(mappages(d, (void*)i, PGSIZE, PADDR(mem), PTE_W|PTE_U) < 0)
       goto bad;
   }
-  return d;
+
+  // Copy bottom section of the stack
+  for(i = USERTOP - proc->stack_size; i < USERTOP; i += PGSIZE){
+    if((pte = walkpgdir(pgdir, (void*)i, 0)) == 0)
+      panic("copyuvm: pte should exist");
+    if(!(*pte & PTE_P))
+      panic("copyuvm: page not present");
+    pa = PTE_ADDR(*pte);
+    if((mem = kalloc()) == 0)
+      goto bad;
+    memmove(mem, (char*)pa, PGSIZE);
+    if(mappages(d, (void*)i, PGSIZE, PADDR(mem), PTE_W|PTE_U) < 0)
+      goto bad;
+  }
+
+return d;
 
 bad:
   freevm(d);
