@@ -35,28 +35,35 @@ main(int argc, char *argv[])
   uint STACK = 150*4096;
   uint USERTOP = 160*4096;
 
+  printf(1, "below\n");
   /* below stack */
   arg = (char*) STACK - 1;
   assert(write(fd, arg, 1) == -1);
 
+  printf(1, "spanning bottom\n");
   /* spanning stack bottom */
   assert(write(fd, arg, 2) == -1);
 
+  printf(1, "at stack\n");
   /* at stack */
   arg = (char*) STACK;
   assert(write(fd, arg, 1) != -1);
 
+  printf(1, "within stack\n");
   /* within stack */
   arg = (char*) (STACK + 8192);
   assert(write(fd, arg, 40) != -1);
 
+  printf(1, "at stack top\n");
   /* at stack top */
   arg = (char*) USERTOP-1;
   assert(write(fd, arg, 1) != -1);
 
+  printf(1, "stack top\n");
   /* spanning stack top */
   assert(write(fd, arg, 2) == -1);
 
+  printf(1, "above stack top\n");
   /* above stack top */
   arg = (char*) USERTOP;
   assert(write(fd, arg, 1) == -1);

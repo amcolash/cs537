@@ -248,13 +248,12 @@ allocuvm(pde_t *pgdir, uint oldsz, uint newsz)
       return 0;
     }
     memset(mem, 0, PGSIZE);
+
     if(a == 0) {
-	mappages(pgdir, (char*)a, PGSIZE, PADDR(mem), 0);
+	    mappages(pgdir, (char*)a, PGSIZE, PADDR(mem), 0);
+    } else {
+      mappages(pgdir, (char*)a, PGSIZE, PADDR(mem), PTE_W|PTE_U);
     }
-    else
-    {
-    mappages(pgdir, (char*)a, PGSIZE, PADDR(mem), PTE_W|PTE_U);
-  }
   }
   return newsz;
 }
