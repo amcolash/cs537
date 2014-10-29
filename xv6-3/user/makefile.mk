@@ -2,22 +2,35 @@
 # user programs
 USER_PROGS := \
 	cat\
-	echo\
-	forktest\
-	grep\
-	init\
-	kill\
-	ln\
-	ls\
-	mkdir\
-	rm\
-	sh\
-	stressfs\
-	test\
-	tester\
-	usertests\
-	wc\
-	zombie
+        echo\
+        forktest\
+        grep\
+        init\
+        kill\
+        ln\
+        ls\
+        mkdir\
+        rm\
+        sh\
+        stressfs\
+        tester\
+        wc\
+        hello\
+        zombie\
+	bounds\
+	bounds2\
+	bounds3\
+	heap\
+	heap2\
+	null\
+	null2\
+	stack\
+	stack2\
+	stack3\
+	stack4\
+	syscalls\
+	usertests
+		
 
 USER_PROGS := $(addprefix user/, $(USER_PROGS))
 
@@ -73,7 +86,7 @@ USER_LDFLAGS += --omagic
 # where program execution should begin
 USER_LDFLAGS += --entry=main
 
-# location in memory where the program will be loaded
+# location in memory where the program will be loaded(was 0x0 before)
 USER_LDFLAGS += --section-start=.text=0x1000
 
 user/bin:
