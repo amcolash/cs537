@@ -75,6 +75,7 @@ struct proc {
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
   uint stack_size;             // Process stack size
+  int grow_stack;              // Temp variable to determine if currently growing stack
 };
 
 // Process memory is laid out contiguously, low addresses first:

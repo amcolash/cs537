@@ -51,8 +51,10 @@ exec(char *path, char **argv)
   // Allocate a one-page stack at the next page boundary
   sz = PGROUNDUP(sz);
 
+  proc->grow_stack = 1;
   if(allocuvm(pgdir, USERTOP - PGSIZE, USERTOP) == 0)
     goto bad;
+  proc->grow_stack = 0;
 
   // Push argument strings, prepare rest of stack in ustack.
   sp = USERTOP;

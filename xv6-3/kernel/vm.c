@@ -231,13 +231,32 @@ allocuvm(pde_t *pgdir, uint oldsz, uint newsz)
   char *mem;
   uint a;
 
-  if ((oldsz == USERTOP - proc->stack_size - PGSIZE) &&
-    (oldsz < proc->stack_size + PGSIZE))
+  int stack_start = USERTOP - proc->stack_size - PGSIZE;
+
+  //cprintf("old: %d -> new: %d, current stack: %d, sz: \n", oldsz, newsz, proc->stack_size, proc->sz);
+  //cprintf("USERTOP - proc->stack_size - PGSIZE = %d\n", USERTOP - proc->stack_size - PGSIZE);
+  //cprintf("growing stack? %d\n", proc->grow_stack);
+
+  // Growing the stack
+  if (proc->grow_stack == 1) {
+    if (oldsz == stack_start && oldsz < proc->stack_size + PGSIZE)
       return 0;
-  if(newsz > USERTOP)
-    return 0;
-  if(newsz < oldsz)
-    return oldsz;
+    if (stack_start - PGSIZE < proc->sz)
+      return 0;
+
+  } else {
+
+    // All cases below grow heap
+    if (newsz > stack_start) {
+      //cprintf("error on this here\n");
+      return 0;
+    }
+
+    if(newsz > USERTOP)
+      return 0;
+    if(newsz < oldsz)
+      return oldsz;
+  }
 
   a = PGROUNDUP(oldsz);
   for(; a < newsz; a += PGSIZE){
