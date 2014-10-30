@@ -48,15 +48,19 @@ exec(char *path, char **argv)
   iunlockput(ip);
   ip = 0;
 
-  // Allocate a one-page stack at the next page boundary
+  // Allocate the heap after an empty page
+  sz += PGSIZE;
   sz = PGROUNDUP(sz);
+  proc->heap_start = sz;
 
+  // Set up the stack at the lowest page
   proc->grow_stack = 1;
   if(allocuvm(pgdir, USERTOP - PGSIZE, USERTOP) == 0)
     goto bad;
   proc->grow_stack = 0;
 
   // Push argument strings, prepare rest of stack in ustack.
+  // Set stack pointer to top of userspace
   sp = USERTOP;
   for(argc = 0; argv[argc]; argc++) {
     if(argc >= MAXARG)
@@ -92,7 +96,6 @@ exec(char *path, char **argv)
   proc->stack_size = PGSIZE;
   switchuvm(proc);
   freevm(oldpgdir);
-
   return 0;
 
  bad:

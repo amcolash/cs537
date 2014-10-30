@@ -76,6 +76,7 @@ struct proc {
   char name[16];               // Process name (debugging)
   uint stack_size;             // Process stack size
   int grow_stack;              // Temp variable to determine if currently growing stack
+  uint heap_start;             // Starting location of the heap in memory
 };
 
 // Process memory is laid out contiguously, low addresses first:
