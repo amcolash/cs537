@@ -17,6 +17,7 @@
 int
 fetchint(struct proc *p, uint addr, int *ip)
 {
+  cprintf("fetching arg %d from (%d)\n", addr, p->pid);
   if((addr >= p->sz && addr < p->tf->esp) || (addr+4 > p->sz && addr - 4 < p->tf->esp) || addr + 4 > USERTOP) {
     return -1;
   }
@@ -56,13 +57,14 @@ int
 argptr(int n, char **pp, int size)
 {
   int i;
-
   if(argint(n, &i) < 0)
     return -1;
   if((uint) i < PGSIZE || ((uint)i >= proc->sz && (uint)i < USERTOP - proc->stack_size)
     || ((uint)i+size > proc->sz && (uint)i - size < USERTOP - proc->stack_size)
-    || (uint) i > USERTOP)
+    || (uint) i > USERTOP) {
+    cprintf("here\n");
     return -1;
+  }
   *pp = (char*)i;
   return 0;
 }
