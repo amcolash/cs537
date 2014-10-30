@@ -375,7 +375,7 @@ sys_pipe(void)
   int fd0, fd1;
 
   if(argptr(0, (void*)&fd, 2*sizeof(fd[0])) < 0) {
-    cprintf("syspipe error\n");
+    cprintf("error in sysfile.c: syspipe error, returning -1\n");
     return -1;
   }
   if(pipealloc(&rf, &wf) < 0)

@@ -331,8 +331,6 @@ copyuvm(pde_t *pgdir, uint sz)
   uint pa, i;
   char *mem;
 
-  // TODO: change to make code have separate section just like stack
-
   // Copy the code section of process
   if((d = setupkvm()) == 0)
     return 0;

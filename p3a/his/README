@@ -33,18 +33,3 @@ region and returns the amount of total availible memory
 
 XV6-Implementation Details:
 
-In this section of Project 3, we implemnted NULL pointer checking as well as
-changing the stack to being dynamic, as compared to previously being only 1
-page large.
-
-The NULL detection was done by not using the first page in the page directory
-and marking it as invalid.
-
-The stack rearrangement was done by modifying where the stack initially lives.
-In order to expand it, whenever a page fault occured the stack was automatically
-expanded if possible.
-
-Additionally, the bounds of different arguments was checked to make sure that
-it was inside the stack that dunamically grew.
-
-In each process, it now store information about the size of the stack.

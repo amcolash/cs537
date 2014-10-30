@@ -10,6 +10,9 @@
 # Default make target
 .PHONY: qemu-nox
 all: xv6.img fs.img tags qemu-nox
+
+test:
+	python ~cs537-2/testing/p3b/VMTest.pyc .
 #.PHONY: all
 #all: xv6.img fs.img tags
 

@@ -17,8 +17,8 @@
 int
 fetchint(struct proc *p, uint addr, int *ip)
 {
-  cprintf("fetching arg %d from (%d)\n", addr, p->pid);
-  if((addr >= p->sz && addr < p->tf->esp) || (addr+4 > p->sz && addr - 4 < p->tf->esp) || addr + 4 > USERTOP) {
+//  if((addr >= p->sz && addr < p->tf->esp) || (addr+4 > p->sz && addr - 4 < p->tf->esp) || addr + 4 > USERTOP) {
+  if((addr >= p->sz && addr < p->tf->esp) || addr + 4 > USERTOP) {
     return -1;
   }
   *ip = *(int*)(addr);
@@ -33,7 +33,8 @@ fetchstr(struct proc *p, uint addr, char **pp)
 {
   char *s, *ep;
 
-  if((addr >= p->sz && addr < p->tf->esp) || addr > USERTOP)
+  if(addr >= p->sz || addr > USERTOP)
+//  if((addr >= p->sz && addr < p->tf->esp) || addr > USERTOP)
     return -1;
   *pp = (char*)addr;
   ep = (char*)p->sz;
@@ -60,9 +61,9 @@ argptr(int n, char **pp, int size)
   if(argint(n, &i) < 0)
     return -1;
   if((uint) i < PGSIZE || ((uint)i >= proc->sz && (uint)i < USERTOP - proc->stack_size)
-    || ((uint)i+size > proc->sz && (uint)i - size < USERTOP - proc->stack_size)
-    || (uint) i > USERTOP) {
-    cprintf("here\n");
+    || (i+size > proc->sz && i - size < USERTOP - proc->stack_size)
+    || i > USERTOP) {
+    cprintf("error in syscall.c: ptr out of bounds, returning -1\n");
     return -1;
   }
   *pp = (char*)i;

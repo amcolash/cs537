@@ -43,6 +43,9 @@ main(int argc, char *argv[])
 
   /* pointer to memory past the stack */
   pipefds = (int*)(640 * 1024);
+
+  // TODO: error here....
+  printf(1, "%d\n", pipe(pipefds));
   assert(pipe(pipefds) == -1);
 
   printf(1, "TEST PASSED\n");
