@@ -121,4 +121,19 @@ int open_listenfd(int portno);
 int Open_clientfd(char *hostname, int port);
 int Open_listenfd(int port); 
 
+struct thread_info {
+ int* buffer;
+ char** requests;	// buffered requests
+ int buffer_size;
+ int buff_count;	// valid buffer entry count
+ int* sizes; // file sizes
+ pthread_cond_t* freed;	// condition signal
+ pthread_cond_t* filled;	// condition signal
+ pthread_mutex_t* lock;	// mutex lock
+};
+
+void produce(int fd, struct thread_info* info, char* request, int size);
+void* consume(void* arg);
+int getSize(char *buffer);
+
 #endif /* __CSAPP_H__ */
