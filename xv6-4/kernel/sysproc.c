@@ -90,6 +90,12 @@ sys_uptime(void)
 }
 
 int sys_clone(void) {
+  int n;
+  if(argint(0, &n) < 0)
+    return -1;
+
+  clone((void *) n);
+
   return 0;
 }
 
