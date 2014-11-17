@@ -23,5 +23,9 @@ int sys_unlink(void);
 int sys_wait(void);
 int sys_write(void);
 int sys_uptime(void);
+int sys_clone(void);
+int sys_lock(void);
+int sys_unlock(void);
+int sys_join(void);
 
 #endif // _SYSFUNC_H_
