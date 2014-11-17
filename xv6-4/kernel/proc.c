@@ -160,8 +160,38 @@ fork(void)
 }
 
 int clone(void *stack) {
-  cprintf("Now cloning\n");
-  return 0;
+  int *pointer = (int*) stack;
+  struct proc *np;
+  int i, pid;
+
+  cprintf("Now cloning, passed in %p\n", pointer);
+
+  // Allocate the process
+  if((np = allocproc()) == 0)
+    return -1;
+
+  np->pgdir = proc->pgdir;
+  np->sz = proc->sz;
+  np->parent = proc;
+  *np->tf = *proc->tf;
+
+  pointer = pointer + PGSIZE;
+  cprintf("new stack: %p\n", pointer);
+
+  np->tf->esp = *(uint*) pointer;
+  np->tf->eax = 0;
+
+  for(i = 0; i < NOFILE; i++)
+    if(proc->ofile[i])
+      np->ofile[i] = filedup(proc->ofile[i]);
+  np->cwd = idup(proc->cwd);
+
+  pid = np->pid;
+  np->state = RUNNABLE;
+  safestrcpy(np->name, proc->name, sizeof(proc->name));
+
+  cprintf("now returning pid: %d\n", pid);
+  return pid;
 }
 
 // Exit the current process.  Does not return.
