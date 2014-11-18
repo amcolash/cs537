@@ -1,0 +1,40 @@
+Name: Andrew McOlash
+CSL-ID: mcolash
+Name: Adarsh Saraff
+CSL-ID: adarsh
+(Leave the second name and ID blank if working alone)
+
+-------------------------------------------------------------------------------
+
+Linux-Implementation Details:
+
+Basic Architecture
+------------------
+Main process of the program listens for incoming HTTP requests, accepts them and stores the details (file descriptor etc.) to be processed later. A separate thread pool handles individual requests parallelly (based on increasing file size).
+
+cs537.h
+-------
+A new object (struct) thread_info is defined to hold information that is to be shared among pthread instances. This includes buffers for holding file descriptors (of opened sockets), their file sizes and request strings, and a mutex lock and two condition objects for synchronizing modifications to attributes of the shared object.
+
+cs537.c
+-------
+Left unchanged.
+
+request.c
+---------
+requestHandler() is modified to extract request parameters from the saved request header rather than from the file descriptor itself (the header is saved in thread_info so it can be reused for determining file size as well).
+
+server.c
+--------
+getargs() is modified to check for thread and buffer sizes as well.
+main() initializes the thread_info object and other required variables, and spawns a set of pthreads that run consume(). Next it enters an infinite loop, accepting incoming HTTP requests, loading their headers to a local buffer in a round-robbin fashion (which are later added to the thread_info object). It also retrieves the size of each file to be served, and passes the details to thread_info via a call to produce().
+A produce() function is defined to elaborate the producer (request generator) operation. This blocks the calling (main) thread till an empty position is found on the buffer, obtains the lock on the thread_info object and adds the new request details (file descriptor, request string and actual size of file to be served) to the relevant buffers inside it. Next it notifies the system that a new request is added via a condition signal, and releases the lock.
+A consume() function is defined as an infinite loop for the consumer (request handler) scenario. It blocks the calling thread (from the handler thread pool) till a request is available in the thread_info buffers. Next, after obtaining the lock on thread_info, it searches the buffer to find the smallest request (in terms of file size, as per the design decision). Next it backs up the request parameters to separate local variables, frees up the buffer position so it can accept a new request, notifies the freeing up via a condition signal and releases the lock. Then it handles the request and closes the connection.
+getSize() returns the file size associated with a request by extracting the file name from the request header and obtaining its stats using the stat() system call.
+Other functions are left unchanged.
+
+-------------------------------------------------------------------------------
+
+XV6-Implementation Details:
+
+

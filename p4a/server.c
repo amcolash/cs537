@@ -26,6 +26,94 @@ void getargs(int* port, int* thread_cnt, struct thread_info* info, int argc, cha
 }
 
 
+void produce(int fd, struct thread_info* info, char* request, int size)
+{
+    pthread_mutex_lock(info->lock);
+    
+    // wait till a position becomes empty
+    while(info->buff_count == info->buffer_size)
+    {
+        pthread_cond_wait(info->freed, info->lock);
+    }
+    
+    // place job into a freed queue position
+    int i;
+    for(i = 0; i < info->buffer_size; i++)
+    {
+        if(info->buffer[i] == NULL)
+        {
+            info->buffer[i] = fd;
+            info->sizes[i] = size;
+            info->requests[i] = request;
+            info->buff_count++;
+            break;
+        }
+    }
+    pthread_cond_signal(info->filled);	// notify
+    
+    pthread_mutex_unlock(info->lock);
+}
+
+void* consume(void* arg)
+{
+    char *request;
+    int fd;
+    
+    while(1)
+    {
+
+        struct thread_info* info = (struct thread_info*)arg;
+        pthread_mutex_lock(info->lock);
+        
+        // if no requests, wait till a position gets filled
+        while (info->buff_count == 0)
+        {
+            pthread_cond_wait(info->filled, info->lock);
+        }
+        
+        // get next request to serve, based on file size
+        int min = 0, i;
+        for(i = 1; i < info->buffer_size; i++)
+        {
+            if(info->buffer[i] != NULL && info->sizes[i] < info->sizes[min])
+            {
+                min = i;
+            }
+        }
+        
+        // copy buffered request to temp variables (before they get cleared)
+        fd = info->buffer[min];
+        request = info->requests[min];
+        info->buffer[min] = NULL;		// clear for next request
+        
+        info->buff_count--;
+        pthread_cond_signal(info->freed);	// notify
+        pthread_mutex_unlock(info->lock);
+        
+        // handle chosen request
+        requestHandle(fd, request);
+        Close(fd);
+    }
+}
+
+int getSize(char *buffer)
+{
+    char method[MAXLINE], uri[MAXLINE], version[MAXLINE];
+    char filename[MAXLINE], cgiargs[MAXLINE];
+    sscanf(buffer, "%s %s %s", method, uri, version);
+    requestParseURI(uri, filename, cgiargs);	// get filename
+    
+    // find and return file size
+    struct stat sbuf;
+    if (stat(filename, &sbuf) < 0)
+    {
+        printf("stat check on %s failed!\n", filename);
+        return -1;
+    }
+    return sbuf.st_size;
+}
+
+
 int main(int argc, char *argv[])
 {
 	int listenfd, connfd, port, clientlen, thread_cnt;
@@ -41,7 +129,8 @@ int main(int argc, char *argv[])
 	info.filled = (pthread_cond_t*) malloc(sizeof(pthread_cond_t));
 	info.lock = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 	info.buff_count = 0;
-	
+    
+    
 	char requests[info.buffer_size][MAXLINE];	// incoming requests
 	rio_t rio;
 	
@@ -56,7 +145,6 @@ int main(int argc, char *argv[])
 	int size;
 	for(i = 0; ; i = (i + 1) % info.buffer_size)	// round robin
 	{
-		printf("loop\n");
 		// accept new connection
 		clientlen = sizeof(clientaddr);
 		connfd = Accept(listenfd, (SA*)&clientaddr, (socklen_t*) &clientlen);
@@ -66,7 +154,6 @@ int main(int argc, char *argv[])
 		Rio_readlineb(&rio, requests[i], MAXLINE);
 		size = getSize(requests[i]);
 		produce(connfd, &info, requests[i], size);
-		printf("~loop\n");
 	}
 }
 

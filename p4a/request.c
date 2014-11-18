@@ -5,6 +5,7 @@
 #include "cs537.h"
 #include "request.h"
 
+
 // requestError(      fd,    filename,        "404",    "Not found", "CS537 Server could not find this file");
 void requestError(int fd, char *cause, char *errnum, char *shortmsg, char *longmsg) 
 {
