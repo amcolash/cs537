@@ -180,6 +180,7 @@ int clone(void *stack) {
 
   np->tf->esp = *(uint*) pointer;
   np->tf->eax = 0;
+  //np->tf->eip = proc->tf->eip;
 
   for(i = 0; i < NOFILE; i++)
     if(proc->ofile[i])
