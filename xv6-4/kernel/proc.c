@@ -208,6 +208,7 @@ int clone(void *stack) {
 
   // Fork returns 0 in the child.
   np->tf->eax = 0;
+  //np->tf->eip = proc->tf->eip;
 
   //np->tf->esp = (uint) stack + PGSIZE -8;
   //np->tf->eip = proc->tf->eip;

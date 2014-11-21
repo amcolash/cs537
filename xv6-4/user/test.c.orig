@@ -19,7 +19,12 @@ int count = 0;
 int main(int argc, char *argv[]) {
   // int tid = fork();
   int tid = clone(stack);
+<<<<<<< HEAD
   //printf(1, "Stack is at %p, tid: %d\n", stack, tid);
+=======
+  printf(1, "stack is cloned and back in test\n");
+  printf(1, "tid: %d\n", tid);
+>>>>>>> c59cf559a9c59dfb95624ee71b59c76f37827eb1
 
   if (tid < 0) {
     printf(2, "error!\n");
@@ -27,6 +32,7 @@ int main(int argc, char *argv[]) {
     printf(1, "Child thread (%d) start, x: %d\n", count, x);
     count++;
     // child
+    printf(1, "got to child\n");
     for(;;) {
       x++;
       //printf(1, "Child thread increment, x: %d\n", x);
@@ -36,6 +42,7 @@ int main(int argc, char *argv[]) {
   } else {
     printf(1, "Parent thread\n");
     // parent
+    printf(1, "got to parent\n");
     for(;;) {
       printf(1, "x = %d\n", x);
       sleep(100);
