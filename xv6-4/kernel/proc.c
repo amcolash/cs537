@@ -159,27 +159,58 @@ fork(void)
   return pid;
 }
 
+
 int clone(void *stack) {
-  int *pointer = (int*) stack;
-  struct proc *np;
   int i, pid;
+  struct proc *np;
 
-  cprintf("Now cloning, passed in %p\n", pointer);
-
-  // Allocate the process
-  if((np = allocproc()) == 0)
+  // is this stack in the valid bounds of process?
+  if((proc->sz - (uint)stack) < PGSIZE) {
+    cprintf("stack outside of bounds for clone\n");
     return -1;
+  }
 
+  // valid pointer?
+  if(((uint)stack % PGSIZE) != 0) {
+    cprintf("invalid pointer in clone\n");
+    return -1;
+  }
+
+  // Allocate process.
+  if((np = allocproc()) == 0) {
+    cprintf("unable to alloc proc\n");
+    return -1;
+  }
+
+  // set stack start
+  np->stack = stack;
+  // use proc pg dir for thread
   np->pgdir = proc->pgdir;
+
   np->sz = proc->sz;
   np->parent = proc;
   *np->tf = *proc->tf;
 
-  pointer = pointer + PGSIZE;
-  cprintf("new stack: %p\n", pointer);
+  void *startFrame = (void*) proc->tf->ebp + 16;
+  void *endFrame = (void*) proc->tf->esp;
+  uint size = (uint) (startFrame - endFrame);
 
-  np->tf->esp = *(uint*) pointer;
+  void *ebp = (stack - 16);
+  void *esp = (stack - size);
+
+  np->tf->ebp = (uint) ebp;
+  np->tf->esp = (uint) esp;
+
+  cprintf("OLD | ebp: %p, esp: %p\n", proc->tf->ebp, proc->tf->esp);
+  cprintf("NEW | stack: %p, start: %p, end: %p, size: %d, ebp: %p, esp: %p\n", stack, startFrame, endFrame, size, ebp, esp);
+
+  memmove(esp, endFrame, size);
+
+  // Fork returns 0 in the child.
   np->tf->eax = 0;
+
+  //np->tf->esp = (uint) stack + PGSIZE -8;
+  //np->tf->eip = proc->tf->eip;
 
   for(i = 0; i < NOFILE; i++)
     if(proc->ofile[i])
@@ -190,9 +221,9 @@ int clone(void *stack) {
   np->state = RUNNABLE;
   safestrcpy(np->name, proc->name, sizeof(proc->name));
 
-  cprintf("now returning pid: %d\n", pid);
   return pid;
 }
+
 
 // Exit the current process.  Does not return.
 // An exited process remains in the zombie state
