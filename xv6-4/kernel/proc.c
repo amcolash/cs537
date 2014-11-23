@@ -52,6 +52,7 @@ found:
     p->state = UNUSED;
     return 0;
   }
+  cprintf("alloc (%d), kstack: %p\n", p->pid, p->kstack);
   sp = p->kstack + KSTACKSIZE;
 
   // Leave room for trap frame.
@@ -287,6 +288,7 @@ wait(void)
       havekids = 1;
       if(p->state == ZOMBIE){
         // Found one.
+        cprintf("zombie (%d), kstack: %p\n", p->pid, p->kstack);
         pid = p->pid;
         kfree(p->kstack);
         p->kstack = 0;

@@ -28,7 +28,6 @@ main(int argc, char *argv[])
    assert(stack != NULL);
    if((uint)stack % PGSIZE)
      stack = stack + (4096 - (uint)stack % PGSIZE);
-
    int clone_pid = clone(stack);
    if (clone_pid == 0) {
      worker(0);

@@ -2,19 +2,30 @@
 # user programs
 USER_PROGS := \
 	cat\
+	clone\
+	clone2\
+	clone3\
 	echo\
 	forktest\
 	grep\
 	init\
+	join\
+	join2\
+	join3\
 	kill\
 	ln\
+	locks\
 	ls\
 	mkdir\
+	multi\
 	rm\
 	sh\
+	size\
 	stressfs\
 	test\
 	tester\
+	thread\
+	thread2\
 	usertests\
 	wc\
 	zombie
