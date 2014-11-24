@@ -39,16 +39,12 @@ void
 kfree(char *v)
 {
   struct run *r;
-
-  if ((uint)v % PGSIZE) {
+  //cprintf("v: %p\n", v);
+  if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) {
     cprintf("v(kstack) - p: %p, d: %d\n", (void*)v, (uint)v);
     cprintf("v % PGSIZE || v < end || v >= PHYSYOP\n");
     cprintf("%p \% %p|| %p < %p || %p >= %p\n", (uint)v, PGSIZE, v, end, (uint)v, PHYSTOP);
     cprintf("%d, %d, %d\n", (uint)v % PGSIZE, v < end, (uint)v >= PHYSTOP);
-  }
-
-
-  if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) {
     panic("kfree");
   }
 
@@ -74,6 +70,8 @@ kalloc(void)
   r = kmem.freelist;
   if(r)
     kmem.freelist = r->next;
+
+  cprintf("*-*-kalloc: %p\n", r);
   release(&kmem.lock);
   return (char*)r;
 }

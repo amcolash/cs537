@@ -24,6 +24,7 @@ USER_PROGS := \
 	stressfs\
 	test\
 	tester\
+	threads\
 	thread\
 	thread2\
 	usertests\

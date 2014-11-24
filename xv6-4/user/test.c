@@ -2,10 +2,14 @@
 #include "stat.h"
 #include "user.h"
 
-int stack[4096] __attribute__ ((aligned (4096)));
+#define PGSIZE (4096)
+
+//int stack[4096] __attribute__ ((aligned (4096)));
 int x = 0;
 
 int main(int argc, char *argv[]) {
+  void *stack = malloc(PGSIZE*2);
+
   int tid = clone(stack);
   printf(1, "tid: %d\n", tid);
 
