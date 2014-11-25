@@ -4,7 +4,7 @@
 #include "user.h"
 #include "x86.h"
 
-char*
+  char*
 strcpy(char *s, char *t)
 {
   char *os;
@@ -15,7 +15,7 @@ strcpy(char *s, char *t)
   return os;
 }
 
-int
+  int
 strcmp(const char *p, const char *q)
 {
   while(*p && *p == *q)
@@ -23,7 +23,7 @@ strcmp(const char *p, const char *q)
   return (uchar)*p - (uchar)*q;
 }
 
-uint
+  uint
 strlen(char *s)
 {
   int n;
@@ -33,14 +33,14 @@ strlen(char *s)
   return n;
 }
 
-void*
+  void*
 memset(void *dst, int c, uint n)
 {
   stosb(dst, c, n);
   return dst;
 }
 
-char*
+  char*
 strchr(const char *s, char c)
 {
   for(; *s; s++)
@@ -49,7 +49,7 @@ strchr(const char *s, char c)
   return 0;
 }
 
-char*
+  char*
 gets(char *buf, int max)
 {
   int i, cc;
@@ -67,7 +67,7 @@ gets(char *buf, int max)
   return buf;
 }
 
-int
+  int
 stat(char *n, struct stat *st)
 {
   int fd;
@@ -81,7 +81,7 @@ stat(char *n, struct stat *st)
   return r;
 }
 
-int
+  int
 atoi(const char *s)
 {
   int n;
@@ -92,7 +92,7 @@ atoi(const char *s)
   return n;
 }
 
-void*
+  void*
 memmove(void *vdst, void *vsrc, int n)
 {
   char *dst, *src;
@@ -102,8 +102,4 @@ memmove(void *vdst, void *vsrc, int n)
   while(n-- > 0)
     *dst++ = *src++;
   return vdst;
-}
-
-int thread_create(void (*fn) (void *), void *arg) {
-  return 0;
 }
