@@ -8,7 +8,7 @@
 int x = 0;
 
 int main(int argc, char *argv[]) {
-  void *stack = malloc(PGSIZE*2);
+  void *stack = malloc(PGSIZE);
 
   int tid = clone(stack);
   printf(1, "tid: %d\n", tid);
