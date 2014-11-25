@@ -99,26 +99,10 @@ int sys_clone(void) {
 }
 
 int sys_lock(void) {
-  int n;
-
-  argint(0, &n);
-
-  while (n != 0) {
-    //sleep(250);
-    argint(0, &n);
-  }
-
   return 1;
 }
 
 int sys_unlock(void) {
-  int n;
-  if(argint(0, &n) < 0)
-    return -1;
-
-  if (n == 0)
-    return -1;
-
   return 0;
 }
 
