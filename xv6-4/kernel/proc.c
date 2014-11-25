@@ -52,7 +52,7 @@ found:
     p->state = UNUSED;
     return 0;
   }
-  cprintf("alloc (%d), kstack: %p\n", p->pid, p->kstack);
+  //cprintf("alloc (%d), kstack: %p\n", p->pid, p->kstack);
   sp = p->kstack + KSTACKSIZE;
 
   // Leave room for trap frame.
@@ -183,30 +183,23 @@ int clone(void* stack) {
   np->parent = proc;
   *np->tf = *proc->tf;
 
-
+  // Mark this proc as a thread
   np->thread = 1;
-
-  //uint stackSize = (uint) proc->tf->ebp - (uint) proc->tf->esp;
-  //cprintf("ebp: %p, esp: %p, new stack: %p, prev stack size: %d\n", proc->tf->ebp, proc->tf->esp, stack, stackSize);
-
-  //np->tf->esp = (uint) stack + stackSize;
-  //np->tf->ebp = proc->tf->esp;
-
-
-  //calculate stack size(from function arg #n to esp)
-  uint stackSize = *(uint *)proc->tf->ebp - proc->tf->esp;
-  //move stack pointer to bottom of trapframe
-  np->tf->esp = (uint)stack - stackSize;
-  //calculate size needed above ebp
-  uint topSize = *(uint *)proc->tf->ebp - proc->tf->ebp;
-  //move base pointer below topsize
-  np->tf->ebp = (uint)stack - topSize;
-  //copy parent processee's stack to child
-  memmove((void *)(np->tf->esp),(const void *)(proc->tf->esp), stackSize);
-
 
   // Clear %eax so that fork returns 0 in the child.
   np->tf->eax = 0;
+
+  // size of stack
+  uint stack_size = *(uint*) proc->tf->ebp - proc->tf->esp;
+  // size above ebp
+  uint ebp_top = *(uint*) proc->tf->ebp - proc->tf->ebp;
+
+  np->tf->esp = (uint) stack - stack_size;
+  np->tf->ebp = (uint) stack - ebp_top;
+
+  // copy stack to child, (from old esp to new esp)
+  memmove((void*) np->tf->esp, (const void *) proc->tf->esp, stack_size);
+
 
   for(i = 0; i < NOFILE; i++)
     if(proc->ofile[i])
@@ -219,74 +212,6 @@ int clone(void* stack) {
   return pid;
 }
 
-/*
-   int clone(void *stack) {
-   int i, pid;
-   struct proc *np;
-
-// is this stack in the valid bounds of process?
-if((proc->sz - (uint)stack) < PGSIZE) {
-cprintf("stack outside of bounds for clone\n");
-return -1;
-}
-
-// valid pointer?
-if(((uint)stack % PGSIZE) != 0) {
-cprintf("invalid pointer in clone\n");
-return -1;
-}
-
-// Allocate process.
-if((np = allocproc()) == 0) {
-cprintf("unable to alloc proc\n");
-return -1;
-}
-
-// use proc pg dir for thread
-np->pgdir = proc->pgdir;
-// set stack start
-//np->stack = stack;
-
-np->thread = 1;
-
-np->sz = proc->sz;
-np->parent = proc;
- *np->tf = *proc->tf;
-
- void *startFrame = (void*) proc->tf->ebp + 16;
- void *endFrame = (void*) proc->tf->esp;
- uint size = (uint) (startFrame - endFrame);
-
- void *ebp = (stack - 16);
- void *esp = (stack - size);
-
- np->tf->ebp = (uint) ebp;
- np->tf->esp = (uint) esp;
-
- cprintf("OLD | ebp: %p, esp: %p\n", proc->tf->ebp, proc->tf->esp);
- cprintf("NEW | stack: %p, start: %p, end: %p, size: %d, ebp: %p, esp: %p\n", stack, startFrame, endFrame, size, ebp, esp);
-
-//memmove(esp, endFrame, size);
-
-// Fork returns 0 in the child.
-np->tf->eax = 0;
-//np->tf->eip = proc->tf->eip;
-
-//np->tf->esp = (uint) stack + PGSIZE -8;
-//np->tf->eip = proc->tf->eip;
-
-for(i = 0; i < NOFILE; i++)
-if(proc->ofile[i])
-np->ofile[i] = filedup(proc->ofile[i]);
-np->cwd = idup(proc->cwd);
-
-pid = np->pid;
-np->state = RUNNABLE;
-safestrcpy(np->name, proc->name, sizeof(proc->name));
-
-return pid;
-}
-*/
 
 // Exit the current process.  Does not return.
 // An exited process remains in the zombie state
@@ -347,14 +272,17 @@ wait(void)
       if(p->parent != proc)
         continue;
       havekids = 1;
-      if(p->state == ZOMBIE && p->thread == 1){
+      if(p->state == ZOMBIE) {
         // Found one.
         pid = p->pid;
-        cprintf("zombie (%d), kstack: %p\n", pid, p->kstack);
-        if (p->thread != 1)
+
+        // Only clean things fully up if main proc and not thread
+        if (p->thread != 1) {
           kfree(p->kstack);
-        p->kstack = 0;
-        freevm(p->pgdir);
+          p->kstack = 0;
+          freevm(p->pgdir);
+        }
+
         p->state = UNUSED;
         p->pid = 0;
         p->parent = 0;

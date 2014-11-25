@@ -289,7 +289,6 @@ freevm(pde_t *pgdir)
   deallocuvm(pgdir, USERTOP, 0);
   for(i = 0; i < NPDENTRIES; i++){
     if(pgdir[i] & PTE_P) {
-      cprintf("kfree, pgdir[%d]: %p\n", i, (char*)PTE_ADDR(pgdir[i]));
       kfree((char*)PTE_ADDR(pgdir[i]));
     }
   }

@@ -71,7 +71,6 @@ kalloc(void)
   if(r)
     kmem.freelist = r->next;
 
-  //cprintf("*-*-kalloc: %p\n", r);
   release(&kmem.lock);
   return (char*)r;
 }
