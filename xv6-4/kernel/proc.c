@@ -269,20 +269,19 @@ wait(void)
     // Scan through table looking for zombie children.
     havekids = 0;
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->parent != proc)
+      // Make sure the process is not a thread by checking
+      // to see if it has the same page directory as the current
+      // process - (which means that it is sharing the same
+      // address space)
+      if(p->parent != proc || p->pgdir == proc->pgdir || p->thread == 1)
         continue;
       havekids = 1;
       if(p->state == ZOMBIE) {
         // Found one.
         pid = p->pid;
-
-        // Only clean things fully up if main proc and not thread
-        if (p->thread != 1) {
-          kfree(p->kstack);
-          p->kstack = 0;
-          freevm(p->pgdir);
-        }
-
+        kfree(p->kstack);
+        p->kstack = 0;
+        freevm(p->pgdir);
         p->state = UNUSED;
         p->pid = 0;
         p->parent = 0;
@@ -314,22 +313,14 @@ int join(void) {
     // Scan through table looking for zombie children.
     havekids = 0;
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->parent != proc)
+      if(p->parent != proc || p->thread != 1)
         continue;
       havekids = 1;
       if(p->state == ZOMBIE) {
         // Found one.
         pid = p->pid;
-
-        // Only clean things fully up if main proc and not thread
-        if (p->thread != 1) {
-          cprintf("got into here\n");
-          kfree(p->kstack);
-          p->kstack = 0;
-          freevm(p->pgdir);
-          pid = -1;
-        }
-
+        kfree(p->kstack);
+        p->kstack = 0;
         p->state = UNUSED;
         p->pid = 0;
         p->parent = 0;

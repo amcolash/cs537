@@ -36,7 +36,6 @@ main(int argc, char *argv[])
      worker(&arg);
    }
    assert(clone_pid > 0);
-
    sleep(250);
    assert(wait() == -1);
 

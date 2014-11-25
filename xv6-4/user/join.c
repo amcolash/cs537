@@ -38,7 +38,6 @@ main(int argc, char *argv[])
    assert(clone_pid > 0);
 
    int join_pid = join();
-   printf(1, "join_pid: %d, clone_pid: %d\n", join_pid, clone_pid);
    assert(join_pid == clone_pid);
    assert(global == 2);
 
