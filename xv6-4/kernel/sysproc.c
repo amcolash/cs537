@@ -107,5 +107,5 @@ int sys_unlock(void) {
 }
 
 int sys_join(void) {
-  return 0;
+  return join();
 }
