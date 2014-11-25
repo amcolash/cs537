@@ -1,2 +1,2 @@
 #!/bin/bash
-meld ~/Downloads/xv6/ ~/Github/cs537/xv6-4/
+meld ~/Github/cs537/xv6-source/ ~/Github/cs537/xv6-4/

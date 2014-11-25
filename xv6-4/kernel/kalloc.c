@@ -39,14 +39,9 @@ void
 kfree(char *v)
 {
   struct run *r;
-  //cprintf("v: %p\n", v);
-  if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) {
-    cprintf("v(kstack) - p: %p, d: %d\n", (void*)v, (uint)v);
-    cprintf("v % PGSIZE || v < end || v >= PHYSYOP\n");
-    cprintf("%p \% %p|| %p < %p || %p >= %p\n", (uint)v, PGSIZE, v, end, (uint)v, PHYSTOP);
-    cprintf("%d, %d, %d\n", (uint)v % PGSIZE, v < end, (uint)v >= PHYSTOP);
+
+  if((uint)v % PGSIZE || v < end || (uint)v >= PHYSTOP) 
     panic("kfree");
-  }
 
   // Fill with junk to catch dangling refs.
   memset(v, 1, PGSIZE);
