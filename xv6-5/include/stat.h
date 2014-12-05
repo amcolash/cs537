@@ -3,9 +3,10 @@
 
 // Stat struct definition, for use with stat syscall
 
-#define T_DIR  1   // Directory
-#define T_FILE 2   // File
-#define T_DEV  3   // Special device
+#define T_DIR  1      // Directory
+#define T_FILE 2      // File
+#define T_DEV  3      // Special device
+#define T_MIRRORED 4  // Mirrored copy of file
 
 struct stat {
   short type;  // Type of file
