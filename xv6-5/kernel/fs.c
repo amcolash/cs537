@@ -609,5 +609,6 @@ namei(char *path)
 struct inode*
 nameiparent(char *path, char *name)
 {
+  cprintf("getting for %s, %s\n", path, name);
   return namex(path, 1, name);
 }

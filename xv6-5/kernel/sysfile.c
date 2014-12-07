@@ -188,27 +188,57 @@ sys_unlink(void)
   }
   ilock(ip);
 
+  char nameMirror[DIRSIZ], pathMirror[512];
+  struct dirent deMirror;
   struct inode *dpMirror;
-  char nameMirror[512];
 
   if (ip->mirror != NULL) {
+    struct inode *ipMirror = ip->mirror;
+
     cprintf("unlink mirror\n");
-    int s = sizeof(path);
 
-    safestrcpy(nameMirror, name, s+4);
-    nameMirror[s+3] = '_';
-    nameMirror[s+4] = 'm';
-    nameMirror[s+5] = 'i';
-    nameMirror[s+6] = 'r';
-    nameMirror[s+7] = NULL;
+/*
+    int s = strlen(name);
+
+    strncpy(nameMirror, name, s);
+    nameMirror[s] = '_';
+    nameMirror[s+1] = 'm';
+    nameMirror[s+2] = 'i';
+    nameMirror[s+3] = 'r';
+    nameMirror[s+4] = NULL;
+*/
+    int s = strlen(path);
+
+    strncpy(pathMirror, path, s);
+    pathMirror[s] = '_';
+    pathMirror[s+1] = 'm';
+    pathMirror[s+2] = 'i';
+    pathMirror[s+3] = 'r';
+    pathMirror[s+4] = NULL;
 
 
-    if((dpMirror = nameiparent(path, nameMirror)) == 0)
+    cprintf("nameMirror: %s, pathMirror: %s\n", nameMirror, pathMirror);
+
+    if((dpMirror = nameiparent(pathMirror, nameMirror)) == 0)
       return -1;
+    cprintf("got name\n");
+    ilock(dpMirror);
 
-    cprintf("dp(%d), dpMirror(%d)\n", dp->type, dpMirror->type);
-    ip->mirror->nlink--;
-    //iupdate(ip->mirror);
+    memset(&deMirror, 0, sizeof(deMirror));
+
+    if(writei(dpMirror, (char*)&deMirror, off, sizeof(deMirror)) != sizeof(deMirror))
+      panic("unlink: writei");
+
+    iunlockput(dpMirror);
+
+
+    ilock(ipMirror);
+
+    ipMirror->nlink--;
+    iupdate(ipMirror);
+
+    iunlockput(ipMirror);
+
     cprintf("done unlinking mirror\n");
   }
 
