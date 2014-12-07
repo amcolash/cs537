@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
   int file = open(name, O_CREATE | O_MIRRORED);
   close(file);
 
-  unlink(name);
+  //unlink(name);
 
   exit();
 }

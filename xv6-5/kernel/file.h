@@ -7,6 +7,7 @@ struct file {
   char writable;
   struct pipe *pipe;
   struct inode *ip;
+  struct inode *ipMirror;
   uint off;
 };
 

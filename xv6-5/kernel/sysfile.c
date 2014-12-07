@@ -11,7 +11,7 @@
 
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
-static int
+  static int
 argfd(int n, int *pfd, struct file **pf)
 {
   int fd;
@@ -30,7 +30,7 @@ argfd(int n, int *pfd, struct file **pf)
 
 // Allocate a file descriptor for the given file.
 // Takes over file reference from caller on success.
-static int
+  static int
 fdalloc(struct file *f)
 {
   int fd;
@@ -44,7 +44,7 @@ fdalloc(struct file *f)
   return -1;
 }
 
-int
+  int
 sys_dup(void)
 {
   struct file *f;
@@ -58,7 +58,7 @@ sys_dup(void)
   return fd;
 }
 
-int
+  int
 sys_read(void)
 {
   struct file *f;
@@ -70,7 +70,7 @@ sys_read(void)
   return fileread(f, p, n);
 }
 
-int
+  int
 sys_write(void)
 {
   struct file *f;
@@ -82,7 +82,7 @@ sys_write(void)
   return filewrite(f, p, n);
 }
 
-int
+  int
 sys_close(void)
 {
   int fd;
@@ -95,7 +95,7 @@ sys_close(void)
   return 0;
 }
 
-int
+  int
 sys_fstat(void)
 {
   struct file *f;
@@ -107,7 +107,7 @@ sys_fstat(void)
 }
 
 // Create the path new as a link to the same inode as old.
-int
+  int
 sys_link(void)
 {
   char name[DIRSIZ], *new, *old;
@@ -146,7 +146,7 @@ bad:
 }
 
 // Is the directory dp empty except for "." and ".." ?
-static int
+  static int
 isdirempty(struct inode *dp)
 {
   int off;
@@ -161,7 +161,7 @@ isdirempty(struct inode *dp)
   return 1;
 }
 
-int
+  int
 sys_unlink(void)
 {
   struct inode *ip, *dp;
@@ -210,7 +210,7 @@ sys_unlink(void)
   return 0;
 }
 
-static struct inode*
+  static struct inode*
 create(char *path, short type, short major, short minor)
 {
   uint off;
@@ -223,7 +223,9 @@ create(char *path, short type, short major, short minor)
 
   if((ip = dirlookup(dp, name, &off)) != 0){
     iunlockput(dp);
+    cprintf("a\n");
     ilock(ip);
+    cprintf("b\n");
     if(type == T_FILE && ip->type == T_FILE)
       return ip;
     iunlockput(ip);
@@ -254,7 +256,7 @@ create(char *path, short type, short major, short minor)
   return ip;
 }
 
-int
+  int
 sys_open(void)
 {
   char *path;
@@ -262,12 +264,14 @@ sys_open(void)
   struct file *f;
   struct inode *ip;
 
+  char pathMirror[512];
+  int fdMirror;
+  struct file* fMirror;
+  struct inode* ipMirror;
+
   if(argstr(0, &path) < 0 || argint(1, &omode) < 0)
     return -1;
   if(omode & O_CREATE){
-    if (omode & O_MIRRORED) {
-      cprintf("GOING TO MAKE A MIRRORED COPY!\n");
-    }
     if((ip = create(path, T_FILE, 0, 0)) == 0)
       return -1;
   } else {
@@ -293,10 +297,45 @@ sys_open(void)
   f->off = 0;
   f->readable = !(omode & O_WRONLY);
   f->writable = (omode & O_WRONLY) || (omode & O_RDWR);
+
+
+  // Copy of parts of the code above
+  if(omode & O_CREATE && omode & O_MIRRORED) {
+    int s = sizeof(path);
+
+    safestrcpy(pathMirror, path, s+4);
+    pathMirror[s+1] = '_';
+    pathMirror[s+2] = 'm';
+    pathMirror[s+3] = 'i';
+    pathMirror[s+4] = 'r';
+    pathMirror[s+5] = NULL;
+
+    cprintf("Making mirror of (%s) with path: %s\n", path, pathMirror);
+    if((ipMirror = create(path, T_MIRRORED, 0, 0)) == 0)
+      return -1;
+
+    if((fMirror = filealloc()) == 0 || (fdMirror = fdalloc(fMirror)) < 0){
+      if(fMirror)
+        fileclose(fMirror);
+      iunlockput(ipMirror);
+      return -1;
+    }
+    iunlock(ipMirror);
+
+    fMirror->type = FD_INODE;
+    fMirror->ip = ipMirror;
+    fMirror->off = 0;
+    fMirror->readable = !(omode & O_WRONLY);
+    fMirror->writable = (omode & O_WRONLY) || (omode & O_RDWR);
+
+    f->ipMirror = ipMirror;
+    cprintf("Done making mirror\n");
+  }
+
   return fd;
 }
 
-int
+  int
 sys_mkdir(void)
 {
   char *path;
@@ -308,7 +347,7 @@ sys_mkdir(void)
   return 0;
 }
 
-int
+  int
 sys_mknod(void)
 {
   struct inode *ip;
@@ -317,15 +356,15 @@ sys_mknod(void)
   int major, minor;
 
   if((len=argstr(0, &path)) < 0 ||
-     argint(1, &major) < 0 ||
-     argint(2, &minor) < 0 ||
-     (ip = create(path, T_DEV, major, minor)) == 0)
+      argint(1, &major) < 0 ||
+      argint(2, &minor) < 0 ||
+      (ip = create(path, T_DEV, major, minor)) == 0)
     return -1;
   iunlockput(ip);
   return 0;
 }
 
-int
+  int
 sys_chdir(void)
 {
   char *path;
@@ -344,7 +383,7 @@ sys_chdir(void)
   return 0;
 }
 
-int
+  int
 sys_exec(void)
 {
   char *path, *argv[MAXARG];
@@ -370,7 +409,7 @@ sys_exec(void)
   return exec(path, argv);
 }
 
-int
+  int
 sys_pipe(void)
 {
   int *fd;
