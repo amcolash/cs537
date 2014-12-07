@@ -4,7 +4,7 @@
 #include "fcntl.h"
 
 int main(int argc, char *argv[]) {
-  char* name = "abc.txt";
+  char* name = "a";
 
   int file = open(name, O_CREATE | O_MIRRORED);
   close(file);

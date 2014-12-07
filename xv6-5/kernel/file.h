@@ -7,7 +7,6 @@ struct file {
   char writable;
   struct pipe *pipe;
   struct inode *ip;
-  struct inode *ipMirror;
   uint off;
 };
 
@@ -26,6 +25,7 @@ struct inode {
   short nlink;
   uint size;
   uint addrs[NDIRECT+1];
+  struct inode* mirror;
 };
 
 #define I_BUSY 0x1

@@ -169,6 +169,7 @@ sys_unlink(void)
   char name[DIRSIZ], *path;
   uint off;
 
+
   if(argstr(0, &path) < 0)
     return -1;
   if((dp = nameiparent(path, name)) == 0)
@@ -186,6 +187,31 @@ sys_unlink(void)
     return -1;
   }
   ilock(ip);
+
+  struct inode *dpMirror;
+  char nameMirror[512];
+
+  if (ip->mirror != NULL) {
+    cprintf("unlink mirror\n");
+    int s = sizeof(path);
+
+    safestrcpy(nameMirror, name, s+4);
+    nameMirror[s+3] = '_';
+    nameMirror[s+4] = 'm';
+    nameMirror[s+5] = 'i';
+    nameMirror[s+6] = 'r';
+    nameMirror[s+7] = NULL;
+
+
+    if((dpMirror = nameiparent(path, nameMirror)) == 0)
+      return -1;
+
+    cprintf("dp(%d), dpMirror(%d)\n", dp->type, dpMirror->type);
+    ip->mirror->nlink--;
+    //iupdate(ip->mirror);
+    cprintf("done unlinking mirror\n");
+  }
+
 
   if(ip->nlink < 1)
     panic("unlink: nlink < 1");
@@ -223,9 +249,7 @@ create(char *path, short type, short major, short minor)
 
   if((ip = dirlookup(dp, name, &off)) != 0){
     iunlockput(dp);
-    cprintf("a\n");
     ilock(ip);
-    cprintf("b\n");
     if(type == T_FILE && ip->type == T_FILE)
       return ip;
     iunlockput(ip);
@@ -290,7 +314,6 @@ sys_open(void)
     iunlockput(ip);
     return -1;
   }
-  iunlock(ip);
 
   f->type = FD_INODE;
   f->ip = ip;
@@ -301,17 +324,17 @@ sys_open(void)
 
   // Copy of parts of the code above
   if(omode & O_CREATE && omode & O_MIRRORED) {
-    int s = sizeof(path);
+    int s = strlen(path);
 
-    safestrcpy(pathMirror, path, s+4);
-    pathMirror[s+1] = '_';
-    pathMirror[s+2] = 'm';
-    pathMirror[s+3] = 'i';
-    pathMirror[s+4] = 'r';
-    pathMirror[s+5] = NULL;
+    strncpy(pathMirror, path, s);
 
-    cprintf("Making mirror of (%s) with path: %s\n", path, pathMirror);
-    if((ipMirror = create(path, T_MIRRORED, 0, 0)) == 0)
+    pathMirror[s] = '_';
+    pathMirror[s+1] = 'm';
+    pathMirror[s+2] = 'i';
+    pathMirror[s+3] = 'r';
+    pathMirror[s+4] = NULL;
+
+    if((ipMirror = create(pathMirror, T_MIRRORED, 0, 0)) == 0)
       return -1;
 
     if((fMirror = filealloc()) == 0 || (fdMirror = fdalloc(fMirror)) < 0){
@@ -320,7 +343,6 @@ sys_open(void)
       iunlockput(ipMirror);
       return -1;
     }
-    iunlock(ipMirror);
 
     fMirror->type = FD_INODE;
     fMirror->ip = ipMirror;
@@ -328,10 +350,17 @@ sys_open(void)
     fMirror->readable = !(omode & O_WRONLY);
     fMirror->writable = (omode & O_WRONLY) || (omode & O_RDWR);
 
-    f->ipMirror = ipMirror;
-    cprintf("Done making mirror\n");
+    ip->mirror = ipMirror;
+
+    iunlock(ipMirror);
+    cprintf("made file: '%s', and mirror: '%s'\n", path, pathMirror);
+
+  } else if(omode & O_CREATE)  {
+    cprintf("setting NULL\n");
+    ip->mirror = NULL;
   }
 
+  iunlock(ip);
   return fd;
 }
 

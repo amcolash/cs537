@@ -9,7 +9,11 @@
 
 # Default make target
 .PHONY: qemu-nox
-all: xv6.img fs.img tags qemu-nox
+
+temp::
+	make clean && make all
+
+all: xv6.img fs.img rmfs tags qemu-nox
 
 test:
 	python ~cs537-2/testing/p4b/ThreadTest.py .
