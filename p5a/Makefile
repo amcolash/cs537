@@ -11,11 +11,11 @@ server: all server.c udp.o
 	rm -f test.img
 	touch test.img
 	chmod 755 test.img
-	./server 4000 test.img
+	./server 9870 test.img
 
 client: all client.c
 	gcc -g -L. -lmfs -Xlinker -rpath=. -o client client.c
-	./client
+	./client 9870
 
 test:
 	python ~cs537-2/testing/p5a/runtests.py

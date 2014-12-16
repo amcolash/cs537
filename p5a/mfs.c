@@ -5,11 +5,13 @@ int socket_addr;
 struct sockaddr_in socket_in;
 
 int MFS_Init(char *hostname, int port) {
-  socket_addr = UDP_FillSockAddr(&socket_in, hostname, port);
+  socket_addr = socket(AF_INET, SOCK_DGRAM, 0);
+  UDP_FillSockAddr(&socket_in, hostname, port);
   return socket_addr;
 }
 
 int MFS_Lookup(int pinum, char *name) {
+  UDP_Write(socket_addr, &socket_in, "test", sizeof(message));
   return 0;
 }
 
