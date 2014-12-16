@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
   } else {
     printf("socket fd: %d\n", socket);
     MFS_Lookup(0, "testing");
+    MFS_Shutdown();
   }
 
   exit(0);

@@ -53,8 +53,8 @@ typedef struct __MFS_DirEnt_t {
     char name[60];  // up to 60 bytes of name in directory (including \0)
     int  inum;      // inode number of entry (-1 means entry not used)
 } MFS_DirEnt_t;
-          
-         
+
+
 typedef struct __attribute__((__packed__)) __message__ {
         char cmd[24];
         int inum;
@@ -77,4 +77,13 @@ int MFS_Write(int inum, char *buffer, int block);
 int MFS_Read(int inum, char *buffer, int block);
 int MFS_Creat(int pinum, int type, char *name);
 int MFS_Unlink(int pinum, char *name);
-int MFS_Shutdown(); 
+int MFS_Shutdown();
+
+#define INIT 1
+#define LOOKUP 2
+#define STAT 3
+#define WRITE 4
+#define READ 5
+#define CREAT 6
+#define UNLINK 7
+#define SHUTDOWN 8

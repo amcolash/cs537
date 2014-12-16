@@ -9,22 +9,38 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
-  char file[60];
   struct sockaddr_in addr;
   int port = atoi(argv[1]);
 
-  strcpy(file, argv[2]);
   int socket = UDP_Open(port);
-
   UDP_FillSockAddr(&addr, "localhost", port);
-  printf("Server running on port %d with image %s\n", port, argv[2]);
+  int fs = open(argv[2], O_CREAT | O_RDWR);
 
-  if (socket < 0)
+  if (socket < 0 || fs < 0)
     return -1;
 
+  printf("Server running on port %d with image %s\n", port, argv[2]);
+
   char readbuffer[sizeof(message)];
+  message *msg;
+
   while (UDP_Read(socket, &addr, readbuffer, sizeof(readbuffer)) != -1) {
-    printf("readbuffer %s\n", readbuffer);
+    msg = (message*) readbuffer;
+    response res;
+    res.rc = 200;
+
+    printf("readbuffer type %d\n", msg->type);
+
+    if (msg->type == LOOKUP) {
+      UDP_Write(socket, &addr,(char*) &res, sizeof(response));
+    } else if (msg->type == SHUTDOWN) {
+      fsync(fs);
+      UDP_Write(socket, &addr,(char*) &res, sizeof(response));
+      return 0;
+    } else {
+      printf("Invalid type\n");
+    }
+
   }
 
   return 0;
