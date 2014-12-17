@@ -31,15 +31,14 @@ int main(int argc, char *argv[]) {
 
     printf("readbuffer type %d\n", msg->type);
 
-    if (msg->cmd[0] == LOOKUP) {
+    if (msg->type == LOOKUP) {
       UDP_Write(socket, &addr,(char*) &res, sizeof(response));
-    } else if (msg->cmd[0] == SHUTDOWN) {
+    } else if (msg->type == SHUTDOWN) {
       fsync(fs);
       UDP_Write(socket, &addr,(char*) &res, sizeof(response));
       return 0;
     } else {
       printf("Invalid type\n");
-      UDP_Write(socket, &addr,(char*) &res, sizeof(response));
     }
 
   }

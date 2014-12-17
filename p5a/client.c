@@ -22,12 +22,8 @@ int main(int argc, char *argv[]) {
     exit(1);
   } else {
     printf("socket fd: %d\n", socket);
-    printf("lookup1: %d\n", MFS_Lookup(0, "testing"));
-    printf("lookup2: %d\n", MFS_Lookup(0, "."));
-    printf("create1: %d\n", MFS_Creat(0, MFS_REGULAR_FILE, "myfile"));
-    printf("create2: %d\n", MFS_Creat(0, MFS_DIRECTORY, "testdir"));
-    printf("lookup3: %d\n", MFS_Lookup(0, "testdir"));
-    printf("lookup4: %d\n", MFS_Lookup(0, "myfile"));
+    MFS_Lookup(0, "testing");
+    MFS_Shutdown();
   }
 
   exit(0);

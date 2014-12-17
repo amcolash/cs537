@@ -11,21 +11,16 @@ int MFS_Init(char *hostname, int port) {
 }
 
 int MFS_Lookup(int pinum, char *name) {
-  if (strlen(name) > 60) {
-    return -1;
-  }
 
   message msg;
   msg.type = LOOKUP;
-  msg.inum = pinum;
-  msg.cmd[0] = LOOKUP;
-  strcpy(msg.name, name);
   UDP_Write(socket_addr, &socket_in, (char*) &msg, sizeof(message));
 
   response res;
   UDP_Read(socket_addr, &socket_in, (char*) &res, sizeof(response));
+  printf("Client rc %d\n", res.rc);
 
-  return res.rc;
+  return 0;
 }
 
 int MFS_Stat(int inum, MFS_Stat_t *m) {
@@ -41,34 +36,17 @@ int MFS_Read(int inum, char *buffer, int block) {
 }
 
 int MFS_Creat(int pinum, int type, char *name) {
-  if (strlen(name) > 60) {
-    return -1;
-  }
-
-  message msg;
-  msg.type = LOOKUP;
-  msg.inum = pinum;
-  msg.cmd[0] = CREAT;
-  strcpy(msg.name, name);
-  UDP_Write(socket_addr, &socket_in, (char*) &msg, sizeof(message));
-
-  response res;
-  UDP_Read(socket_addr, &socket_in, (char*) &res, sizeof(response));
-
-  return res.rc;
+  return 0;
 }
 
 int MFS_Unlink(int pinum, char *name) {
-  if (strlen(name) > 60) {
-    return -1;
-  }
   return 0;
 }
 
 int MFS_Shutdown() {
   message msg;
   response res;
-  msg.cmd[0] = SHUTDOWN;
+  msg.type = SHUTDOWN;
   UDP_Write(socket_addr, &socket_in, (char*) &msg, sizeof(message));
   UDP_Read(socket_addr, &socket_in, (char*) &res, sizeof(response));
   return 0;
