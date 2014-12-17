@@ -1,4 +1,4 @@
-main:: server
+#main:: server
 
 all: mfs.c mfs.h udp.o
 	gcc -c -fPIC mfs.c -Wall -Werror
